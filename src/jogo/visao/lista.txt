@@ -1,0 +1,15 @@
+Lisat de telas do jogo:
+FrmStart-> tela de inicio Carregamento de jogo  ou Novo Jogo;
+    FrmCarregarJogo -> Tela de carregamento do jogo;
+    FrmIniciarComNome -> Novo jogo, dado o nome do jogador;
+        FrmIntroducao -> Tela de Explicação do jogo, pode pular;
+            FrmTelaPrincipal -> Tela de monitoramento, com ações do jogo
+                ->Passar de Fase;
+                ->Salvar o jogo;
+                ->Pegar Emprestimo;
+                ->Tabela da Bolsa de Valores;
+                FrmDetalhesAcao -> Detathes da ação?
+                    -> mais irformações sobre a ação
+                    -> Ordens de Compra e Venda
+                    -> Vender e comprar ações
+                
