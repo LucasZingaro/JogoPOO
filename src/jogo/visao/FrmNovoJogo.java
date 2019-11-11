@@ -11,18 +11,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import jogo.controle.CtrFrmNovoJogo;
 
 /**
- *
- * @author aluno
+ * Tela de criação de um novo Jogo.
  */
-public class FrmIniciarComNome extends javax.swing.JFrame {
+public class FrmNovoJogo extends javax.swing.JFrame {
+    
+    private CtrFrmNovoJogo listeners;
 
     /**
      * Creates new form Login
      */
-    public FrmIniciarComNome() {
+    public FrmNovoJogo() {
         initComponents();
+        listeners = new CtrFrmNovoJogo(this);
         for (Component myComponent : getComponents()) {
             if (myComponent instanceof JLabel) {
                 ((JLabel) myComponent).setHorizontalAlignment(SwingConstants.CENTER);
@@ -33,20 +36,20 @@ public class FrmIniciarComNome extends javax.swing.JFrame {
         }
     }
 
-    public JButton getBtnLogin() {
-        return btnLogin;
+    public JButton getBtnIniciar() {
+        return btnIniciar;
     }
 
-    public void setBtnLogin(JButton btnLogin) {
-        this.btnLogin = btnLogin;
+    public void setBtnIniciar(JButton btnIniciar) {
+        this.btnIniciar = btnIniciar;
     }
 
-    public JPanel getjPanel1() {
-        return panelLogin;
+    public JButton getBtnVoltar() {
+        return btnVoltar;
     }
 
-    public void setjPanel1(JPanel jPanel1) {
-        this.panelLogin = jPanel1;
+    public void setBtnVoltar(JButton btnVoltar) {
+        this.btnVoltar = btnVoltar;
     }
 
     public JLabel getLblImg() {
@@ -63,6 +66,14 @@ public class FrmIniciarComNome extends javax.swing.JFrame {
 
     public void setLblNome(JLabel lblNome) {
         this.lblNome = lblNome;
+    }
+
+    public JPanel getPanelIniciar() {
+        return panelIniciar;
+    }
+
+    public void setPanelIniciar(JPanel panelIniciar) {
+        this.panelIniciar = panelIniciar;
     }
 
     public JTextField getTxtNome() {
@@ -82,70 +93,74 @@ public class FrmIniciarComNome extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        panelLogin = new javax.swing.JPanel();
+        panelIniciar = new javax.swing.JPanel();
         txtNome = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        btnIniciar = new javax.swing.JButton();
         lblImg = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusCycleRoot(false);
         setMinimumSize(new java.awt.Dimension(300, 250));
         setResizable(false);
 
-        lblNome.setText("Nome");
+        panelIniciar.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 6, 5, 1);
+        panelIniciar.add(txtNome, gridBagConstraints);
 
-        btnLogin.setText("Iniciar");
+        lblNome.setText("Nome");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(5, 6, 5, 5);
+        panelIniciar.add(lblNome, gridBagConstraints);
+
+        btnIniciar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnIniciar.setText("Iniciar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(5, 37, 5, 37);
+        panelIniciar.add(btnIniciar, gridBagConstraints);
 
         lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/imgLogin.png"))); // NOI18N
         lblImg.setFocusable(false);
         lblImg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        panelIniciar.add(lblImg, gridBagConstraints);
 
-        javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
-        panelLogin.setLayout(panelLoginLayout);
-        panelLoginLayout.setHorizontalGroup(
-            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLoginLayout.createSequentialGroup()
-                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLoginLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblNome)
-                        .addGap(11, 11, 11)
-                        .addComponent(txtNome))
-                    .addGroup(panelLoginLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(lblImg)
-                        .addGap(0, 28, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(panelLoginLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addComponent(btnLogin)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelLoginLayout.setVerticalGroup(
-            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLoginLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnLogin)
-                .addGap(23, 23, 23))
-        );
+        btnVoltar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnVoltar.setText("Voltar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(5, 37, 5, 37);
+        panelIniciar.add(btnVoltar, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -169,14 +184,18 @@ public class FrmIniciarComNome extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmIniciarComNome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNovoJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmIniciarComNome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNovoJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmIniciarComNome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNovoJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmIniciarComNome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNovoJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -185,16 +204,17 @@ public class FrmIniciarComNome extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmIniciarComNome().setVisible(true);
+                new FrmNovoJogo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnIniciar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel lblImg;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JPanel panelLogin;
+    private javax.swing.JPanel panelIniciar;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

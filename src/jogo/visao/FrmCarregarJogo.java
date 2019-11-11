@@ -5,17 +5,74 @@
  */
 package jogo.visao;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import jogo.controle.CtrFrmCarregarJogo;
+
 /**
- *
- * @author aluno
+ * Tela de Carregamento dos jogos salvos no Banco de dados.
  */
 public class FrmCarregarJogo extends javax.swing.JFrame {
+
+    private CtrFrmCarregarJogo listeners;
 
     /**
      * Creates new form FrmCarregarJogo
      */
     public FrmCarregarJogo() {
         initComponents();
+        listeners = new CtrFrmCarregarJogo(this);
+    }
+
+    public CtrFrmCarregarJogo getListeners() {
+        return listeners;
+    }
+
+    public void setListeners(CtrFrmCarregarJogo listeners) {
+        this.listeners = listeners;
+    }
+
+    public JButton getBtnVoltar() {
+        return btnVoltar;
+    }
+
+    public void setBtnVoltar(JButton btnVoltar) {
+        this.btnVoltar = btnVoltar;
+    }
+
+    public JLabel getLblTitulo() {
+        return lblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        this.lblTitulo = lblTitulo;
+    }
+
+    public JPanel getPanelCarregar() {
+        return panelCarregar;
+    }
+
+    public void setPanelCarregar(JPanel panelCarregar) {
+        this.panelCarregar = panelCarregar;
+    }
+
+    public JScrollPane getScrollTbCarregarJogo() {
+        return scrollTbCarregarJogo;
+    }
+
+    public void setScrollTbCarregarJogo(JScrollPane scrollTbCarregarJogo) {
+        this.scrollTbCarregarJogo = scrollTbCarregarJogo;
+    }
+
+    public JTable getTbCarregarJogo() {
+        return tbCarregarJogo;
+    }
+
+    public void setTbCarregarJogo(JTable tbCarregarJogo) {
+        this.tbCarregarJogo = tbCarregarJogo;
     }
 
     /**
@@ -26,21 +83,69 @@ public class FrmCarregarJogo extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        panelCarregar = new javax.swing.JPanel();
+        btnVoltar = new javax.swing.JButton();
+        lblTitulo = new javax.swing.JLabel();
+        scrollTbCarregarJogo = new javax.swing.JScrollPane();
+        tbCarregarJogo = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(300, 300));
+
+        panelCarregar.setLayout(new java.awt.GridBagLayout());
+
+        btnVoltar.setText("Voltar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelCarregar.add(btnVoltar, gridBagConstraints);
+
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblTitulo.setText("Jogos Salvos");
+        lblTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelCarregar.add(lblTitulo, gridBagConstraints);
+
+        tbCarregarJogo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scrollTbCarregarJogo.setViewportView(tbCarregarJogo);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 493;
+        gridBagConstraints.ipady = 308;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelCarregar.add(scrollTbCarregarJogo, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(panelCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(panelCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 376, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -79,5 +184,10 @@ public class FrmCarregarJogo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel panelCarregar;
+    private javax.swing.JScrollPane scrollTbCarregarJogo;
+    private javax.swing.JTable tbCarregarJogo;
     // End of variables declaration//GEN-END:variables
 }

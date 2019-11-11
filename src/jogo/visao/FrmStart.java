@@ -5,18 +5,56 @@
  */
 package jogo.visao;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import jogo.controle.CtrFrmStart;
+
 /**
- *
- * @author aluno
+ * Tela de Inico do Jogo.
  */
 public class FrmStart extends javax.swing.JFrame {
+
+    private CtrFrmStart listener;
 
     /**
      * Creates new form FrmStart
      */
     public FrmStart() {
         initComponents();
+        this.listener = new CtrFrmStart(this);
     }
+
+    public CtrFrmStart getListener() {
+        return listener;
+    }
+
+    public void setListener(CtrFrmStart listener) {
+        this.listener = listener;
+    }
+
+    public JButton getBtnNovoJogo() {
+        return BtnNovoJogo;
+    }
+
+    public void setBtnNovoJogo(JButton BtnNovoJogo) {
+        this.BtnNovoJogo = BtnNovoJogo;
+    }
+
+    public JButton getBtnCarregarJogo() {
+        return btnCarregarJogo;
+    }
+
+    public void setBtnCarregarJogo(JButton btnCarregarJogo) {
+        this.btnCarregarJogo = btnCarregarJogo;
+    }
+    public JPanel getPanelStart() {
+        return panelStart;
+    }
+
+    public void setPanelStart(JPanel panelStart) {
+        this.panelStart = panelStart;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +64,46 @@ public class FrmStart extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        panelStart = new javax.swing.JPanel();
+        BtnNovoJogo = new javax.swing.JButton();
+        btnCarregarJogo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(300, 300));
+
+        panelStart.setLayout(new java.awt.GridBagLayout());
+
+        BtnNovoJogo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        BtnNovoJogo.setText("Novo Jogo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        panelStart.add(BtnNovoJogo, gridBagConstraints);
+
+        btnCarregarJogo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        btnCarregarJogo.setText("Carregar Jogo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
+        panelStart.add(btnCarregarJogo, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(panelStart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(panelStart, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -79,5 +142,8 @@ public class FrmStart extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnNovoJogo;
+    private javax.swing.JButton btnCarregarJogo;
+    private javax.swing.JPanel panelStart;
     // End of variables declaration//GEN-END:variables
 }

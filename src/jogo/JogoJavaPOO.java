@@ -5,6 +5,8 @@
  */
 package jogo;
 
+import jogo.visao.FrmCarregarJogo;
+import jogo.visao.FrmNovoJogo;
 import jogo.visao.FrmStart;
 
 /**
@@ -13,6 +15,8 @@ import jogo.visao.FrmStart;
  */
 public class JogoJavaPOO {
 
+    FrmStart frmStart;
+
     /**
      * @param args the command line arguments
      */
@@ -20,7 +24,5 @@ public class JogoJavaPOO {
         // TODO code application logic here
         FrmStart start = new FrmStart();
         start.setVisible(true);
-        
     }
-    
 }
