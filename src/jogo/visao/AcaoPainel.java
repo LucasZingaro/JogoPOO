@@ -38,6 +38,7 @@ public class AcaoPainel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmAcao frmAcao = new FrmAcao(acao);
+                frmAcao.setVisible(true);
             }
         });
     }

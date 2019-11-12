@@ -15,10 +15,11 @@ import jogo.modelo.Acao;
  */
 /**
  * Tela de detalhes e operações das alções
+ *
  * @author Lucas
  */
 public class FrmAcao extends javax.swing.JFrame {
-    
+
     CtrFrmAcao listeners;
     Acao acao;
 
@@ -32,15 +33,21 @@ public class FrmAcao extends javax.swing.JFrame {
 
     FrmAcao(Acao acao) {
         initComponents();
-        this.acao = acao;
+        this.setAcao(acao);
         listeners = new CtrFrmAcao(this);
     }
+
     public Acao getAcao() {
         return acao;
     }
 
     public void setAcao(Acao acao) {
         this.acao = acao;
+        this.getLblNomeValor().setText(String.valueOf(acao.getNome()));
+        this.getLblPrecoUniValor().setText(String.valueOf("R$" + acao.getValor()));
+        this.getLblQuantidadeValor().setText(String.valueOf(acao.getQuantidade()));
+        this.getLblVariacaoValor().setText(String.valueOf(acao.getVariacao() + "%"));
+
     }
 
     public JButton getBtnVender() {
@@ -154,7 +161,6 @@ public class FrmAcao extends javax.swing.JFrame {
     public void setTbAcoesCompra(JTable tbAcoesCompra) {
         this.tbAcoesCompra = tbAcoesCompra;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
