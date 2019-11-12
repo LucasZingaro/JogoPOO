@@ -37,15 +37,15 @@ public class AcaoPainel extends javax.swing.JPanel {
         this.getJlblInformacao().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, acao);
+                FrmAcao frmAcao = new FrmAcao(acao);
             }
         });
     }
-    
-    public void reloadMyComponents(){
+
+    public void reloadMyComponents() {
         this.jlblNome.setText(acao.getNome());
         this.jlblPreco.setText("R$" + String.valueOf(acao.getValor()));
-        this.jlblVariacao.setText(String.valueOf(acao.getVariacao()) + '%');        
+        this.jlblVariacao.setText(String.valueOf(acao.getVariacao()) + '%');
     }
 
     public Component[] getMyComponents() {
