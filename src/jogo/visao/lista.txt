@@ -9,7 +9,7 @@ Lista de telas do jogo{
             FrmIntroducao -> Tela de Explicação do jogo;
                 |-> Pular == Ir para Tela Principal
                 FrmTelaPrincipal == Tela de monitoramento, com ações do jogo:
-                    |->Passar de Fase;
+                    |->Passar de Turno;
                     |->Salvar o jogo;
                     |->Pegar Emprestimo;
                     |->Tabela da Bolsa de Valores;

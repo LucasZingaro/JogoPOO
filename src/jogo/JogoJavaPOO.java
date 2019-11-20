@@ -5,6 +5,8 @@
  */
 package jogo;
 
+import jogo.modelo.Acao;
+import jogo.visao.AcaoPainel;
 import jogo.visao.FrmCarregarJogo;
 import jogo.visao.FrmNovoJogo;
 import jogo.visao.FrmStart;
@@ -24,5 +26,6 @@ public class JogoJavaPOO {
         // TODO code application logic here
         FrmStart start = new FrmStart();
         start.setVisible(true);
+        
     }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.visao;
 
 import java.awt.Component;
@@ -10,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import jogo.modelo.Acao;
 
 /**
@@ -21,10 +15,7 @@ public class AcaoPainel extends javax.swing.JPanel {
 
     private Acao acao;
 
-    /**
-     * Creates new form AcaoPainel
-     */
-    public AcaoPainel(/*Acao acao*/) {
+    public AcaoPainel() {
         initComponents();
         for (Component myComponent : getMyComponents()) {
             if (myComponent instanceof JLabel) {
@@ -32,9 +23,7 @@ public class AcaoPainel extends javax.swing.JPanel {
                 ((JLabel) myComponent).setVerticalAlignment(javax.swing.SwingConstants.CENTER);
             }
         }
-        //this.setAcao(acao);
-        //this.reloadMyComponents();
-        this.getJlblInformacao().addActionListener(new ActionListener() {
+        this.getBtnInformacao().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 FrmAcao frmAcao = new FrmAcao(acao);
@@ -44,17 +33,17 @@ public class AcaoPainel extends javax.swing.JPanel {
     }
 
     public void reloadMyComponents() {
-        this.jlblNome.setText(acao.getNome());
-        this.jlblPreco.setText("R$" + String.valueOf(acao.getValor()));
-        this.jlblVariacao.setText(String.valueOf(acao.getVariacao()) + '%');
+        this.lblNome.setText(acao.getNome());
+        this.lblPreco.setText("R$" + String.valueOf(acao.getValor()));
+        this.lblVariacao.setText(String.valueOf(acao.getVariacao()) + '%');
     }
 
     public Component[] getMyComponents() {
         Component[] myComponents = {
-            this.getJlblInformacao(),
-            this.getJlblNome(),
-            this.getJlblPreco(),
-            this.getJlblVariacao()
+            this.getBtnInformacao(),
+            this.getLblNome(),
+            this.getLblPreco(),
+            this.getLblVariacao()
         };
         return myComponents;
     }
@@ -68,36 +57,36 @@ public class AcaoPainel extends javax.swing.JPanel {
         this.reloadMyComponents();
     }
 
-    public JButton getJlblInformacao() {
-        return jlblInformacao;
+    public JButton getBtnInformacao() {
+        return btnInformacao;
     }
 
-    public void setJlblInformacao(JButton jlblInformacao) {
-        this.jlblInformacao = jlblInformacao;
+    public void setBtnInformacao(JButton jlblInformacao) {
+        this.btnInformacao = jlblInformacao;
     }
 
-    public JLabel getJlblNome() {
-        return jlblNome;
+    public JLabel getLblNome() {
+        return lblNome;
     }
 
-    public void setJlblNome(JLabel jlblNome) {
-        this.jlblNome = jlblNome;
+    public void setLblNome(JLabel jlblNome) {
+        this.lblNome = jlblNome;
     }
 
-    public JLabel getJlblPreco() {
-        return jlblPreco;
+    public JLabel getLblPreco() {
+        return lblPreco;
     }
 
-    public void setJlblPreco(JLabel jlblPreco) {
-        this.jlblPreco = jlblPreco;
+    public void setLblPreco(JLabel jlblPreco) {
+        this.lblPreco = jlblPreco;
     }
 
-    public JLabel getJlblVariacao() {
-        return jlblVariacao;
+    public JLabel getLblVariacao() {
+        return lblVariacao;
     }
 
-    public void setJlblVariacao(JLabel jlblVariacao) {
-        this.jlblVariacao = jlblVariacao;
+    public void setLblVariacao(JLabel jlblVariacao) {
+        this.lblVariacao = jlblVariacao;
     }
 
     /**
@@ -109,59 +98,61 @@ public class AcaoPainel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpainel = new javax.swing.JPanel();
-        jlblNome = new javax.swing.JLabel();
-        jlblVariacao = new javax.swing.JLabel();
-        jlblPreco = new javax.swing.JLabel();
-        jlblInformacao = new javax.swing.JButton();
+        panelDados = new javax.swing.JPanel();
+        lblNome = new javax.swing.JLabel();
+        lblVariacao = new javax.swing.JLabel();
+        lblPreco = new javax.swing.JLabel();
+        btnInformacao = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setMaximumSize(new java.awt.Dimension(132, 76));
+        setMaximumSize(new java.awt.Dimension(150, 75));
+        setMinimumSize(new java.awt.Dimension(150, 75));
+        setPreferredSize(new java.awt.Dimension(150, 75));
 
-        jpainel.setLayout(new java.awt.GridLayout(2, 2));
+        panelDados.setLayout(new java.awt.GridLayout(2, 2));
 
-        jlblNome.setText("Nome");
-        jlblNome.setFocusable(false);
-        jlblNome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jpainel.add(jlblNome);
+        lblNome.setText("Nome");
+        lblNome.setFocusable(false);
+        lblNome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelDados.add(lblNome);
 
-        jlblVariacao.setText("Variacao %");
-        jlblVariacao.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 1, 0, new java.awt.Color(0, 0, 0)));
-        jlblVariacao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jpainel.add(jlblVariacao);
+        lblVariacao.setText("Variacao %");
+        lblVariacao.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 1, 0, new java.awt.Color(0, 0, 0)));
+        lblVariacao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelDados.add(lblVariacao);
 
-        jlblPreco.setText("Preco");
-        jlblPreco.setToolTipText("");
-        jlblPreco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jpainel.add(jlblPreco);
+        lblPreco.setText("Preco");
+        lblPreco.setToolTipText("");
+        lblPreco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelDados.add(lblPreco);
 
-        jlblInformacao.setText("Info");
-        jpainel.add(jlblInformacao);
+        btnInformacao.setText("Info");
+        panelDados.add(btnInformacao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jpainel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpainel, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 62, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jlblInformacao;
-    private javax.swing.JLabel jlblNome;
-    private javax.swing.JLabel jlblPreco;
-    private javax.swing.JLabel jlblVariacao;
-    private javax.swing.JPanel jpainel;
+    private javax.swing.JButton btnInformacao;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPreco;
+    private javax.swing.JLabel lblVariacao;
+    private javax.swing.JPanel panelDados;
     // End of variables declaration//GEN-END:variables
 }

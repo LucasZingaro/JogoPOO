@@ -1,9 +1,10 @@
+package tabelaAcoes;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -12,31 +13,48 @@ import javax.swing.JTable;
  *
  * @author Lucas
  */
-public class FrmTabela extends javax.swing.JFrame {
+public class FrmTabelaAcoes extends javax.swing.JFrame {
 
-    private CtrAcoes  listenerCtrAcoes;
+    private CtrFrmTabelaAcoes listenerCtrAcoes;
+
     /**
      * Creates new form FrmTabela
      */
-    public FrmTabela() {
+    public FrmTabelaAcoes() {
         initComponents();
-        listenerCtrAcoes = new CtrAcoes(this);
-    }  
-
-    public JButton getJbtnShow() {
-        return jbtnShow;
+        listenerCtrAcoes = new CtrFrmTabelaAcoes(this);
     }
 
-    public void setJbtnShow(JButton jbtnShow) {
-        this.jbtnShow = jbtnShow;
+    public JButton getBtnAddAcao() {
+        return btnAddAcao;
     }
 
-    public JTable getJtbAcoes() {
-        return jtbAcoes;
+    public void setBtnAddAcao(JButton btnAddAcao) {
+        this.btnAddAcao = btnAddAcao;
     }
 
-    public void setJtbAcoes(JTable jtbAcoes) {
-        this.jtbAcoes = jtbAcoes;
+    public JButton getBtnNewAcao() {
+        return btnNewAcao;
+    }
+
+    public void setBtnNewAcao(JButton btnNewAcao) {
+        this.btnNewAcao = btnNewAcao;
+    }
+
+    public JButton getBtnPassarTurno() {
+        return btnPassarTurno;
+    }
+
+    public void setBtnPassarTurno(JButton btnPassarTurno) {
+        this.btnPassarTurno = btnPassarTurno;
+    }
+
+    public JTable getTbAcoes() {
+        return tbAcoes;
+    }
+
+    public void setTbAcoes(JTable tbAcoes) {
+        this.tbAcoes = tbAcoes;
     }
 
     
@@ -50,36 +68,42 @@ public class FrmTabela extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbtnShow = new javax.swing.JButton();
+        btnAddAcao = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtbAcoes = new javax.swing.JTable();
+        tbAcoes = new javax.swing.JTable();
+        btnNewAcao = new javax.swing.JButton();
+        btnPassarTurno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jbtnShow.setText("Show");
+        btnAddAcao.setText("Adicionar Ação");
 
-        jtbAcoes.setModel(new javax.swing.table.DefaultTableModel(
+        tbAcoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Ações"
+                "Ações", "Ações", "Ações", "Ações"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jtbAcoes.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(jtbAcoes);
-        jtbAcoes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (jtbAcoes.getColumnModel().getColumnCount() > 0) {
-            jtbAcoes.getColumnModel().getColumn(0).setResizable(false);
+        tbAcoes.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tbAcoes);
+        tbAcoes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (tbAcoes.getColumnModel().getColumnCount() > 0) {
+            tbAcoes.getColumnModel().getColumn(0).setResizable(false);
         }
+
+        btnNewAcao.setText("Nova ação selecionada");
+
+        btnPassarTurno.setText("Teste passar turno");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,20 +111,28 @@ public class FrmTabela extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jbtnShow)
-                .addContainerGap(82, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(btnAddAcao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPassarTurno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNewAcao)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jbtnShow)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddAcao)
+                    .addComponent(btnNewAcao)
+                    .addComponent(btnPassarTurno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -120,28 +152,32 @@ public class FrmTabela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmTabela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTabelaAcoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmTabela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTabelaAcoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmTabela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTabelaAcoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmTabela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmTabelaAcoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmTabela().setVisible(true);
+                new FrmTabelaAcoes().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddAcao;
+    private javax.swing.JButton btnNewAcao;
+    private javax.swing.JButton btnPassarTurno;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtnShow;
-    private javax.swing.JTable jtbAcoes;
+    private javax.swing.JTable tbAcoes;
     // End of variables declaration//GEN-END:variables
 }
