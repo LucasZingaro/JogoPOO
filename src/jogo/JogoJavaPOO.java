@@ -5,7 +5,7 @@
  */
 package jogo;
 
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 import jogo.visao.AcaoPainel;
 import jogo.visao.FrmCarregarJogo;
 import jogo.visao.FrmNovoJogo;

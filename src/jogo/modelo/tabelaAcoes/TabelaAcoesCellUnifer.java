@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 import jogo.visao.AcaoPainel;
 
 /**
@@ -39,7 +39,7 @@ public class TabelaAcoesCellUnifer extends AbstractCellEditor implements TableCe
          * @param isSelected
          * @param table
          */
-        public void updateData(Acao ac, boolean isSelected, JTable table) {
+        public void updateData(Action ac, boolean isSelected, JTable table) {
             this.setAcao(ac);
             this.reloadMyComponents();
             this.setBackground((isSelected)
@@ -59,11 +59,11 @@ public class TabelaAcoesCellUnifer extends AbstractCellEditor implements TableCe
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int row, int column) {
-        if (!(value instanceof Acao)) {
+        if (!(value instanceof Action)) {
             return new JPanel();
         }
 
-        cellComponent.updateData((Acao) value, true, table);
+        cellComponent.updateData((Action) value, true, table);
         return cellComponent;
     }
 
@@ -76,11 +76,11 @@ public class TabelaAcoesCellUnifer extends AbstractCellEditor implements TableCe
     public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
 
-        if (!(value instanceof Acao)) {
+        if (!(value instanceof Action)) {
             return new JPanel();
         }
 
-        cellComponent.updateData((Acao) value, false, table);
+        cellComponent.updateData((Action) value, false, table);
         return cellComponent;
     }
 

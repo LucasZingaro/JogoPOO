@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 import java.util.ArrayList;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellComponent;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellRender;
@@ -33,10 +33,10 @@ public class CtrFrmTabelaAcoes implements ActionListener, ListSelectionListener 
 
         //Exemplo de ações iniciais
         //ArrayList<Acao> acaoList = new ArrayList<>();
-        //acaoList.add(new Acao("AAA", 100, 11));
-        //acaoList.add(new Acao("BBB", 100, 22));
-        //acaoList.add(new Acao("CCC", 100, 33));
-        //acaoList.add(new Acao("DDD", 100, 44));
+        //acaoList.add(new Action("AAA", 100, 11));
+        //acaoList.add(new Action("BBB", 100, 22));
+        //acaoList.add(new Action("CCC", 100, 33));
+        //acaoList.add(new Action("DDD", 100, 44));
         //tmTabelaAcoes.setAcaoList(acaoList);
     }
 
@@ -70,21 +70,19 @@ public class CtrFrmTabelaAcoes implements ActionListener, ListSelectionListener 
     public void actionPerformed(ActionEvent e) {
         System.out.println("Action:" + e.getActionCommand());
         if (e.getActionCommand().equals(frm.getBtnAddAcao().getText())) {
-            tmTabelaAcoes.addAcao(
-                    new Acao()
+            tmTabelaAcoes.addAcao(new Action()
             );
             tmTabelaAcoes.reloadSelectionJTable(frm.getTbAcoes());
 
         } else if (e.getActionCommand().equals(frm.getBtnNewAcao().getText())) {
-            tmTabelaAcoes.setValueAt(
-                    new Acao(),
+            tmTabelaAcoes.setValueAt(new Action(),
                     frm.getTbAcoes().getSelectedRow(),
                     frm.getTbAcoes().getSelectedColumn()
             );
             tmTabelaAcoes.reloadSelectionJTable(frm.getTbAcoes());
         } else if (e.getActionCommand().equals(frm.getBtnPassarTurno().getText())) {
             tmTabelaAcoes.getAcaoList().forEach((acao) -> {
-                if (acao instanceof Acao) {
+                if (acao instanceof Action) {
                     acao.passarTurno();
                     System.out.println(acao);
                 }

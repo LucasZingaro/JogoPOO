@@ -4,7 +4,7 @@ import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 
 /**
  * Renderizador de célula para tabela de ações;
@@ -25,10 +25,10 @@ public class TabelaAcoesCellRender implements TableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
 
-        if (!(value instanceof Acao)) {
+        if (!(value instanceof Action)) {
             return new JPanel();
         }
-        cellComponent.updateData((Acao) value, false, table);
+        cellComponent.updateData((Action) value, false, table);
         return cellComponent;
     }
 

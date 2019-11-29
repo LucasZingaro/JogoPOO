@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import jogo.controle.CtrFrmAcao;
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,7 +21,7 @@ import jogo.modelo.Acao;
 public class FrmAcao extends javax.swing.JFrame {
 
     CtrFrmAcao listeners;
-    Acao acao;
+    Action acao;
 
     /**
      * Creates new form AcaoInfoFRM
@@ -31,22 +31,22 @@ public class FrmAcao extends javax.swing.JFrame {
         listeners = new CtrFrmAcao(this);
     }
 
-    FrmAcao(Acao acao) {
+    FrmAcao(Action acao) {
         initComponents();
         this.setAcao(acao);
         listeners = new CtrFrmAcao(this);
     }
 
-    public Acao getAcao() {
+    public Action getAcao() {
         return acao;
     }
 
-    public void setAcao(Acao acao) {
+    public void setAcao(Action acao) {
         this.acao = acao;
-        this.getLblNomeValor().setText(String.valueOf(acao.getNome()));
-        this.getLblPrecoUniValor().setText(String.valueOf("R$" + acao.getValor()));
-        this.getLblQuantidadeValor().setText(String.valueOf(acao.getQuantidade()));
-        this.getLblVariacaoValor().setText(String.valueOf(acao.getVariacao() + "%"));
+        this.getLblNomeValor().setText(String.valueOf(acao.getName()));
+        this.getLblPrecoUniValor().setText(String.valueOf("R$" + acao.getValue()));
+        this.getLblQuantidadeValor().setText(String.valueOf(acao.getMarketQuantity()));
+        this.getLblVariacaoValor().setText(String.valueOf(acao.getVariation() + "%"));
 
     }
 

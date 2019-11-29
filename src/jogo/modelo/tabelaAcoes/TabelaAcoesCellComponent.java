@@ -6,7 +6,7 @@
 package jogo.modelo.tabelaAcoes;
 
 import javax.swing.JTable;
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 import jogo.visao.AcaoPainel;
 
 /**
@@ -26,7 +26,7 @@ public class TabelaAcoesCellComponent extends AcaoPainel {
      * @param isSelected
      * @param table
      */
-    public void updateData(Acao acao, boolean isSelected, JTable table) {
+    public void updateData(Action acao, boolean isSelected, JTable table) {
         this.setAcao(acao);
         this.reloadMyComponents();
         this.setBackground((isSelected)

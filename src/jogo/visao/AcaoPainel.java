@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 
 /**
  *
@@ -13,7 +13,7 @@ import jogo.modelo.Acao;
  */
 public class AcaoPainel extends javax.swing.JPanel {
 
-    private Acao acao;
+    private Action acao;
 
     public AcaoPainel() {
         initComponents();
@@ -33,9 +33,9 @@ public class AcaoPainel extends javax.swing.JPanel {
     }
 
     public void reloadMyComponents() {
-        this.lblNome.setText(acao.getNome());
-        this.lblPreco.setText("R$" + String.valueOf(acao.getValor()));
-        this.lblVariacao.setText(String.valueOf(acao.getVariacao()) + '%');
+        this.lblNome.setText(acao.getName());
+        this.lblPreco.setText("R$" + String.valueOf(acao.getValue()));
+        this.lblVariacao.setText(String.valueOf(acao.getVariation()) + '%');
     }
 
     public Component[] getMyComponents() {
@@ -48,11 +48,11 @@ public class AcaoPainel extends javax.swing.JPanel {
         return myComponents;
     }
 
-    public Acao getAcao() {
+    public Action getAcao() {
         return acao;
     }
 
-    public void setAcao(Acao acao) {
+    public void setAcao(Action acao) {
         this.acao = acao;
         this.reloadMyComponents();
     }

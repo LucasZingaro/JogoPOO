@@ -5,7 +5,7 @@ import javax.swing.AbstractCellEditor;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 
 /**
  * Editor de células para tabela de ações
@@ -31,10 +31,10 @@ public class TabelaAcoesCellEditor extends AbstractCellEditor implements TableCe
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int row, int column) {
 
-        if (!(value instanceof Acao)) {
+        if (!(value instanceof Action)) {
             return new JPanel();
         }
-        cellComponent.updateData((Acao) value, true, table);
+        cellComponent.updateData((Action) value, true, table);
         return cellComponent;
     }
 

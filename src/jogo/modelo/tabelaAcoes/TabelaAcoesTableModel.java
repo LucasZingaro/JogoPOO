@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import jogo.modelo.Acao;
+import jogo.modelo.Action;
 
 /**
  * Modelo da tabela de ações
  *
- * @see Acao
+ * @see Action
  * @see TabelaAcoesCellUnifer
  *
  * @author Lucas
  */
 public final class TabelaAcoesTableModel extends AbstractTableModel {
 
-    ArrayList<Acao> acaoList;
+    ArrayList<Action> acaoList;
     private String[] colunas;
 
     public TabelaAcoesTableModel(Integer nColulas) {
@@ -29,12 +29,12 @@ public final class TabelaAcoesTableModel extends AbstractTableModel {
         }
     }
 
-    public TabelaAcoesTableModel(Integer nColulas, ArrayList<Acao> acaoList) {
+    public TabelaAcoesTableModel(Integer nColulas, ArrayList<Action> acaoList) {
         this(nColulas);
         this.setAcaoList(acaoList);
     }
 
-    public TabelaAcoesTableModel(Integer nColulas, List<Acao> acaoList) {
+    public TabelaAcoesTableModel(Integer nColulas, List<Action> acaoList) {
         this(nColulas);
         this.setAcaoList(acaoList);
     }
@@ -80,8 +80,8 @@ public final class TabelaAcoesTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        if (this.getIndexBy(rowIndex, columnIndex) >= 0 && aValue instanceof Acao) {
-            acaoList.set(this.getIndexBy(rowIndex, columnIndex), (Acao) aValue);
+        if (this.getIndexBy(rowIndex, columnIndex) >= 0 && aValue instanceof Action) {
+            acaoList.set(this.getIndexBy(rowIndex, columnIndex), (Action) aValue);
             fireTableCellUpdated(rowIndex, columnIndex);
         }
     }
@@ -91,40 +91,40 @@ public final class TabelaAcoesTableModel extends AbstractTableModel {
         return true;
     }
 
-    public ArrayList<Acao> getAcaoList() {
+    public ArrayList<Action> getAcaoList() {
         return acaoList;
     }
 
-    public void setAcaoList(ArrayList<Acao> acaoList) {
+    public void setAcaoList(ArrayList<Action> acaoList) {
         this.acaoList = acaoList;
         this.nullCompletation();
         fireTableDataChanged();
     }
 
-    public void setAcaoList(List<Acao> acaoList) {
+    public void setAcaoList(List<Action> acaoList) {
         this.acaoList.clear();
         this.acaoList.addAll(acaoList);
         this.nullCompletation();
         fireTableDataChanged();
     }
 
-    public void setAcaoList(Acao[] acaoList) {
+    public void setAcaoList(Action[] acaoList) {
         this.acaoList.clear();
-        for (Acao acao : acaoList) {
+        for (Action acao : acaoList) {
             this.acaoList.add(acao);
         }
         this.nullCompletation();
         fireTableDataChanged();
     }
 
-    public void addAcao(Acao acao) {
+    public void addAcao(Action acao) {
         this.nullRemotion();
         acaoList.add(acao);
         this.nullCompletation();
         fireTableDataChanged();
     }
 
-    public void addAcoes(List<Acao> acoes) {
+    public void addAcoes(List<Action> acoes) {
         int tamanhoArtigo = this.getRowCount();
         acaoList.addAll(acoes);
         fireTableRowsInserted(tamanhoArtigo, this.getRowCount());
@@ -137,8 +137,8 @@ public final class TabelaAcoesTableModel extends AbstractTableModel {
      * @param coluna
      * @return Acão desejada
      */
-    public Acao removeAcao(int linha, int coluna) {
-        Acao acao = acaoList.remove(this.getIndexBy(linha, coluna));
+    public Action removeAcao(int linha, int coluna) {
+        Action acao = acaoList.remove(this.getIndexBy(linha, coluna));
         fireTableRowsDeleted(linha, linha);
         return acao;
     }
@@ -160,7 +160,7 @@ public final class TabelaAcoesTableModel extends AbstractTableModel {
      * @param acao Objeto desejado
      * @return Se foi deletado com sucesso.
      */
-    public boolean delete(Acao acao) {
+    public boolean delete(Action acao) {
         boolean isDeleted = acaoList.remove(acao);
         fireTableDataChanged();
         return isDeleted;
