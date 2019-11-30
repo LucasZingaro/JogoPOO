@@ -7,8 +7,8 @@ package jogo.dao;
 
 /**
  *
- * @author aluno
+ * @author MukaFelix
  */
-public class DAO {
+public class FinancialOrderDAO {
     
 }
