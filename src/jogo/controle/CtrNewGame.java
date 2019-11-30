@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.controle;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import jogo.modelo.Game;
+import jogo.modelo.Player;
 import jogo.visao.FrmMainGame;
 import jogo.visao.FrmNewGame;
 import jogo.visao.FrmStart;
@@ -19,12 +13,12 @@ import jogo.visao.FrmStart;
  * @see FrmNewGame
  * @author Lucas
  */
-public class CtrNewGame implements ActionListener {
+public class CtrNewGame {
 
-    FrmNewGame frm;
+    FrmNewGame frmNewGame;
 
-    public CtrNewGame(FrmNewGame frm) {
-        this.frm = frm;
+    public CtrNewGame(FrmNewGame frmNewGame) {
+        this.frmNewGame = frmNewGame;
         addActionListeners();
     }
 
@@ -32,22 +26,8 @@ public class CtrNewGame implements ActionListener {
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-        frm.getBtnVoltar().addActionListener(this);
-        frm.getBtnIniciar().addActionListener(this);
-    }
-
-    /**
-     * Chamado quando uma ação ocorre.
-     *
-     * @param e
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals(frm.getBtnVoltar().getText())) {
-            actionBtnVoltar();
-        }else if (e.getActionCommand().equals(frm.getBtnIniciar().getText())) {
-            actionBtnIniciar();
-        }
+        frmNewGame.getBtnVoltar().addActionListener(e -> actionBtnVoltar());
+        frmNewGame.getBtnIniciar().addActionListener(e -> actionBtnIniciar());
     }
 
     /**
@@ -57,19 +37,24 @@ public class CtrNewGame implements ActionListener {
      */
     private void actionBtnVoltar() {
         new FrmStart().setVisible(true);
-        frm.dispose();
+        frmNewGame.dispose();
     }
+
     /**
      * Ação para Iniciar a Partida
      */
     private void actionBtnIniciar() {
+        String nome = frmNewGame.getTxtNome().getText();
+        if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(frmNewGame, "Digite um nome válido");
+            return;
+        }
         FrmMainGame frmMainGame = new FrmMainGame();
-        frmMainGame.setGame(new Game());
+        frmMainGame.setGame(new Game(new Player(nome)));
         //Montrar introdução(se tiver)
+        frmMainGame.getListeners().reloadComponents();
         frmMainGame.setVisible(true);
-        frm.dispose();
-        
-        JOptionPane.showMessageDialog(frm, "Olá,"+frm.getTxtNome().getText()+";\n\nIniciando....", "Iniciar", JOptionPane.INFORMATION_MESSAGE);
+        frmNewGame.dispose();
     }
 
 }

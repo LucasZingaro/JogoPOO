@@ -5,10 +5,7 @@
  */
 package jogo;
 
-import jogo.modelo.Action;
-import jogo.visao.PanelAction;
-import jogo.visao.FrmSaveRecovery;
-import jogo.visao.FrmNewGame;
+import jogo.modelo.Game;
 import jogo.visao.FrmStart;
 
 /**
@@ -17,7 +14,8 @@ import jogo.visao.FrmStart;
  */
 public class Main {
 
-    FrmStart frmStart;
+    public static FrmStart frmStart;
+    public static Game game;
 
     /**
      * @param args the command line arguments
@@ -26,6 +24,6 @@ public class Main {
         // TODO code application logic here
         FrmStart start = new FrmStart();
         start.setVisible(true);
-        
+
     }
 }

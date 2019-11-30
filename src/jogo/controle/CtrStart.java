@@ -5,8 +5,6 @@
  */
 package jogo.controle;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import jogo.visao.FrmSaveRecovery;
 import jogo.visao.FrmNewGame;
 import jogo.visao.FrmStart;
@@ -17,7 +15,7 @@ import jogo.visao.FrmStart;
  * @see FrmStart
  * @author Lucas
  */
-public class CtrStart implements ActionListener {
+public class CtrStart {
 
     FrmStart frm;
 
@@ -30,22 +28,8 @@ public class CtrStart implements ActionListener {
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-        frm.getBtnCarregarJogo().addActionListener(this);
-        frm.getBtnNovoJogo().addActionListener(this);
-    }
-
-    /**
-     * Chamado quando uma ação ocorre.
-     *
-     * @param e
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals(frm.getBtnCarregarJogo().getText())) {
-            actionBtnCarregarJogo();
-        } else if (e.getActionCommand().equals(frm.getBtnNovoJogo().getText())) {
-            actionBtnNovoJogo();
-        }
+        frm.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
+        frm.getBtnNovoJogo().addActionListener(e -> actionBtnNovoJogo());
     }
 
     /**

@@ -9,12 +9,17 @@ import javax.swing.JProgressBar;
 public class FrmLoading extends javax.swing.JFrame {
 
     private final CtrLoading listeners;
+
     /**
      * Creates new form FrmLoading
      */
     public FrmLoading() {
         initComponents();
         listeners = new CtrLoading(this);
+    }
+
+    public CtrLoading getListeners() {
+        return listeners;
     }
 
     public JProgressBar getProgressBarOfGame() {

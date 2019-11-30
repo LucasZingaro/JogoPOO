@@ -22,6 +22,10 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
         listeners = new CtrSaveRecovery(this);
     }
 
+    public CtrSaveRecovery getListeners() {
+        return listeners;
+    }
+
     public JButton getBtnCarregarJogo() {
         return btnCarregarJogo;
     }

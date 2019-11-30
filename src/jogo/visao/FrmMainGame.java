@@ -28,6 +28,10 @@ public class FrmMainGame extends javax.swing.JFrame {
         listeners = new CtrMainGame(this);
     }
 
+    public CtrMainGame getListeners() {
+        return listeners;
+    }
+
     public Game getGame() {
         return game;
     }

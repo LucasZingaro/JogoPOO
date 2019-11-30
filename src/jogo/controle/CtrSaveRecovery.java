@@ -7,6 +7,7 @@ package jogo.controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import jogo.visao.FrmSaveRecovery;
 import jogo.visao.FrmStart;
 
@@ -16,7 +17,7 @@ import jogo.visao.FrmStart;
  * @see FrmSaveRecovery
  * @author Lucas
  */
-public class CtrSaveRecovery implements ActionListener {
+public class CtrSaveRecovery {
 
     FrmSaveRecovery frm;
 
@@ -29,19 +30,8 @@ public class CtrSaveRecovery implements ActionListener {
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-        frm.getBtnVoltar().addActionListener(this);
-    }
-
-    /**
-     * Chamado quando uma ação ocorre.
-     *
-     * @param e
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals(frm.getBtnVoltar().getText())) {
-            actionBtnVoltar();
-        }
+        frm.getBtnVoltar().addActionListener(e -> actionBtnVoltar());
+        frm.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
     }
 
     /**
@@ -52,6 +42,22 @@ public class CtrSaveRecovery implements ActionListener {
     private void actionBtnVoltar() {
         new FrmStart().setVisible(true);
         frm.dispose();
+    }
+
+    /**
+     * Ação para recuperar jogo salvo
+     */
+    private void actionBtnCarregarJogo() {
+        if (frm.getTbCarregarJogo().getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(frm,
+                    "Nenhum jogo selecionado!!!",
+                    "Aviso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+        JOptionPane.showMessageDialog(frm,
+                "Recuperar jogo da linha selecionada = " + frm.getTbCarregarJogo().getSelectedRow());
     }
 
 }

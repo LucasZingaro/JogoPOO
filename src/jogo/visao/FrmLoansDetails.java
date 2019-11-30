@@ -9,7 +9,7 @@ import jogo.modelo.Player;
 
 /**
  * Tela de Empréstimos
- * 
+ *
  * @see Loan
  * @see Player
  * @see CtrLoansDetails
@@ -18,13 +18,17 @@ public class FrmLoansDetails extends javax.swing.JFrame {
 
     private final CtrLoansDetails listeners;
     private Player player;
-    
+
     /**
      * Creates new form FrmLoansDetails
      */
     public FrmLoansDetails() {
         initComponents();
         listeners = new CtrLoansDetails(this);
+    }
+
+    public CtrLoansDetails getListeners() {
+        return listeners;
     }
 
     public Player getPlayer() {
@@ -82,7 +86,6 @@ public class FrmLoansDetails extends javax.swing.JFrame {
     public void setTxtValor(JTextField txtValor) {
         this.txtValor = txtValor;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

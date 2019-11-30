@@ -34,6 +34,10 @@ public class FrmNewGame extends javax.swing.JFrame {
         }
     }
 
+    public CtrNewGame getListeners() {
+        return listeners;
+    }
+
     public JButton getBtnIniciar() {
         return btnIniciar;
     }

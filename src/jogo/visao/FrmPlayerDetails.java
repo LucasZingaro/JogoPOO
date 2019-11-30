@@ -25,6 +25,10 @@ public class FrmPlayerDetails extends javax.swing.JFrame {
         listeners = new CtrPlayerDetails(this);
     }
 
+    public CtrPlayerDetails getListeners() {
+        return listeners;
+    }
+
     public Player getPlayer() {
         return player;
     }

@@ -14,7 +14,7 @@ public class FixedIncome {
      * Identificador da Renda fixa
      */
     private int id;
-    
+
     /**
      * Valor atual em renda fixa
      */
@@ -38,6 +38,14 @@ public class FixedIncome {
      * Lista de solicitações de recuperação de um valor
      */
     private ArrayList<RedemptionRequests> redemptionRequests;
+
+    public FixedIncome(int id, double value, double interest, ArrayList<RedemptionRequests> redemptionRequests) {
+        this.id = id;
+        this.value = value;
+        this.interest = interest;
+        this.recoveryDelay = Config.FIXED_INCOME_RECOVERY_DELAY;
+        this.redemptionRequests = redemptionRequests;
+    }
 
     public FixedIncome(double value, double interest, ArrayList<RedemptionRequests> redemptionRequests) {
         this.value = value;
@@ -93,8 +101,6 @@ public class FixedIncome {
     public void setRedemptionRequests(ArrayList<RedemptionRequests> redemptionRequests) {
         this.redemptionRequests = redemptionRequests;
     }
-    
-    
 
 }
 

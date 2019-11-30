@@ -31,6 +31,10 @@ public class FrmActionDetails extends javax.swing.JFrame {
         listeners = new CtrActionDetails(this);
     }
 
+    public CtrActionDetails getListeners() {
+        return listeners;
+    }
+
     public Action getAction() {
         return action;
     }

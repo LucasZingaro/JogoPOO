@@ -5,6 +5,7 @@
  */
 package jogo.controle;
 
+import javax.swing.JOptionPane;
 import jogo.visao.FrmLoansDetails;
 
 /**
@@ -12,9 +13,43 @@ import jogo.visao.FrmLoansDetails;
  * @author Lucas
  */
 public class CtrLoansDetails {
-
-    public CtrLoansDetails(FrmLoansDetails aThis) {
     
+    FrmLoansDetails frmLoansDetails;
+    
+    public CtrLoansDetails(FrmLoansDetails frmLoansDetails) {
+        this.frmLoansDetails = frmLoansDetails;
+        addActionListeners();
+    }
+
+    /**
+     * Adiciona os listadores de Ações
+     */
+    private void addActionListeners() {
+        frmLoansDetails.getBtnPagar().addActionListener(e -> actionBtnPagar());
+        frmLoansDetails.getBtnPegar().addActionListener(e -> actionBtnPegar());
+        frmLoansDetails.getBtnSelecionar().addActionListener(e -> actionBtnSelecionar());
+    }
+    
+    private void actionBtnPagar() {
+        JOptionPane.showMessageDialog(frmLoansDetails, "Pagar empréstimo");
+    }
+    
+    private void actionBtnPegar() {
+        JOptionPane.showMessageDialog(frmLoansDetails, "Pegar empréstimo");
+    }
+    
+    private void actionBtnSelecionar() {
+        if (frmLoansDetails.getTbEmprestimos().getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(frmLoansDetails,
+                    "Nenhum empréstimo selecionado!!!",
+                    "Aviso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+        JOptionPane.showMessageDialog(frmLoansDetails,
+                "Linha selecionada = " + frmLoansDetails.getTbEmprestimos().getSelectedRow());
+        
     }
     
 }

@@ -22,5 +22,7 @@ public abstract class Config {
     public static String db_PASSWORD = "root";
     
     /** Atraso na recuperação de renda fixa (em Turnos)*/
-    public static final int FIXED_INCOME_RECOVERY_DELAY = 3;
+    public static final int FIXED_INCOME_RECOVERY_DELAY = 1;
+    public static final double INITIAL_PLAYER_MONEY = 25000.00;
+    
 }

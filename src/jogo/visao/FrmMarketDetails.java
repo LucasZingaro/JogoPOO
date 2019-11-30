@@ -23,6 +23,10 @@ public class FrmMarketDetails extends javax.swing.JFrame {
         listeners = new CtrMarketDetails(this);
     }
 
+    public CtrMarketDetails getListeners() {
+        return listeners;
+    }
+
     public Market getMercado() {
         return mercado;
     }
