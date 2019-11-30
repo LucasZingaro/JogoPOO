@@ -5,10 +5,16 @@
  */
 package jogo.controle;
 
+import jogo.visao.FrmMainGame;
+
 /**
  *
- * @author aluno
+ * @author Lucas
  */
-public class Ctr {
+public class CtrMainGame {
+
+    public CtrMainGame(FrmMainGame aThis) {
+    
+    }
     
 }

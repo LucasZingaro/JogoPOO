@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import jogo.modelo.Action;
-import jogo.visao.AcaoPainel;
+import jogo.visao.PanelAction;
 
 /**
  * Composta pelas 3 classes TabelaAcoes{CellComponent, CellEditor, CellRender}
@@ -30,7 +30,7 @@ public class TabelaAcoesCellUnifer extends AbstractCellEditor implements TableCe
     /**
      * @see TabelaAcoesCellComponent
      */
-    public class CellComponent extends AcaoPainel {
+    public class CellComponent extends PanelAction {
 
         /**
          * Atualização dos dados do componente

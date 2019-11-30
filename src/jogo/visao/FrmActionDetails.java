@@ -2,60 +2,41 @@ package jogo.visao;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import jogo.controle.CtrFrmAcao;
+import jogo.controle.CtrActionDetails;
 import jogo.modelo.Action;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  * Tela de detalhes e operações das alções
  *
- * @author Lucas
+ * @see Action
+ * @see CtrActionDetails
  */
-public class FrmAcao extends javax.swing.JFrame {
+public class FrmActionDetails extends javax.swing.JFrame {
 
-    CtrFrmAcao listeners;
-    Action acao;
+    private final CtrActionDetails listeners;
+    private Action action;
 
     /**
      * Creates new form AcaoInfoFRM
      */
-    public FrmAcao() {
+    public FrmActionDetails() {
         initComponents();
-        listeners = new CtrFrmAcao(this);
+        listeners = new CtrActionDetails(this);
     }
 
-    FrmAcao(Action acao) {
+    FrmActionDetails(Action acao) {
         initComponents();
-        this.setAcao(acao);
-        listeners = new CtrFrmAcao(this);
+        this.setAction(acao);
+        listeners = new CtrActionDetails(this);
     }
 
-    public Action getAcao() {
-        return acao;
+    public Action getAction() {
+        return action;
     }
 
-    public void setAcao(Action acao) {
-        this.acao = acao;
-        this.getLblNomeValor().setText(String.valueOf(acao.getName()));
-        this.getLblPrecoUniValor().setText(String.valueOf("R$" + acao.getValue()));
-        this.getLblQuantidadeValor().setText(String.valueOf(acao.getMarketQuantity()));
-        this.getLblVariacaoValor().setText(String.valueOf(acao.getVariation() + "%"));
-
-    }
-
-    public JButton getBtnVender() {
-        return BtnVender;
-    }
-
-    public void setBtnVender(JButton BtnVender) {
-        this.BtnVender = BtnVender;
+    public void setAction(Action action) {
+        this.action = action;
     }
 
     public JButton getBtnComprar() {
@@ -66,20 +47,20 @@ public class FrmAcao extends javax.swing.JFrame {
         this.btnComprar = btnComprar;
     }
 
-    public JButton getBtnMaisInfo() {
-        return btnMaisInfo;
+    public JButton getBtnOrdens() {
+        return btnOrdens;
     }
 
-    public void setBtnMaisInfo(JButton btnMaisInfo) {
-        this.btnMaisInfo = btnMaisInfo;
+    public void setBtnOrdens(JButton btnOrdens) {
+        this.btnOrdens = btnOrdens;
     }
 
-    public JLabel getLblNomeEmpresaValor() {
-        return lblNomeEmpresaValor;
+    public JButton getBtnVender() {
+        return btnVender;
     }
 
-    public void setLblNomeEmpresaValor(JLabel lblNomeEmpresaValor) {
-        this.lblNomeEmpresaValor = lblNomeEmpresaValor;
+    public void setBtnVender(JButton btnVender) {
+        this.btnVender = btnVender;
     }
 
     public JLabel getLblNomeValor() {
@@ -98,20 +79,20 @@ public class FrmAcao extends javax.swing.JFrame {
         this.lblPrecoUniValor = lblPrecoUniValor;
     }
 
-    public JLabel getLblQuantidadeValor() {
-        return lblQuantidadeValor;
+    public JLabel getLblQuantidadeJogadorValor() {
+        return lblQuantidadeJogadorValor;
     }
 
-    public void setLblQuantidadeValor(JLabel lblQuantidadeValor) {
-        this.lblQuantidadeValor = lblQuantidadeValor;
+    public void setLblQuantidadeJogadorValor(JLabel lblQuantidadeJogadorValor) {
+        this.lblQuantidadeJogadorValor = lblQuantidadeJogadorValor;
     }
 
-    public JLabel getLblStatusEmpresaValor() {
-        return lblStatusEmpresaValor;
+    public JLabel getLblStatusAcaoValor() {
+        return lblStatusAcaoValor;
     }
 
-    public void setLblStatusEmpresaValor(JLabel lblStatusEmpresaValor) {
-        this.lblStatusEmpresaValor = lblStatusEmpresaValor;
+    public void setLblStatusAcaoValor(JLabel lblStatusAcaoValor) {
+        this.lblStatusAcaoValor = lblStatusAcaoValor;
     }
 
     public JLabel getLblVariacaoValor() {
@@ -122,44 +103,28 @@ public class FrmAcao extends javax.swing.JFrame {
         this.lblVariacaoValor = lblVariacaoValor;
     }
 
-    public JPanel getPanelActionAcao() {
-        return panelActionAcao;
-    }
-
-    public void setPanelActionAcao(JPanel panelActionAcao) {
-        this.panelActionAcao = panelActionAcao;
-    }
-
-    public JPanel getPanelInfoAcao() {
-        return panelInfoAcao;
-    }
-
-    public void setPanelInfoAcao(JPanel panelInfoAcao) {
-        this.panelInfoAcao = panelInfoAcao;
-    }
-
-    public JScrollPane getScrollTbAcoesCompra() {
-        return scrollTbAcoesCompra;
-    }
-
-    public void setScrollTbAcoesCompra(JScrollPane scrollTbAcoesCompra) {
-        this.scrollTbAcoesCompra = scrollTbAcoesCompra;
-    }
-
-    public JScrollPane getScrollTbAcoesVenda() {
-        return scrollTbAcoesVenda;
-    }
-
-    public void setScrollTbAcoesVenda(JScrollPane scrollTbAcoesVenda) {
-        this.scrollTbAcoesVenda = scrollTbAcoesVenda;
-    }
-
     public JTable getTbAcoesCompra() {
         return tbAcoesCompra;
     }
 
     public void setTbAcoesCompra(JTable tbAcoesCompra) {
         this.tbAcoesCompra = tbAcoesCompra;
+    }
+
+    public JTable getTbAcoesVenda() {
+        return tbAcoesVenda;
+    }
+
+    public void setTbAcoesVenda(JTable tbAcoesVenda) {
+        this.tbAcoesVenda = tbAcoesVenda;
+    }
+
+    public JLabel getLblQuantidadeValor() {
+        return lblQuantidadeValor;
+    }
+
+    public void setLblQuantidadeValor(JLabel lblQuantidadeValor) {
+        this.lblQuantidadeValor = lblQuantidadeValor;
     }
 
     /**
@@ -174,57 +139,53 @@ public class FrmAcao extends javax.swing.JFrame {
 
         panelActionAcao = new javax.swing.JPanel();
         panelInfoAcao = new javax.swing.JPanel();
-        lblNome = new javax.swing.JLabel();
+        lblVariacaoValor = new javax.swing.JLabel();
+        lblStatusAction = new javax.swing.JLabel();
+        lblVariacao = new javax.swing.JLabel();
+        lblPrecoUniValor = new javax.swing.JLabel();
         lblPrecoUni = new javax.swing.JLabel();
         lblQuantidade = new javax.swing.JLabel();
         lblQuantidadeValor = new javax.swing.JLabel();
-        lblVariacao = new javax.swing.JLabel();
-        lblVariacaoValor = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
+        lblStatusAcaoValor = new javax.swing.JLabel();
         lblNomeValor = new javax.swing.JLabel();
-        lblPrecoUniValor = new javax.swing.JLabel();
-        lblNomeEmpresa = new javax.swing.JLabel();
-        lblNomeEmpresaValor = new javax.swing.JLabel();
-        lblStatusEmpresa = new javax.swing.JLabel();
-        lblStatusEmpresaValor = new javax.swing.JLabel();
-        btnMaisInfo = new javax.swing.JButton();
         scrollTbAcoesCompra = new javax.swing.JScrollPane();
         tbAcoesCompra = new javax.swing.JTable();
         scrollTbAcoesVenda = new javax.swing.JScrollPane();
         tbAcoesVenda = new javax.swing.JTable();
         btnComprar = new javax.swing.JButton();
-        BtnVender = new javax.swing.JButton();
+        btnVender = new javax.swing.JButton();
         lblOrdensCompra = new javax.swing.JLabel();
         lblOrdensVenda = new javax.swing.JLabel();
+        panelInfoJogador = new javax.swing.JPanel();
+        lblQuantidadeJogador = new javax.swing.JLabel();
+        lblDadosJogado = new javax.swing.JLabel();
+        lblQuantidadeJogadorValor = new javax.swing.JLabel();
+        btnOrdens = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         panelActionAcao.setLayout(new java.awt.GridBagLayout());
 
-        lblNome.setText("Nome:");
+        lblVariacaoValor.setText("N%");
 
-        lblPrecoUni.setText("Preço Unitário:");
-
-        lblQuantidade.setText("Quantidade:");
-
-        lblQuantidadeValor.setText("N");
+        lblStatusAction.setText("Status:");
 
         lblVariacao.setText("Variação:");
 
-        lblVariacaoValor.setText("N%");
-
-        lblNomeValor.setText("Nome");
-
         lblPrecoUniValor.setText("R$0,00");
 
-        lblNomeEmpresa.setText("Empresa:");
+        lblPrecoUni.setText("Preço Unitário:");
 
-        lblNomeEmpresaValor.setText("NomeEmpresa");
+        lblQuantidade.setText("Quantidade no Mercado:");
 
-        lblStatusEmpresa.setText("Status:");
+        lblQuantidadeValor.setText("N");
 
-        lblStatusEmpresaValor.setText("StatusEmpresa");
+        lblNome.setText("Nome:");
 
-        btnMaisInfo.setText("Mais informações");
+        lblStatusAcaoValor.setText("StatusAcao");
+
+        lblNomeValor.setText("Nome");
 
         javax.swing.GroupLayout panelInfoAcaoLayout = new javax.swing.GroupLayout(panelInfoAcao);
         panelInfoAcao.setLayout(panelInfoAcaoLayout);
@@ -236,34 +197,24 @@ public class FrmAcao extends javax.swing.JFrame {
                     .addGroup(panelInfoAcaoLayout.createSequentialGroup()
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNomeValor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNomeValor))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
+                        .addComponent(lblPrecoUni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPrecoUniValor))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
+                        .addComponent(lblQuantidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblQuantidadeValor))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
+                        .addComponent(lblStatusAction)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblStatusAcaoValor))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
                         .addComponent(lblVariacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblVariacaoValor))
-                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                        .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                                .addComponent(lblPrecoUni)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPrecoUniValor))
-                            .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                                .addComponent(lblQuantidade)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblQuantidadeValor))
-                            .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                                .addComponent(lblNomeEmpresa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNomeEmpresaValor))
-                            .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                                .addComponent(lblStatusEmpresa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblStatusEmpresaValor)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                .addComponent(btnMaisInfo)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lblVariacaoValor)))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
         panelInfoAcaoLayout.setVerticalGroup(
             panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,37 +222,30 @@ public class FrmAcao extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
-                    .addComponent(lblVariacao)
-                    .addComponent(lblVariacaoValor)
                     .addComponent(lblNomeValor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPrecoUniValor)
-                    .addComponent(lblPrecoUni))
+                    .addComponent(lblPrecoUni)
+                    .addComponent(lblPrecoUniValor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuantidade)
                     .addComponent(lblQuantidadeValor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomeEmpresa)
-                    .addComponent(lblNomeEmpresaValor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblStatusEmpresa)
-                    .addComponent(lblStatusEmpresaValor))
+                    .addComponent(lblStatusAction)
+                    .addComponent(lblStatusAcaoValor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMaisInfo)
-                .addGap(50, 50, 50))
+                .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblVariacao)
+                    .addComponent(lblVariacaoValor))
+                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 13;
-        gridBagConstraints.ipady = -48;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(panelInfoAcao, gridBagConstraints);
 
@@ -313,7 +257,7 @@ public class FrmAcao extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Quantidade", "Valor"
             }
         ));
         scrollTbAcoesCompra.setViewportView(tbAcoesCompra);
@@ -336,9 +280,17 @@ public class FrmAcao extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Quantidade", "Valor"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         scrollTbAcoesVenda.setViewportView(tbAcoesVenda);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -358,12 +310,12 @@ public class FrmAcao extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(btnComprar, gridBagConstraints);
 
-        BtnVender.setText("Vender");
+        btnVender.setText("Vender");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        panelActionAcao.add(BtnVender, gridBagConstraints);
+        panelActionAcao.add(btnVender, gridBagConstraints);
 
         lblOrdensCompra.setText("Ordens de Compra");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -381,11 +333,56 @@ public class FrmAcao extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(lblOrdensVenda, gridBagConstraints);
 
+        panelInfoJogador.setMinimumSize(new java.awt.Dimension(100, 100));
+        panelInfoJogador.setPreferredSize(new java.awt.Dimension(170, 198));
+
+        lblQuantidadeJogador.setText("Quantidade de ações:");
+
+        lblDadosJogado.setText("Dados do Jogador");
+
+        lblQuantidadeJogadorValor.setText("N");
+
+        btnOrdens.setText("Minhas Ordens");
+
+        javax.swing.GroupLayout panelInfoJogadorLayout = new javax.swing.GroupLayout(panelInfoJogador);
+        panelInfoJogador.setLayout(panelInfoJogadorLayout);
+        panelInfoJogadorLayout.setHorizontalGroup(
+            panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInfoJogadorLayout.createSequentialGroup()
+                .addContainerGap(136, Short.MAX_VALUE)
+                .addGroup(panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInfoJogadorLayout.createSequentialGroup()
+                        .addComponent(lblQuantidadeJogador)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblQuantidadeJogadorValor))
+                    .addComponent(lblDadosJogado, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnOrdens, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        panelInfoJogadorLayout.setVerticalGroup(
+            panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInfoJogadorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblDadosJogado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQuantidadeJogadorValor)
+                    .addComponent(lblQuantidadeJogador))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(btnOrdens)
+                .addContainerGap())
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        panelActionAcao.add(panelInfoJogador, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelActionAcao, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addComponent(panelActionAcao, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,14 +409,18 @@ public class FrmAcao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAcao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmActionDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAcao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmActionDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAcao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmActionDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAcao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmActionDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -428,31 +429,33 @@ public class FrmAcao extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAcao().setVisible(true);
+                new FrmActionDetails().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnVender;
     private javax.swing.JButton btnComprar;
-    private javax.swing.JButton btnMaisInfo;
+    private javax.swing.JButton btnOrdens;
+    private javax.swing.JButton btnVender;
+    private javax.swing.JLabel lblDadosJogado;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblNomeEmpresa;
-    private javax.swing.JLabel lblNomeEmpresaValor;
     private javax.swing.JLabel lblNomeValor;
     private javax.swing.JLabel lblOrdensCompra;
     private javax.swing.JLabel lblOrdensVenda;
     private javax.swing.JLabel lblPrecoUni;
     private javax.swing.JLabel lblPrecoUniValor;
     private javax.swing.JLabel lblQuantidade;
+    private javax.swing.JLabel lblQuantidadeJogador;
+    private javax.swing.JLabel lblQuantidadeJogadorValor;
     private javax.swing.JLabel lblQuantidadeValor;
-    private javax.swing.JLabel lblStatusEmpresa;
-    private javax.swing.JLabel lblStatusEmpresaValor;
+    private javax.swing.JLabel lblStatusAcaoValor;
+    private javax.swing.JLabel lblStatusAction;
     private javax.swing.JLabel lblVariacao;
     private javax.swing.JLabel lblVariacaoValor;
     private javax.swing.JPanel panelActionAcao;
     private javax.swing.JPanel panelInfoAcao;
+    private javax.swing.JPanel panelInfoJogador;
     private javax.swing.JScrollPane scrollTbAcoesCompra;
     private javax.swing.JScrollPane scrollTbAcoesVenda;
     private javax.swing.JTable tbAcoesCompra;

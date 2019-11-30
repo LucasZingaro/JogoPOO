@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.visao;
 
 import javax.swing.JButton;
@@ -10,21 +5,35 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import jogo.controle.CtrMainGame;
+import jogo.modelo.Game;
 
 /**
+ * Tela principal da Partida
  *
- * @author Lucas
+ * @see Game
+ * @see CtrMainGame
  */
-public class FrmTelaPrincipal extends javax.swing.JFrame {
+public class FrmMainGame extends javax.swing.JFrame {
+
+    private final CtrMainGame listeners;
+    private Game game;
 
     /**
      * Creates new form FrmTelaPrincipal
      */
-    public FrmTelaPrincipal() {
+    public FrmMainGame() {
         initComponents();
+        listeners = new CtrMainGame(this);
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public JButton getBtnPassarTurno() {
@@ -91,14 +100,6 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         this.menuAjuda = menuAjuda;
     }
 
-    public JMenuItem getMenuItemSalvar() {
-        return menuItemSalvar;
-    }
-
-    public void setMenuItemSalvar(JMenuItem menuItemSalvar) {
-        this.menuItemSalvar = menuItemSalvar;
-    }
-
     public JMenu getMenuJogo() {
         return menuJogo;
     }
@@ -107,28 +108,28 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         this.menuJogo = menuJogo;
     }
 
-    public JPanel getPanelDados() {
-        return panelDados;
+    public JMenuItem getMiMenu() {
+        return miMenu;
     }
 
-    public void setPanelDados(JPanel panelDados) {
-        this.panelDados = panelDados;
+    public void setMiMenu(JMenuItem miMenu) {
+        this.miMenu = miMenu;
     }
 
-    public JPanel getPanelTelaPrincipal() {
-        return panelTelaPrincipal;
+    public JMenuItem getMiSair() {
+        return miSair;
     }
 
-    public void setPanelTelaPrincipal(JPanel panelTelaPrincipal) {
-        this.panelTelaPrincipal = panelTelaPrincipal;
+    public void setMiSair(JMenuItem miSair) {
+        this.miSair = miSair;
     }
 
-    public JScrollPane getScrollPaneTabelaAcoes() {
-        return scrollPaneTabelaAcoes;
+    public JMenuItem getMiSalvar() {
+        return miSalvar;
     }
 
-    public void setScrollPaneTabelaAcoes(JScrollPane scrollPaneTabelaAcoes) {
-        this.scrollPaneTabelaAcoes = scrollPaneTabelaAcoes;
+    public void setMiSalvar(JMenuItem miSalvar) {
+        this.miSalvar = miSalvar;
     }
 
     public JTable getTabelaAcoes() {
@@ -163,7 +164,9 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         tabelaAcoes = new javax.swing.JTable();
         frmMenuBar = new javax.swing.JMenuBar();
         menuJogo = new javax.swing.JMenu();
-        menuItemSalvar = new javax.swing.JMenuItem();
+        miSalvar = new javax.swing.JMenuItem();
+        miMenu = new javax.swing.JMenuItem();
+        miSair = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -194,24 +197,25 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDadosLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTurnoValor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPassarTurno))
-                    .addGroup(panelDadosLayout.createSequentialGroup()
                         .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDadosLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTurnoValor))
                             .addGroup(panelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNomeValor))
-                            .addGroup(panelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblSaldoValor)))
+                                .addComponent(lblNomeValor)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVisaoGeral)
+                        .addComponent(btnPassarTurno))
+                    .addGroup(panelDadosLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSaldoValor)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelDadosLayout.createSequentialGroup()
+                        .addComponent(btnVisaoGeral)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnPatrimonio)))
                 .addContainerGap())
         );
@@ -221,61 +225,38 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPassarTurno)
-                    .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(lblTurnoValor)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDadosLayout.createSequentialGroup()
                         .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(lblNomeValor))
+                            .addComponent(jLabel3)
+                            .addComponent(lblTurnoValor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblNomeValor))))
+                .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDadosLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(lblSaldoValor))
-                        .addGap(4, 4, 4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnPatrimonio)
-                        .addComponent(btnVisaoGeral)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDadosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addGroup(panelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPatrimonio)
+                            .addComponent(btnVisaoGeral))
+                        .addContainerGap())))
         );
 
         tabelaAcoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Ações", "Ações", "Ações", "Ações", "Ações", "Ações", "Ações", "Ações", "Ações"
+                "Ações", "Ações", "Ações", "Ações"
             }
         ));
-        tabelaAcoes.setCellSelectionEnabled(true);
+        tabelaAcoes.setColumnSelectionAllowed(false);
         tabelaAcoes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         scrollPaneTabelaAcoes.setViewportView(tabelaAcoes);
         if (tabelaAcoes.getColumnModel().getColumnCount() > 0) {
@@ -283,11 +264,6 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
             tabelaAcoes.getColumnModel().getColumn(1).setMinWidth(150);
             tabelaAcoes.getColumnModel().getColumn(2).setMinWidth(150);
             tabelaAcoes.getColumnModel().getColumn(3).setMinWidth(150);
-            tabelaAcoes.getColumnModel().getColumn(4).setMinWidth(150);
-            tabelaAcoes.getColumnModel().getColumn(5).setMinWidth(150);
-            tabelaAcoes.getColumnModel().getColumn(6).setMinWidth(150);
-            tabelaAcoes.getColumnModel().getColumn(7).setMinWidth(150);
-            tabelaAcoes.getColumnModel().getColumn(8).setMinWidth(150);
         }
 
         javax.swing.GroupLayout panelTelaPrincipalLayout = new javax.swing.GroupLayout(panelTelaPrincipal);
@@ -297,7 +273,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
             .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTelaPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrollPaneTabelaAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+                .addComponent(scrollPaneTabelaAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelTelaPrincipalLayout.setVerticalGroup(
@@ -305,15 +281,22 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
             .addGroup(panelTelaPrincipalLayout.createSequentialGroup()
                 .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTabelaAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addComponent(scrollPaneTabelaAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         menuJogo.setText("Jogo");
 
-        menuItemSalvar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        menuItemSalvar.setText("Salvar");
-        menuJogo.add(menuItemSalvar);
+        miSalvar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        miSalvar.setText("Salvar");
+        menuJogo.add(miSalvar);
+
+        miMenu.setText("Menu");
+        menuJogo.add(miMenu);
+
+        miSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        miSair.setText("Sair");
+        menuJogo.add(miSair);
 
         frmMenuBar.add(menuJogo);
 
@@ -334,6 +317,7 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -353,20 +337,21 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmTelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMainGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmTelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMainGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmTelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMainGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmTelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMainGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmTelaPrincipal().setVisible(true);
+                new FrmMainGame().setVisible(true);
             }
         });
     }
@@ -383,8 +368,10 @@ public class FrmTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblSaldoValor;
     private javax.swing.JLabel lblTurnoValor;
     private javax.swing.JMenu menuAjuda;
-    private javax.swing.JMenuItem menuItemSalvar;
     private javax.swing.JMenu menuJogo;
+    private javax.swing.JMenuItem miMenu;
+    private javax.swing.JMenuItem miSair;
+    private javax.swing.JMenuItem miSalvar;
     private javax.swing.JPanel panelDados;
     private javax.swing.JPanel panelTelaPrincipal;
     private javax.swing.JScrollPane scrollPaneTabelaAcoes;

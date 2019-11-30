@@ -7,17 +7,17 @@ package jogo.modelo.tabelaAcoes;
 
 import javax.swing.JTable;
 import jogo.modelo.Action;
-import jogo.visao.AcaoPainel;
+import jogo.visao.PanelAction;
 
 /**
  * Componente Painel para representação das Ações na tabela.
  *
- * @see AcaoPainel
+ * @see PanelAction
  * @see TabelaAcoesTableModel
  *
  * @author Lucas
  */
-public class TabelaAcoesCellComponent extends AcaoPainel {
+public class TabelaAcoesCellComponent extends PanelAction {
 
     /**
      * Atualização dos dados do componente

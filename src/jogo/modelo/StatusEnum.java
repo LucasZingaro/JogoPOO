@@ -17,7 +17,7 @@ public enum StatusEnum {
     /** Depressão*/
     DEPRESSION;
 
-    private void setValue(StatusEnum status,StatusEnum value){
+    private void setValue(StatusEnum status, StatusEnum value){
         status = value;
     }
     
@@ -27,6 +27,13 @@ public enum StatusEnum {
     
     @Override
     public String toString() {
-        return this.name();
+        switch(this){
+            case FLYING: return "Voando";
+            case GROWING: return "Crescendo";
+            case NEUTRAL: return "Neutro";
+            case DESCENDING: return "Decrescendo";
+            case DEPRESSION: return "Depressão";
+            default: return "none";
+        }
     }
 }

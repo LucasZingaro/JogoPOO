@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.visao;
 
 import java.awt.Component;
@@ -11,21 +6,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import jogo.controle.CtrFrmNovoJogo;
+import jogo.controle.CtrNewGame;
 
 /**
- * Tela de criação de um novo Jogo.
+ * Tela de criação de novas Partidas
+ *
+ * @see CtrNewGame
  */
-public class FrmNovoJogo extends javax.swing.JFrame {
-    
-    private CtrFrmNovoJogo listeners;
+public class FrmNewGame extends javax.swing.JFrame {
+
+    private CtrNewGame listeners;
 
     /**
      * Creates new form Login
      */
-    public FrmNovoJogo() {
+    public FrmNewGame() {
         initComponents();
-        listeners = new CtrFrmNovoJogo(this);
+        // this.lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/logoJogoPOO.png")));
+        listeners = new CtrNewGame(this);
         for (Component myComponent : getComponents()) {
             if (myComponent instanceof JLabel) {
                 ((JLabel) myComponent).setHorizontalAlignment(SwingConstants.CENTER);
@@ -83,7 +81,6 @@ public class FrmNovoJogo extends javax.swing.JFrame {
     public void setTxtNome(JTextField txtNome) {
         this.txtNome = txtNome;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -105,7 +102,6 @@ public class FrmNovoJogo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusCycleRoot(false);
         setMinimumSize(new java.awt.Dimension(300, 250));
-        setResizable(false);
 
         panelIniciar.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -184,14 +180,22 @@ public class FrmNovoJogo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmNovoJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNewGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmNovoJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNewGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmNovoJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNewGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmNovoJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNewGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -204,7 +208,7 @@ public class FrmNovoJogo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmNovoJogo().setVisible(true);
+                new FrmNewGame().setVisible(true);
             }
         });
     }

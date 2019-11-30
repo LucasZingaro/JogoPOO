@@ -1,34 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.visao;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import jogo.controle.CtrFrmStart;
+import jogo.controle.CtrStart;
 
 /**
- * Tela de Inico do Jogo.
+ * Tela de Início do Jogo.
+ *
+ * @see CtrStart
  */
 public class FrmStart extends javax.swing.JFrame {
 
-    private CtrFrmStart listener;
+    private CtrStart listener;
 
     /**
      * Creates new form FrmStart
      */
     public FrmStart() {
         initComponents();
-        this.listener = new CtrFrmStart(this);
+        this.listener = new CtrStart(this);
     }
 
-    public CtrFrmStart getListener() {
+    public CtrStart getListener() {
         return listener;
     }
 
-    public void setListener(CtrFrmStart listener) {
+    public void setListener(CtrStart listener) {
         this.listener = listener;
     }
 
@@ -47,6 +44,7 @@ public class FrmStart extends javax.swing.JFrame {
     public void setBtnCarregarJogo(JButton btnCarregarJogo) {
         this.btnCarregarJogo = btnCarregarJogo;
     }
+
     public JPanel getPanelStart() {
         return panelStart;
     }
@@ -54,7 +52,6 @@ public class FrmStart extends javax.swing.JFrame {
     public void setPanelStart(JPanel panelStart) {
         this.panelStart = panelStart;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,7 +92,7 @@ public class FrmStart extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelStart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelStart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

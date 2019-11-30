@@ -8,11 +8,12 @@ import javax.swing.event.ListSelectionListener;
 import jogo.modelo.Action;
 import java.util.ArrayList;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellComponent;
+import jogo.modelo.tabelaAcoes.TabelaAcoesCellEditor;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellRender;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellUnifer;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellUnifer;
 import jogo.modelo.tabelaAcoes.TabelaAcoesTableModel;
-import jogo.visao.AcaoPainel;
+import jogo.visao.PanelAction;
 
 /**
  * Controle do formulário de ações
@@ -45,17 +46,22 @@ public class CtrFrmTabelaAcoes implements ActionListener, ListSelectionListener 
         frm.getTbAcoes().setModel(tmTabelaAcoes);
 
         //Possibilitam a renderização e edição dos componentes na tabela
-        /*
+//        /*
         frm.getTbAcoes().setDefaultRenderer(
-                TabelaAcoesCellComponent.class, new TabelaAcoesCellRender());
+                TabelaAcoesCellComponent.class,
+                new TabelaAcoesCellRender()
+        );
         frm.getTbAcoes().setDefaultEditor(
-                TabelaAcoesCellComponent.class, new TabelaAcoesCellUnifer()); //*/
+                TabelaAcoesCellComponent.class,
+                new TabelaAcoesCellEditor()
+        );
+        //*/
         //Ou
-        frm.getTbAcoes().setDefaultRenderer(TabelaAcoesCellUnifer.CellComponent.class, new TabelaAcoesCellUnifer());
-        frm.getTbAcoes().setDefaultEditor(TabelaAcoesCellUnifer.CellComponent.class, new TabelaAcoesCellUnifer());
+//        frm.getTbAcoes().setDefaultRenderer(TabelaAcoesCellUnifer.CellComponent.class, new TabelaAcoesCellUnifer());
+//        frm.getTbAcoes().setDefaultEditor(TabelaAcoesCellUnifer.CellComponent.class, new TabelaAcoesCellUnifer());
 
         //Definir tabanho das linhas
-        Dimension d = new AcaoPainel().getMaximumSize();
+        Dimension d = new PanelAction().getMaximumSize();
         frm.getTbAcoes().setRowHeight(d.height);
     }
 
@@ -80,6 +86,7 @@ public class CtrFrmTabelaAcoes implements ActionListener, ListSelectionListener 
                     frm.getTbAcoes().getSelectedColumn()
             );
             tmTabelaAcoes.reloadSelectionJTable(frm.getTbAcoes());
+
         } else if (e.getActionCommand().equals(frm.getBtnPassarTurno().getText())) {
             tmTabelaAcoes.getAcaoList().forEach((acao) -> {
                 if (acao instanceof Action) {

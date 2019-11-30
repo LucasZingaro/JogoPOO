@@ -7,8 +7,8 @@ package jogo.controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import jogo.visao.FrmCarregarJogo;
-import jogo.visao.FrmNovoJogo;
+import jogo.visao.FrmSaveRecovery;
+import jogo.visao.FrmNewGame;
 import jogo.visao.FrmStart;
 
 /**
@@ -17,11 +17,11 @@ import jogo.visao.FrmStart;
  * @see FrmStart
  * @author Lucas
  */
-public class CtrFrmStart implements ActionListener {
+public class CtrStart implements ActionListener {
 
     FrmStart frm;
 
-    public CtrFrmStart(FrmStart frm) {
+    public CtrStart(FrmStart frm) {
         this.frm = frm;
         addActionListeners();
     }
@@ -51,20 +51,20 @@ public class CtrFrmStart implements ActionListener {
     /**
      * Ação para abrir o FrmCarregaJogo
      *
-     * @see FrmCarregarJogo
+     * @see FrmSaveRecovery
      */
     private void actionBtnCarregarJogo() {
-        new FrmCarregarJogo().setVisible(true);
+        new FrmSaveRecovery().setVisible(true);
         frm.dispose();
     }
 
     /**
      * Ação para abrir o FrmIniciarComNome
      *
-     * @see FrmNovoJogo
+     * @see FrmNewGame
      */
     private void actionBtnNovoJogo() {
-        new FrmNovoJogo().setVisible(true);
+        new FrmNewGame().setVisible(true);
         frm.dispose();
     }
 

@@ -8,27 +8,29 @@ import javax.swing.JLabel;
 import jogo.modelo.Action;
 
 /**
+ * Representação de uma ação gráfica
  *
- * @author Lucas
+ * @see Action
  */
-public class AcaoPainel extends javax.swing.JPanel {
+public class PanelAction extends javax.swing.JPanel {
 
     private Action acao;
 
-    public AcaoPainel() {
+    public PanelAction() {
         initComponents();
+
+        //Style Editor
         for (Component myComponent : getMyComponents()) {
             if (myComponent instanceof JLabel) {
                 ((JLabel) myComponent).setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 ((JLabel) myComponent).setVerticalAlignment(javax.swing.SwingConstants.CENTER);
             }
         }
-        this.getBtnInformacao().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FrmAcao frmAcao = new FrmAcao(acao);
-                frmAcao.setVisible(true);
-            }
+
+        //Button Action
+        this.getBtnInformacao().addActionListener((ActionEvent e) -> {
+            FrmActionDetails frmAcao = new FrmActionDetails(acao);
+            frmAcao.setVisible(true);
         });
     }
 

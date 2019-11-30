@@ -7,19 +7,20 @@ package jogo.controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import jogo.visao.FrmAcao;
+import jogo.visao.FrmSaveRecovery;
+import jogo.visao.FrmStart;
 
 /**
- * Classe de controle do FrmAcao.
+ * Classe de controle do FrmSaveRecovery.
  *
- * @see FrmAcao
+ * @see FrmSaveRecovery
  * @author Lucas
  */
-public class CtrFrmAcao implements ActionListener {
+public class CtrSaveRecovery implements ActionListener {
 
-    FrmAcao frm;
+    FrmSaveRecovery frm;
 
-    public CtrFrmAcao(FrmAcao frm) {
+    public CtrSaveRecovery(FrmSaveRecovery frm) {
         this.frm = frm;
         addActionListeners();
     }
@@ -28,7 +29,7 @@ public class CtrFrmAcao implements ActionListener {
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-
+        frm.getBtnVoltar().addActionListener(this);
     }
 
     /**
@@ -38,7 +39,19 @@ public class CtrFrmAcao implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals(frm.getBtnVoltar().getText())) {
+            actionBtnVoltar();
+        }
+    }
 
+    /**
+     * Ação para Voltar ao o FrmStart
+     *
+     * @see FrmStart
+     */
+    private void actionBtnVoltar() {
+        new FrmStart().setVisible(true);
+        frm.dispose();
     }
 
 }

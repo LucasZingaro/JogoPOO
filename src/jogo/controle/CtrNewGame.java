@@ -8,20 +8,22 @@ package jogo.controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import jogo.visao.FrmNovoJogo;
+import jogo.modelo.Game;
+import jogo.visao.FrmMainGame;
+import jogo.visao.FrmNewGame;
 import jogo.visao.FrmStart;
 
 /**
- * Classe de controle do FrmNovoJogo.
+ * Classe de controle do FrmNewGame.
  *
- * @see FrmNovoJogo
+ * @see FrmNewGame
  * @author Lucas
  */
-public class CtrFrmNovoJogo implements ActionListener {
+public class CtrNewGame implements ActionListener {
 
-    FrmNovoJogo frm;
+    FrmNewGame frm;
 
-    public CtrFrmNovoJogo(FrmNovoJogo frm) {
+    public CtrNewGame(FrmNewGame frm) {
         this.frm = frm;
         addActionListeners();
     }
@@ -61,6 +63,12 @@ public class CtrFrmNovoJogo implements ActionListener {
      * Ação para Iniciar a Partida
      */
     private void actionBtnIniciar() {
+        FrmMainGame frmMainGame = new FrmMainGame();
+        frmMainGame.setGame(new Game());
+        //Montrar introdução(se tiver)
+        frmMainGame.setVisible(true);
+        frm.dispose();
+        
         JOptionPane.showMessageDialog(frm, "Olá,"+frm.getTxtNome().getText()+";\n\nIniciando....", "Iniciar", JOptionPane.INFORMATION_MESSAGE);
     }
 

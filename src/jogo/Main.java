@@ -6,16 +6,16 @@
 package jogo;
 
 import jogo.modelo.Action;
-import jogo.visao.AcaoPainel;
-import jogo.visao.FrmCarregarJogo;
-import jogo.visao.FrmNovoJogo;
+import jogo.visao.PanelAction;
+import jogo.visao.FrmSaveRecovery;
+import jogo.visao.FrmNewGame;
 import jogo.visao.FrmStart;
 
 /**
  *
  * @author Lucas
  */
-public class JogoJavaPOO {
+public class Main {
 
     FrmStart frmStart;
 

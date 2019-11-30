@@ -1,5 +1,4 @@
 package jogo;
-
 /**
  * Configurações do Jogo
  *
@@ -10,9 +9,11 @@ public abstract class Config {
     public static final int MAX_TURN = 100;
     /** Tamanho máximo do nome do jogador*/
     public static final int MAX_SIZE_PLAYER_NAME = 64;
-
+    
+    /** Driver do banco de dados*/
+    public static String db_DRIVER = "com.mysql.jdbc.Driver";
     /** Link base de acesso ao banco de dados*/
-    public static String db_ROOT = "localhost:3307";
+    public static String db_ROOT = "jdbc:mysql://localhost:3307";
     /** Nome do banco de dados*/
     public static String db_NAME = "economygamedb";
     /** Nome de usuário do banco de dados*/
@@ -21,5 +22,5 @@ public abstract class Config {
     public static String db_PASSWORD = "root";
     
     /** Atraso na recuperação de renda fixa (em Turnos)*/
-    public static int FIXED_INCOME_RECOVERY_DELAY = 3;
+    public static final int FIXED_INCOME_RECOVERY_DELAY = 3;
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import jogo.modelo.Action;
+import jogo.visao.PanelAction;
 
 /**
  * Modelo da tabela de ações
@@ -45,7 +46,7 @@ public final class TabelaAcoesTableModel extends AbstractTableModel {
 
     @Override
     public Class getColumnClass(int columnIndex) {
-        return TabelaAcoesCellUnifer.CellComponent.class;
+        return TabelaAcoesCellComponent.class;
     }
 
     @Override

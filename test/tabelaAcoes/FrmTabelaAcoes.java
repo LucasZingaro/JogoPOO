@@ -80,25 +80,19 @@ public class FrmTabelaAcoes extends javax.swing.JFrame {
 
         tbAcoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null}
             },
             new String [] {
                 "Ações", "Ações", "Ações", "Ações"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tbAcoes.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tbAcoes);
         tbAcoes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (tbAcoes.getColumnModel().getColumnCount() > 0) {
             tbAcoes.getColumnModel().getColumn(0).setResizable(false);
+            tbAcoes.getColumnModel().getColumn(0).setCellEditor(null);
+            tbAcoes.getColumnModel().getColumn(0).setCellRenderer(null);
         }
 
         btnNewAcao.setText("Nova ação selecionada");

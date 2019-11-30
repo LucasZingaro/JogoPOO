@@ -1,38 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.visao;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import jogo.controle.CtrFrmCarregarJogo;
+import jogo.controle.CtrSaveRecovery;
 
 /**
  * Tela de Carregamento dos jogos salvos no Banco de dados.
+ *
+ * @see Game
+ * @see CtrSaveRecovery
  */
-public class FrmCarregarJogo extends javax.swing.JFrame {
+public class FrmSaveRecovery extends javax.swing.JFrame {
 
-    private CtrFrmCarregarJogo listeners;
+    private final CtrSaveRecovery listeners;
 
     /**
      * Creates new form FrmCarregarJogo
      */
-    public FrmCarregarJogo() {
+    public FrmSaveRecovery() {
         initComponents();
-        listeners = new CtrFrmCarregarJogo(this);
+        listeners = new CtrSaveRecovery(this);
     }
 
-    public CtrFrmCarregarJogo getListeners() {
-        return listeners;
+    public JButton getBtnCarregarJogo() {
+        return btnCarregarJogo;
     }
 
-    public void setListeners(CtrFrmCarregarJogo listeners) {
-        this.listeners = listeners;
+    public void setBtnCarregarJogo(JButton btnCarregarJogo) {
+        this.btnCarregarJogo = btnCarregarJogo;
     }
 
     public JButton getBtnVoltar() {
@@ -41,30 +36,6 @@ public class FrmCarregarJogo extends javax.swing.JFrame {
 
     public void setBtnVoltar(JButton btnVoltar) {
         this.btnVoltar = btnVoltar;
-    }
-
-    public JLabel getLblTitulo() {
-        return lblTitulo;
-    }
-
-    public void setLblTitulo(JLabel lblTitulo) {
-        this.lblTitulo = lblTitulo;
-    }
-
-    public JPanel getPanelCarregar() {
-        return panelCarregar;
-    }
-
-    public void setPanelCarregar(JPanel panelCarregar) {
-        this.panelCarregar = panelCarregar;
-    }
-
-    public JScrollPane getScrollTbCarregarJogo() {
-        return scrollTbCarregarJogo;
-    }
-
-    public void setScrollTbCarregarJogo(JScrollPane scrollTbCarregarJogo) {
-        this.scrollTbCarregarJogo = scrollTbCarregarJogo;
     }
 
     public JTable getTbCarregarJogo() {
@@ -90,6 +61,7 @@ public class FrmCarregarJogo extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         scrollTbCarregarJogo = new javax.swing.JScrollPane();
         tbCarregarJogo = new javax.swing.JTable();
+        btnCarregarJogo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(300, 300));
@@ -105,18 +77,17 @@ public class FrmCarregarJogo extends javax.swing.JFrame {
         lblTitulo.setText("Jogos Salvos");
         lblTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         panelCarregar.add(lblTitulo, gridBagConstraints);
 
         tbCarregarJogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome do Jogador", "Saldo", "Turno", "Salvo em"
             }
         ));
         scrollTbCarregarJogo.setViewportView(tbCarregarJogo);
@@ -133,11 +104,18 @@ public class FrmCarregarJogo extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelCarregar.add(scrollTbCarregarJogo, gridBagConstraints);
 
+        btnCarregarJogo.setText("Carregar Jogo");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        panelCarregar.add(btnCarregarJogo, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+            .addComponent(panelCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,25 +143,27 @@ public class FrmCarregarJogo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCarregarJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmSaveRecovery.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCarregarJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmSaveRecovery.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCarregarJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmSaveRecovery.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCarregarJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmSaveRecovery.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCarregarJogo().setVisible(true);
+                new FrmSaveRecovery().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCarregarJogo;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelCarregar;

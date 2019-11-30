@@ -7,20 +7,19 @@ package jogo.controle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import jogo.visao.FrmCarregarJogo;
-import jogo.visao.FrmStart;
+import jogo.visao.FrmActionDetails;
 
 /**
- * Classe de controle do FrmCarregarJogo.
+ * Classe de controle do FrmActionDetails.
  *
- * @see FrmCarregarJogo
+ * @see FrmActionDetails
  * @author Lucas
  */
-public class CtrFrmCarregarJogo implements ActionListener {
+public class CtrActionDetails implements ActionListener {
 
-    FrmCarregarJogo frm;
+    FrmActionDetails frm;
 
-    public CtrFrmCarregarJogo(FrmCarregarJogo frm) {
+    public CtrActionDetails(FrmActionDetails frm) {
         this.frm = frm;
         addActionListeners();
     }
@@ -29,7 +28,7 @@ public class CtrFrmCarregarJogo implements ActionListener {
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-        frm.getBtnVoltar().addActionListener(this);
+
     }
 
     /**
@@ -39,19 +38,7 @@ public class CtrFrmCarregarJogo implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals(frm.getBtnVoltar().getText())) {
-            actionBtnVoltar();
-        }
-    }
 
-    /**
-     * Ação para Voltar ao o FrmStart
-     *
-     * @see FrmStart
-     */
-    private void actionBtnVoltar() {
-        new FrmStart().setVisible(true);
-        frm.dispose();
     }
 
 }
