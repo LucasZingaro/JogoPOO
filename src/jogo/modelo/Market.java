@@ -11,6 +11,8 @@ public class Market {
 
     /**
      * Identificador do mercado
+     *
+     * @hidden savable
      */
     private int id;
 
@@ -18,11 +20,14 @@ public class Market {
      * Valor da Inflação atual
      *
      * @see "É o último registro do histórico de valores da inflação"
+     * @hidden unsavable
      */
     private float inflation;
 
     /**
      * Histórico de valores da inflação
+     *
+     * @hidden savable
      */
     private ArrayList<Float> inflationHistory;
 
@@ -30,11 +35,14 @@ public class Market {
      * Valor do CDI atual
      *
      * @see "É o último registro do histórico de valores do CDI"
+     * @hidden unsavable
      */
     private float cdi;
 
     /**
      * Histórico de valores do CDI
+     *
+     * @hidden savable
      */
     private ArrayList<Float> cdiHistory;
 
@@ -42,32 +50,57 @@ public class Market {
      * Valor da taxa SELIC Atual
      *
      * @see "É o último registro do histórico de valores da SELIC"
+     * @hidden unsavable
      */
     private float selic;
 
     /**
      * Histórico de valores da SELIC
+     *
+     * @hidden savable
      */
     private ArrayList<Float> selicHistory;
 
     /**
      * Status ou tendência do mercado
+     *
+     * @hidden savable
      */
     private StatusEnum status;
 
     /**
      * Lista de ações do mercado
+     *
+     * @hidden savable
      */
     private ArrayList<Action> marketListActions;
 
-    public Market(float inflation, float cdi, float selic, StatusEnum status, ArrayList<Action> listActions) {
-        this.inflation = inflation;
-        this.cdi = cdi;
-        this.selic = selic;
+    /**
+     * Construtor do BD
+     */
+    public Market(int id, ArrayList<Float> inflationHistory, ArrayList<Float> cdiHistory, ArrayList<Float> selicHistory, StatusEnum status, ArrayList<Action> marketListActions) {
+        this.id = id;
+        this.inflation = inflationHistory.get(inflationHistory.size() - 1);
+        this.inflationHistory = inflationHistory;
+        this.cdi = cdiHistory.get(cdiHistory.size() - 1);
+        this.cdiHistory = cdiHistory;
+        this.selic = selicHistory.get(selicHistory.size() - 1);
+        this.selicHistory = selicHistory;
         this.status = status;
-        this.marketListActions = listActions;
+        this.marketListActions = marketListActions;
     }
 
+    public Market(float inflation, float cdi, float selic, StatusEnum status, ArrayList<Action> listActions) {
+        this.inflation = inflation;
+        this.inflationHistory = new ArrayList<>();
+        this.cdi = cdi;
+        this.cdiHistory = new ArrayList<>();
+        this.selic = selic;
+        this.selicHistory = new ArrayList<>();
+        this.status = status;
+        this.marketListActions = new ArrayList<>();
+    }
+    
     public Market() {
     }
 

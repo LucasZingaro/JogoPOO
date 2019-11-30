@@ -12,76 +12,133 @@ import java.util.Random;
  * @author Lucas
  */
 public class Action {
-    
+
     /**
      * Identificador da Ação
+     *
+     * @hidden savable
      */
     private int id;
 
     /**
      * Nome da ação
+     *
+     * @hidden savable
      */
     private String name;
-    
+
     /**
      * Status da Ação
+     *
+     * @hidden savable
      */
     private StatusEnum status;
-    
+
     /**
      * Valor atual da Ação.
+     *
      * @see "É o último registro do histórico de valores da ação"
+     * @hidden unsavable
      */
     private double value;
-    
+
     /**
      * Histórico de valores da ação
+     *
+     * @hidden savable
      */
     private ArrayList<Double> valueHistory;
-    
+
     /**
      * Variação do valor atual da Ação em comparação com o valor anterior.
+     *
      * @see "É o último registro do histórico de variação"
+     * @hidden unsavable
      */
     private double variation;
-    
+
     /**
      * Histórico de valores da variação
+     *
+     * @hidden unsavable
      */
-    private double variationHistory;
-    
+    private ArrayList<Double> variationHistory;
+
     /**
      * Quantidade de ações no marcado
+     *
+     * @hidden savable
      */
     private double marketQuantity;
-    
+
     /**
      * Quantidade de ações do jogador
+     *
+     * @hidden savable
      */
     private double playerQuantity;
-    
+
     /**
      * Lista de ordens de compra
+     *
+     * @hidden savable
      */
     private ArrayList<PurchaseOrder> purchaseOrderList;
-    
+
     /**
      * Lista de ordens de venda
+     *
+     * @hidden savable
      */
     private ArrayList<SalesOrder> salesOrderList;
 
-    public Action(String nome, double quantidade, double valor) {
-        this.name = nome;
-        this.marketQuantity = quantidade;
-        this.value = valor;
-        this.variation = 0;
+    /**
+     * Construtor BD
+     */
+    public Action(int id, String name, StatusEnum status, ArrayList<Double> valueHistory,
+            ArrayList<Double> variationHistory, double marketQuantity, double playerQuantity,
+            ArrayList<PurchaseOrder> purchaseOrderList, ArrayList<SalesOrder> salesOrderList) {
+
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.value = valueHistory.get(valueHistory.size() - 1);
+        this.valueHistory = valueHistory;
+        this.variation = variationHistory.get(this.valueHistory.size() - 1);;
+        this.variationHistory = variationHistory;
+        this.marketQuantity = marketQuantity;
+        this.playerQuantity = playerQuantity;
+        this.purchaseOrderList = purchaseOrderList;
+        this.salesOrderList = salesOrderList;
     }
 
-    public Action(String nome, double quantidade, double valor, double variacao) {
-        this.name = nome;
-        this.marketQuantity = quantidade;
-        this.value = valor;
-        this.variation = variacao;
+    public Action(String name, StatusEnum status, double value, ArrayList<Double> valueHistory, double variation, ArrayList<Double> variationHistory, double marketQuantity, double playerQuantity, ArrayList<PurchaseOrder> purchaseOrderList, ArrayList<SalesOrder> salesOrderList) {
+        this.name = name;
+        this.status = status;
+        this.value = value;
+        this.valueHistory = valueHistory;
+        this.variation = variation;
+        this.variationHistory = variationHistory;
+        this.marketQuantity = marketQuantity;
+        this.playerQuantity = playerQuantity;
+        this.purchaseOrderList = purchaseOrderList;
+        this.salesOrderList = salesOrderList;
+    }
+
+    public Action(String name, StatusEnum status, double value, double variation, double marketQuantity, double playerQuantity) {
+        this(name, status,
+                value, new ArrayList<>(),
+                variation, new ArrayList<>(),
+                marketQuantity, playerQuantity,
+                new ArrayList<>(),
+                new ArrayList<>()
+        );
+        this.valueHistory.add(value);
+        this.variationHistory.add(variation);
+    }
+
+    public Action(String name, StatusEnum status, double value, double marketQuantity) {
+        this(name, status, value, 0, marketQuantity, 0);
     }
 
     /**
@@ -116,6 +173,7 @@ public class Action {
 
     public void setValue(double value) {
         this.value = value;
+        this.valueHistory.add(value);
     }
 
     public double getVariation() {
@@ -124,6 +182,7 @@ public class Action {
 
     public void setVariation(double variation) {
         this.variation = variation;
+        this.variationHistory.add(variation);
     }
 
     @Override

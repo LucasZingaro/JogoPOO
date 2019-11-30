@@ -12,11 +12,15 @@ public class FixedIncome {
 
     /**
      * Identificador da Renda fixa
+     *
+     * @hidden savable
      */
     private int id;
 
     /**
      * Valor atual em renda fixa
+     *
+     * @hidden savable
      */
     private double value;
 
@@ -24,6 +28,8 @@ public class FixedIncome {
      * Juros da renda fixa.
      *
      * @see "Calculado pelas variáveis do mercado"
+     * @see Market
+     * @hidden unsavable
      */
     private double interest;
 
@@ -31,35 +37,31 @@ public class FixedIncome {
      * Tempo de espera para recuperar um valor, em turnos
      *
      * @see Config
+     * @hidden unsavable
      */
     private int recoveryDelay;
 
     /**
-     * Lista de solicitações de recuperação de um valor
+     * Construtor BD
      */
-    private ArrayList<RedemptionRequests> redemptionRequests;
-
-    public FixedIncome(int id, double value, double interest, ArrayList<RedemptionRequests> redemptionRequests) {
+    public FixedIncome(int id, double value) {
         this.id = id;
         this.value = value;
-        this.interest = interest;
         this.recoveryDelay = Config.FIXED_INCOME_RECOVERY_DELAY;
-        this.redemptionRequests = redemptionRequests;
-    }
-
-    public FixedIncome(double value, double interest, ArrayList<RedemptionRequests> redemptionRequests) {
-        this.value = value;
-        this.interest = interest;
-        this.recoveryDelay = Config.FIXED_INCOME_RECOVERY_DELAY;
-        this.redemptionRequests = redemptionRequests;
     }
 
     public FixedIncome(double value, double interest) {
-        this(value, interest, new ArrayList<>());
+        this.value = value;
+        this.interest = interest;
+        this.recoveryDelay = Config.FIXED_INCOME_RECOVERY_DELAY;
+    }
+
+    public FixedIncome(double value) {
+        this(value, 0);
     }
 
     public FixedIncome() {
-        this(0, 0);
+        this(0);
     }
 
     public int getId() {
@@ -94,26 +96,4 @@ public class FixedIncome {
         this.recoveryDelay = recoveryDelay;
     }
 
-    public ArrayList<RedemptionRequests> getRedemptionRequests() {
-        return redemptionRequests;
-    }
-
-    public void setRedemptionRequests(ArrayList<RedemptionRequests> redemptionRequests) {
-        this.redemptionRequests = redemptionRequests;
-    }
-
-}
-
-/**
- * Pedido de Recuperação
- */
-class RedemptionRequests {
-
-    private double value;
-    private int delay;
-
-    public RedemptionRequests(double value, int delay) {
-        this.value = value;
-        this.delay = delay;
-    }
 }

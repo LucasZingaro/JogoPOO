@@ -9,42 +9,70 @@ public abstract class Order {
 
     /**
      * Identificador da Operação
+     *
+     * @hidden savable
      */
     private int id;
 
     /**
      * Ação operada
+     *
+     * @see "Deve estár associada a lista de ações do Jogo"
+     * @see Game
+     * @hidden savable
      */
-    private Action Acao;
+    private Action Action;
 
     /**
      * Quantidades de ações
+     *
+     * @hidden savable
      */
     private int quantity;
 
     /**
      * Valor da operação
+     *
+     * @hidden savable
      */
     private int value;
 
     /**
      * Turno inicial da Ordem
+     *
+     * @hidden savable
      */
     private int startTurn;
 
     /**
      * Turno final ou máximo da Ordem
+     *
+     * @hidden savable
      */
     private int endTurn;
 
     /**
      * Se esta ordem vem de um Jogador
+     *
+     * @hidden savable
      */
     private boolean isFromPlayer;
 
-    public Order(int id, Action Acao, int quantity, int value, int startTurn, int endTurn, boolean isFromPlayer) {
+    /**
+     * Construtor BD
+     */
+    public Order(int id, Action action, int quantity, int value, int startTurn, int endTurn, boolean isFromPlayer) {
         this.id = id;
-        this.Acao = Acao;
+        this.Action = action;
+        this.quantity = quantity;
+        this.value = value;
+        this.startTurn = startTurn;
+        this.endTurn = endTurn;
+        this.isFromPlayer = isFromPlayer;
+    }
+
+    public Order(Action Action, int quantity, int value, int startTurn, int endTurn, boolean isFromPlayer) {
+        this.Action = Action;
         this.quantity = quantity;
         this.value = value;
         this.startTurn = startTurn;
@@ -60,12 +88,12 @@ public abstract class Order {
         this.id = id;
     }
 
-    public Action getAcao() {
-        return Acao;
+    public Action getAction() {
+        return Action;
     }
 
-    public void setAcao(Action Acao) {
-        this.Acao = Acao;
+    public void setAction(Action Action) {
+        this.Action = Action;
     }
 
     public int getQuantity() {

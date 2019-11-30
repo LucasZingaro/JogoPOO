@@ -12,41 +12,58 @@ public class Player {
 
     /**
      * Identificador do jogador
+     *
+     * @hidden savable
      */
     private int id;
 
     /**
      * Nome do Jogador
+     *
+     * @hidden savable
      */
     private String name;
 
     /**
      * Dinheiro líquido do Jogador
+     *
+     * @hidden savable
      */
-    private Double money;
+    private double money;
 
     /**
      * Lista de Empréstimos do Jogador
+     *
+     * @hidden savable
      */
     private ArrayList<Loan> loanList;
 
     /**
      * Renda fixa do jogador
+     *
+     * @hidden savable
      */
     private FixedIncome fixedIncome;
 
     /**
      * Lista de ações que o jogador tem participação
+     *
+     * @see "Associados as ações do mercado que o jogador tem algma quantidade"
+     * @see Market
+     * @hidden unsavable
      */
     private ArrayList<Action> playerListActions;
 
-    public Player(int id, String name, Double money, ArrayList<Loan> loanList, FixedIncome fixedIncome, ArrayList<Action> playerListActions) {
+    /** 
+     * Contrutor BD
+     */
+    public Player(int id, String name, Double money, ArrayList<Loan> loanList, FixedIncome fixedIncome) {
         this.id = id;
         this.name = name;
         this.money = money;
         this.loanList = loanList;
         this.fixedIncome = fixedIncome;
-        this.playerListActions = playerListActions;
+        this.playerListActions = new ArrayList<>();
     }
 
     public Player(String name, Double money, ArrayList<Loan> loanList, FixedIncome fixedIncome, ArrayList<Action> playerListActions) {
@@ -57,11 +74,11 @@ public class Player {
         this.playerListActions = playerListActions;
     }
 
-    public Player(String name, Double money, ArrayList<Loan> loanList, FixedIncome fixedIncome) {
+    public Player(String name, double money, ArrayList<Loan> loanList, FixedIncome fixedIncome) {
         this(name, money, loanList, fixedIncome, new ArrayList<>());
     }
 
-    public Player(String name, Double money, ArrayList<Loan> loanList) {
+    public Player(String name, double money, ArrayList<Loan> loanList) {
         this(name, money, loanList, new FixedIncome());
     }
 
@@ -96,11 +113,11 @@ public class Player {
         this.name = name;
     }
 
-    public Double getMoney() {
+    public double getMoney() {
         return money;
     }
 
-    public void setMoney(Double money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
