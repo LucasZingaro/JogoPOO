@@ -96,4 +96,14 @@ public class FixedIncome {
         this.recoveryDelay = recoveryDelay;
     }
 
+    @Override
+    public String toString() {
+        return "FixedIncome{"
+                + " \n    id=" + id
+                + ",\n    value=" + value
+                + ",\n    interest=" + interest
+                + ",\n    recoveryDelay=" + recoveryDelay
+                + " \n}";
+    }
+
 }

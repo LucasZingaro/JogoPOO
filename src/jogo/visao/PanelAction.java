@@ -13,6 +13,7 @@ import jogo.modelo.Action;
  */
 public class PanelAction extends javax.swing.JPanel {
 
+    FrmActionDetails frmAcao;
     private Action acao;
 
     public PanelAction() {
@@ -28,8 +29,14 @@ public class PanelAction extends javax.swing.JPanel {
 
         //Button Action
         this.getBtnInformacao().addActionListener((ActionEvent e) -> {
-            FrmActionDetails frmAcao = new FrmActionDetails(acao);
+            if (!(frmAcao instanceof FrmActionDetails)) {
+                System.out.println("Criando frmPlayerDetails");
+            frmAcao = new FrmActionDetails(acao);
+            }
+            frmAcao.setAction(acao);
+            frmAcao.getListeners().reloadComponents();
             frmAcao.setVisible(true);
+            frmAcao.requestFocus();
         });
     }
 
@@ -98,6 +105,7 @@ public class PanelAction extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         panelDados = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
@@ -134,17 +142,11 @@ public class PanelAction extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 62, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

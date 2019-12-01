@@ -54,7 +54,7 @@ public class Player {
      */
     private ArrayList<Action> playerListActions;
 
-    /** 
+    /**
      * Contrutor BD
      */
     public Player(int id, String name, Double money, ArrayList<Loan> loanList, FixedIncome fixedIncome) {
@@ -82,7 +82,7 @@ public class Player {
         this(name, money, loanList, new FixedIncome());
     }
 
-    public Player(String name, Double money) {
+    public Player(String name, double money) {
         this(name, money, new ArrayList<>());
     }
 
@@ -143,6 +143,15 @@ public class Player {
 
     public void setPlayerListActions(ArrayList<Action> playerListActions) {
         this.playerListActions = playerListActions;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" + " id=" + id + ", name=" + name + ", money=" + money
+                + ",\n      loanList=" + loanList
+                + ",\n      fixedIncome=" + fixedIncome
+                + ",\n      playerListActions=" + playerListActions
+                + "     \n}";
     }
 
 }

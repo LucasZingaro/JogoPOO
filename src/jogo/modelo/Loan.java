@@ -41,7 +41,7 @@ public class Loan {
         this.interest = interest;
         this.startTurn = startTurn;
     }
-    
+
     public Loan(double value, double interest, int startTurn) {
         this.value = value;
         this.interest = interest;
@@ -81,6 +81,16 @@ public class Loan {
 
     public void setStartTurn(int startTurn) {
         this.startTurn = startTurn;
+    }
+
+    @Override
+    public String toString() {
+        return     "\n      Loan{"
+                + " \n          id=" + id
+                + ",\n          value=" + value
+                + ",\n          interest=" + interest
+                + ",\n          startTurn=" + startTurn
+                + " \n      }";
     }
 
 }

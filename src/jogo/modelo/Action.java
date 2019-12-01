@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
+import jogo.Util;
 
 /**
  * Representação de uma ação financeira
@@ -142,13 +143,26 @@ public class Action {
     }
 
     /**
-     * Criação Random, para testes
+     * Criação Random
      */
     public Action() {
-        this.name = "A" + Action.getRandomChar() + Action.getRandomChar() + Action.getRandomChar();
-        this.marketQuantity = gerarQuantidade();
-        this.value = gerarValor();
-        this.variation = Double.parseDouble(String.valueOf(Math.random() * (Math.random() * (Math.random() * 100))).substring(0, 4));
+        this(
+                ("B" + Util.getSequencialRandomCharBetweenAandZ(4)),
+                StatusEnum.NEUTRAL,
+                gerarValor(),
+                gerarVariacao(),
+                gerarQuantidade(),
+                0
+        );
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -159,12 +173,12 @@ public class Action {
         this.name = name;
     }
 
-    public double getMarketQuantity() {
-        return marketQuantity;
+    public StatusEnum getStatus() {
+        return status;
     }
 
-    public void setMarketQuantity(double marketQuantity) {
-        this.marketQuantity = marketQuantity;
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 
     public double getValue() {
@@ -173,7 +187,14 @@ public class Action {
 
     public void setValue(double value) {
         this.value = value;
-        this.valueHistory.add(value);
+    }
+
+    public ArrayList<Double> getValueHistory() {
+        return valueHistory;
+    }
+
+    public void setValueHistory(ArrayList<Double> valueHistory) {
+        this.valueHistory = valueHistory;
     }
 
     public double getVariation() {
@@ -182,60 +203,57 @@ public class Action {
 
     public void setVariation(double variation) {
         this.variation = variation;
-        this.variationHistory.add(variation);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.name);
-        hash = 47 * hash + Objects.hashCode(this.marketQuantity);
-        hash = 47 * hash + Objects.hashCode(this.value);
-        return hash;
+    public ArrayList<Double> getVariationHistory() {
+        return variationHistory;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Action other = (Action) obj;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.marketQuantity, other.marketQuantity)) {
-            return false;
-        }
-        if (!Objects.equals(this.value, other.value)) {
-            return false;
-        }
-        return true;
+    public void setVariationHistory(ArrayList<Double> variationHistory) {
+        this.variationHistory = variationHistory;
     }
 
-    @Override
-    public String toString() {
-        return "Acao{" + "nome=" + name + ", quantidade=" + marketQuantity + ", valor=" + value + ", variacao=" + variation + '}';
+    public double getMarketQuantity() {
+        return marketQuantity;
     }
 
-    public static char getRandomChar() {
-        return ((char) (new Random().nextInt(26) + 'a'));
+    public void setMarketQuantity(double marketQuantity) {
+        this.marketQuantity = marketQuantity;
     }
 
-    private double gerarQuantidade() {
-        return Math.round(Math.random() * 10000);
+    public double getPlayerQuantity() {
+        return playerQuantity;
     }
 
-    private double gerarValor() {
-        return Math.round(Math.random() * 10000) / 100;
+    public void setPlayerQuantity(double playerQuantity) {
+        this.playerQuantity = playerQuantity;
     }
 
-    private double gerarValor(double valorAnterior) {
+    public ArrayList<PurchaseOrder> getPurchaseOrderList() {
+        return purchaseOrderList;
+    }
+
+    public void setPurchaseOrderList(ArrayList<PurchaseOrder> purchaseOrderList) {
+        this.purchaseOrderList = purchaseOrderList;
+    }
+
+    public ArrayList<SalesOrder> getSalesOrderList() {
+        return salesOrderList;
+    }
+
+    public void setSalesOrderList(ArrayList<SalesOrder> salesOrderList) {
+        this.salesOrderList = salesOrderList;
+    }
+
+    public static double gerarQuantidade() {
+        return Math.round(Util.generateValue(100, 50000));
+    }
+
+    public static double gerarValor() {
+        return Math.round(Util.generateValue(100, 10000)) / 100;
+    }
+
+    public static double gerarValor(double valorAnterior) {
         double upOrDown = (Math.round(Math.random()) == 1) ? (1) : (-1);
         double howMuchChange = (upOrDown == 1)
                 ? (Math.round(Math.random() * (valorAnterior)))
@@ -244,24 +262,33 @@ public class Action {
         return (valorNovo < 1) ? (1) : (valorNovo);
     }
 
+    public static double gerarVariacao() {
+        return Double.parseDouble(String.valueOf(
+                Util.multGenerateValue(0.1, 100, 42)
+        ).substring(0, 4));
+    }
+
     public void passarTurno() {
         double valorAntigo = this.value;
-        this.value = round(this.gerarValor(valorAntigo), 2);
-        this.variation = round(((this.value / valorAntigo) - 1) * 100, 2);
+        this.value = Util.round(Action.gerarValor(valorAntigo), 2);
+        this.variation = Util.round(((this.value / valorAntigo) - 1) * 100, 2);
 
     }
 
-    public static double round(double value, int places) {
-        if (places < 0) {
-            throw new IllegalArgumentException();
-        }
-
-        BigDecimal bd = BigDecimal.valueOf(value);
-        try {
-            bd = bd.setScale(places, RoundingMode.HALF_UP);
-        } catch (Exception e) {
-        }
-        return bd.doubleValue();
+    public String toString() {
+        return "\n      Action{"
+                + " \n          id=" + id
+                + ",\n          name=" + name
+                + ",\n          status=" + status
+                + ",\n          value=" + value
+                + ",\n          valueHistory=" + valueHistory
+                + ",\n          variation=" + variation
+                + ",\n          variationHistory=" + variationHistory
+                + ",\n          marketQuantity=" + marketQuantity
+                + ",\n          playerQuantity=" + playerQuantity
+                + ",\n          purchaseOrderList=" + purchaseOrderList
+                + ",\n          salesOrderList=" + salesOrderList
+                + " \n      }";
     }
 
 }

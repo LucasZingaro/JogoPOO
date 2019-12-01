@@ -5,7 +5,13 @@
  */
 package jogo.controle;
 
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
+import jogo.Main;
+import jogo.modelo.tabelaAcoes.TabelaAcoesCellComponent;
+import jogo.modelo.tabelaAcoes.TabelaAcoesCellEditor;
+import jogo.modelo.tabelaAcoes.TabelaAcoesCellRender;
+import jogo.modelo.tabelaAcoes.TabelaAcoesTableModel;
 import jogo.visao.FrmMainGame;
 import jogo.visao.FrmMarketDetails;
 import jogo.visao.FrmPlayerDetails;
@@ -18,12 +24,29 @@ import jogo.visao.FrmStart;
 public class CtrMainGame {
 
     FrmMainGame frmMainGame;
+    TabelaAcoesTableModel tabelaAcoesTableModel;
     FrmPlayerDetails frmPlayerDetails = null;
     FrmMarketDetails frmMarketDetails = null;
 
     public CtrMainGame(FrmMainGame frmMainGame) {
         this.frmMainGame = frmMainGame;
+        startTbModel();
         addActionListeners();
+    }
+
+    private void startTbModel() {
+        this.tabelaAcoesTableModel = new TabelaAcoesTableModel(5, Main.game.getMarket().getMarketListActions());
+        this.frmMainGame.getTabelaAcoes().setModel(tabelaAcoesTableModel);
+        frmMainGame.getTabelaAcoes().setDefaultRenderer(
+                TabelaAcoesCellComponent.class,
+                new TabelaAcoesCellRender()
+        );
+        frmMainGame.getTabelaAcoes().setDefaultEditor(
+                TabelaAcoesCellComponent.class,
+                new TabelaAcoesCellEditor()
+        );
+        Dimension d = new TabelaAcoesCellComponent().getMaximumSize();
+        frmMainGame.getTabelaAcoes().setRowHeight(d.height);
     }
 
     /**
@@ -103,9 +126,12 @@ public class CtrMainGame {
     }
 
     private void disposeFrames() {
-        frmMarketDetails.dispose();
-        frmPlayerDetails.dispose();
-        frmMainGame.dispose();
+        try {
+            frmMarketDetails.dispose();
+            frmPlayerDetails.dispose();
+            frmMainGame.dispose();
+        } catch (Exception e) {
+        }
     }
 
     public void reloadComponents() {

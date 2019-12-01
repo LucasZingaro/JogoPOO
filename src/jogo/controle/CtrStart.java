@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.controle;
 
 import jogo.visao.FrmSaveRecovery;
@@ -17,10 +12,10 @@ import jogo.visao.FrmStart;
  */
 public class CtrStart {
 
-    FrmStart frm;
+    FrmStart frmStart;
 
-    public CtrStart(FrmStart frm) {
-        this.frm = frm;
+    public CtrStart(FrmStart frmStart) {
+        this.frmStart = frmStart;
         addActionListeners();
     }
 
@@ -28,8 +23,8 @@ public class CtrStart {
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-        frm.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
-        frm.getBtnNovoJogo().addActionListener(e -> actionBtnNovoJogo());
+        frmStart.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
+        frmStart.getBtnNovoJogo().addActionListener(e -> actionBtnNovoJogo());
     }
 
     /**
@@ -39,7 +34,7 @@ public class CtrStart {
      */
     private void actionBtnCarregarJogo() {
         new FrmSaveRecovery().setVisible(true);
-        frm.dispose();
+        frmStart.dispose();
     }
 
     /**
@@ -49,7 +44,7 @@ public class CtrStart {
      */
     private void actionBtnNovoJogo() {
         new FrmNewGame().setVisible(true);
-        frm.dispose();
+        frmStart.dispose();
     }
 
 }

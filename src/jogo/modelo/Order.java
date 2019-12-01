@@ -35,7 +35,7 @@ public abstract class Order {
      *
      * @hidden savable
      */
-    private int value;
+    private double value;
 
     /**
      * Turno inicial da Ordem
@@ -61,7 +61,7 @@ public abstract class Order {
     /**
      * Construtor BD
      */
-    public Order(int id, Action action, int quantity, int value, int startTurn, int endTurn, boolean isFromPlayer) {
+    public Order(int id, Action action, int quantity, double value, int startTurn, int endTurn, boolean isFromPlayer) {
         this.id = id;
         this.Action = action;
         this.quantity = quantity;
@@ -71,7 +71,7 @@ public abstract class Order {
         this.isFromPlayer = isFromPlayer;
     }
 
-    public Order(Action Action, int quantity, int value, int startTurn, int endTurn, boolean isFromPlayer) {
+    public Order(Action Action, int quantity, double value, int startTurn, int endTurn, boolean isFromPlayer) {
         this.Action = Action;
         this.quantity = quantity;
         this.value = value;
@@ -104,11 +104,11 @@ public abstract class Order {
         this.quantity = quantity;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
@@ -136,4 +136,18 @@ public abstract class Order {
         this.isFromPlayer = isFromPlayer;
     }
 
+    @Override
+    public String toString() {
+        return "{" 
+                + " \n    id=" + id 
+                + ",\n    Action=" + Action 
+                + ",\n    quantity=" + quantity 
+                + ",\n    value=" + value 
+                + ",\n    startTurn=" + startTurn 
+                + ",\n    endTurn=" + endTurn 
+                + ",\n    isFromPlayer=" + isFromPlayer 
+                + "}";
+    }
+
+    
 }

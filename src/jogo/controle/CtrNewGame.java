@@ -1,8 +1,10 @@
 package jogo.controle;
 
 import javax.swing.JOptionPane;
+import jogo.Main;
 import jogo.modelo.Game;
 import jogo.modelo.Player;
+import jogo.visao.FrmLoading;
 import jogo.visao.FrmMainGame;
 import jogo.visao.FrmNewGame;
 import jogo.visao.FrmStart;
@@ -42,6 +44,8 @@ public class CtrNewGame {
 
     /**
      * Ação para Iniciar a Partida
+     *
+     * @see FrmMainGame
      */
     private void actionBtnIniciar() {
         String nome = frmNewGame.getTxtNome().getText();
@@ -49,11 +53,20 @@ public class CtrNewGame {
             JOptionPane.showMessageDialog(frmNewGame, "Digite um nome válido");
             return;
         }
+        //Criando o jogo
+        Main.game = new Game(new Player(nome));
         FrmMainGame frmMainGame = new FrmMainGame();
-        frmMainGame.setGame(new Game(new Player(nome)));
-        //Montrar introdução(se tiver)
+        
+        //display loading
+        new FrmLoading().getListeners().runLoadingJFrame(frmMainGame);
+        
+        //Carrega o jogo
+        frmMainGame.setGame(Main.game);
         frmMainGame.getListeners().reloadComponents();
-        frmMainGame.setVisible(true);
+        System.out.println(Main.game);
+
+        //Montrar introdução(se tiver)
+        //frmMainGame.setVisible(true); //Já feito pelo Loading
         frmNewGame.dispose();
     }
 

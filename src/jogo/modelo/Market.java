@@ -1,5 +1,6 @@
 package jogo.modelo;
 
+import jogo.Util;
 import java.util.ArrayList;
 
 /**
@@ -90,18 +91,44 @@ public class Market {
         this.marketListActions = marketListActions;
     }
 
-    public Market(float inflation, float cdi, float selic, StatusEnum status, ArrayList<Action> listActions) {
+    public Market(float inflation, ArrayList<Float> inflationHistory, float cdi,
+            ArrayList<Float> cdiHistory, float selic, ArrayList<Float> selicHistory,
+            StatusEnum status, ArrayList<Action> marketListActions) {
+
         this.inflation = inflation;
-        this.inflationHistory = new ArrayList<>();
+        this.inflationHistory = inflationHistory;
         this.cdi = cdi;
-        this.cdiHistory = new ArrayList<>();
+        this.cdiHistory = cdiHistory;
         this.selic = selic;
-        this.selicHistory = new ArrayList<>();
+        this.selicHistory = selicHistory;
         this.status = status;
-        this.marketListActions = new ArrayList<>();
+        this.marketListActions = marketListActions;
     }
-    
+
+    public Market(float inflation, float cdi, float selic, StatusEnum status,
+            ArrayList<Action> listActions) {
+
+        this(inflation, new ArrayList<>(),
+                cdi, new ArrayList<>(),
+                selic, new ArrayList<>(),
+                status, listActions);
+    }
+
     public Market() {
+        this.inflation = Market.generateInflation();
+        this.inflationHistory = new ArrayList<>();
+        this.inflationHistory.add(this.inflation);
+
+        this.selic = Market.generateSelic(this.inflation);
+        this.selicHistory = new ArrayList<>();
+        this.selicHistory.add(this.selic);
+
+        this.cdi = Market.calcCdi(selic);
+        this.cdiHistory = new ArrayList<>();
+        this.cdiHistory.add(this.cdi);
+
+        this.status = StatusEnum.NEUTRAL;
+        this.marketListActions = Market.generateMarketListActions(25);
     }
 
     public int getId() {
@@ -174,6 +201,55 @@ public class Market {
 
     public void setMarketListActions(ArrayList<Action> marketListActions) {
         this.marketListActions = marketListActions;
+    }
+
+    @Override
+    public String toString() {
+        return "Market{"+" id=" + id+", inflation=" + inflation
+                + ",\n    inflationHistory=" + inflationHistory
+                + ",\n    cdi=" + cdi
+                + ",\n    cdiHistory=" + cdiHistory
+                + ",\n    selic=" + selic
+                + ",\n    selicHistory=" + selicHistory
+                + ",\n    status=" + status
+                + ",\n    marketListActions=" + marketListActions
+                + "\n}";
+    }
+
+    public static float generateInflation() {
+        return Float.parseFloat(String.valueOf(Util.generateValue(0.5, 20)));
+
+    }
+
+    public static float generateInflation(float inflation) {
+        return Float.parseFloat(String.valueOf(
+                (generateInflation() * generateInflation() / inflation)
+        ));
+    }
+
+    public static float generateSelic(float inflation) {
+        return Float.parseFloat(String.valueOf(inflation + 1
+                + (Util.multGenerateValue(0.5, 20.0, 256))
+        ));
+    }
+
+    public static float calcSelic(float inflation, float selic) {
+        return Float.parseFloat(String.valueOf(inflation + 1
+                + ((Util.multGenerateValue(0.5, 20.0, 256) + (selic - inflation - 1))
+                / (selic - inflation - 1))
+        ));
+    }
+
+    public static float calcCdi(float selic) {
+        return Float.parseFloat(String.valueOf(selic + Util.generateValue(0.1, 3)));
+    }
+
+    public static ArrayList<Action> generateMarketListActions(int i) {
+        ArrayList<Action> list = new ArrayList<>();
+        for (int j = 0; j < i; j++) {
+            list.add(new Action());
+        }
+        return list;
     }
 
 }

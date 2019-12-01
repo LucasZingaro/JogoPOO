@@ -52,7 +52,7 @@ public class Game {
     }
 
     public Game(Player player, Market market) {
-        this(player, market, 0);
+        this(player, market, 1);
     }
 
     public Game(Player player) {
@@ -98,4 +98,13 @@ public class Game {
         this.numTurn = numTurn;
     }
 
+    @Override
+    public String toString() {
+        return "Game{"
+                + " \n    id=" + id
+                + ",\n    player=" + player
+                + ",\n    market=" + market
+                + ",\n    numTurn=" + numTurn
+                + "\n}";
+    }
 }

@@ -25,9 +25,9 @@ public class FrmActionDetails extends javax.swing.JFrame {
         listeners = new CtrActionDetails(this);
     }
 
-    FrmActionDetails(Action acao) {
+    public FrmActionDetails(Action acao) {
         initComponents();
-        this.setAction(acao);
+        this.action = acao;
         listeners = new CtrActionDetails(this);
     }
 
