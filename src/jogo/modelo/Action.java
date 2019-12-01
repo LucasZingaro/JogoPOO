@@ -91,6 +91,15 @@ public class Action {
 
     /**
      * Construtor BD
+     * @param id Identificador
+     * @param name Nome
+     * @param status Status
+     * @param valueHistory Históricos de valores
+     * @param variationHistory Históricos de variação
+     * @param marketQuantity Quantidade de ações no mercado
+     * @param playerQuantity Quantidade de ações do jogador
+     * @param purchaseOrderList Lista de ordens de compra (Action==null)
+     * @param salesOrderList Lista de ordens de venda (Action==null)
      */
     public Action(int id, String name, StatusEnum status, ArrayList<Double> valueHistory,
             ArrayList<Double> variationHistory, double marketQuantity, double playerQuantity,
@@ -101,11 +110,21 @@ public class Action {
         this.status = status;
         this.value = valueHistory.get(valueHistory.size() - 1);
         this.valueHistory = valueHistory;
-        this.variation = variationHistory.get(this.valueHistory.size() - 1);;
+        this.variation = variationHistory.get(this.valueHistory.size() - 1);
         this.variationHistory = variationHistory;
         this.marketQuantity = marketQuantity;
         this.playerQuantity = playerQuantity;
+        
+        //Associação de action anteriormente null
+        purchaseOrderList.forEach((PurchaseOrder purchaseOrder) -> {
+            purchaseOrder.setAction(this);
+        });
         this.purchaseOrderList = purchaseOrderList;
+        
+        //Associação de action anteriormente null
+        salesOrderList.forEach((SalesOrder salesOrder) -> {
+            salesOrder.setAction(this);
+        });
         this.salesOrderList = salesOrderList;
     }
 
