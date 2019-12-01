@@ -1,10 +1,6 @@
 package jogo.modelo;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Random;
 import jogo.Util;
 
 /**
@@ -61,7 +57,7 @@ public class Action {
     /**
      * Histórico de valores da variação
      *
-     * @hidden unsavable
+     * @hidden savable
      */
     private ArrayList<Double> variationHistory;
 

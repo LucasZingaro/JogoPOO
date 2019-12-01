@@ -10,10 +10,10 @@ import jogo.visao.FrmPlayerDetails;
  * @author Lucas
  */
 public class CtrPlayerDetails {
-    
+
     FrmPlayerDetails frmPlayerDetails;
     FrmLoansDetails frmLoansDetails;
-    
+
     public CtrPlayerDetails(FrmPlayerDetails frmPlayerDetails) {
         this.frmPlayerDetails = frmPlayerDetails;
         Main.frmPlayerDetails = frmPlayerDetails;
@@ -31,12 +31,12 @@ public class CtrPlayerDetails {
         frmPlayerDetails.getBtnRetirarValorRF()
                 .addActionListener(e -> actionBtnRetirarValorRF());
     }
-    
+
     private void actionBtnAdicionarValorRF() {
         switch (JOptionPane.showConfirmDialog(frmPlayerDetails,
                 "Adicionando:" + frmPlayerDetails.getTxtValorAdicionadoRF().getText(),
                 "Investimento Renda Fixa", JOptionPane.OK_CANCEL_OPTION)) {
-            
+
             case JOptionPane.OK_OPTION:
                 frmPlayerDetails.getTxtValorAdicionadoRF().setText("");
                 break;
@@ -44,7 +44,7 @@ public class CtrPlayerDetails {
                 break;
         }
     }
-    
+
     private void actionBtnEmprestimos() {
         if (!(frmLoansDetails instanceof FrmLoansDetails)) {
             System.out.println("Criando frmMarketDetails");
@@ -54,12 +54,12 @@ public class CtrPlayerDetails {
         frmLoansDetails.setVisible(true);
         frmLoansDetails.requestFocus();
     }
-    
+
     private void actionBtnRetirarValorRF() {
         switch (JOptionPane.showConfirmDialog(frmPlayerDetails,
                 "Removendo:" + frmPlayerDetails.getTxtValorRemovidoRF().getText(),
                 "Recuperação Renda Fixa", JOptionPane.OK_CANCEL_OPTION)) {
-            
+
             case JOptionPane.OK_OPTION:
                 frmPlayerDetails.getTxtValorAdicionadoRF().setText("");
                 break;
@@ -67,8 +67,8 @@ public class CtrPlayerDetails {
                 break;
         }
     }
-    
-    void reloadComponents() {
+
+    public void reloadComponents() {
         frmPlayerDetails.getLblGastosValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().calcDespesas(Main.game)));
         frmPlayerDetails.getLblJurosValor()
@@ -80,5 +80,5 @@ public class CtrPlayerDetails {
         frmPlayerDetails.getLblSaldoValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().getMoney()));
     }
-    
+
 }

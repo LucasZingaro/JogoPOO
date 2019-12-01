@@ -25,6 +25,25 @@ public enum StatusEnum {
         this.setValue(this, status);
     }
     
+    public static StatusEnum parseStatusEnum(String sStatusEnum){
+        if(sStatusEnum.equals(StatusEnum.DEPRESSION.toString())){
+            return StatusEnum.DEPRESSION;
+        }
+        if(sStatusEnum.equals(StatusEnum.DESCENDING.toString())){
+            return StatusEnum.DESCENDING;
+        }
+        if(sStatusEnum.equals(StatusEnum.NEUTRAL.toString())){
+            return StatusEnum.NEUTRAL;
+        }
+        if(sStatusEnum.equals(StatusEnum.GROWING.toString())){
+            return StatusEnum.GROWING;
+        }
+        if(sStatusEnum.equals(StatusEnum.FLYING.toString())){
+            return StatusEnum.FLYING;
+        }
+        return null;
+    }
+    
     @Override
     public String toString() {
         switch(this){

@@ -57,10 +57,10 @@ public class CtrNewGame {
         //Criando o jogo
         Main.game = new Game(new Player(nome));
         FrmMainGame frmMainGame = new FrmMainGame();
-        
+
         //display loading
         new FrmLoading().getListeners().runLoadingJFrame(frmMainGame);
-        
+
         //Carrega o jogo
         frmMainGame.setGame(Main.game);
         frmMainGame.getListeners().reloadComponents();
@@ -69,6 +69,10 @@ public class CtrNewGame {
         //Montrar introdução(se tiver)
         //frmMainGame.setVisible(true); //Já feito pelo Loading
         frmNewGame.dispose();
+    }
+
+    public void reloadComponents() {
+        frmNewGame.getTxtNome().setText("");
     }
 
 }

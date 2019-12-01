@@ -64,4 +64,14 @@ public class CtrSaveRecovery {
                 "Recuperar jogo da linha selecionada = " + frmSaveRecovery.getTbCarregarJogo().getSelectedRow());
     }
 
+    public void reloadComponents() {
+        frmSaveRecovery.getTbCarregarJogo();
+        this.reloadTabela();
+    }
+
+    private void reloadTabela() {
+        //recarregar tabela com dados do banco
+        System.out.println("Recarregando tabela com dados do banco");
+    }
+
 }

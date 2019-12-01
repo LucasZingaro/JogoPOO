@@ -1,5 +1,6 @@
 package jogo;
 
+import javax.swing.JFrame;
 import jogo.modelo.Game;
 import jogo.visao.FrmActionDetails;
 import jogo.visao.FrmLoading;
@@ -36,5 +37,56 @@ public class Main {
         Main.frmStart = new FrmStart();
         Main.frmLoading = new FrmLoading();
         Main.frmLoading.getListeners().runLoadingJFrame(frmStart);
+    }
+
+    public static void disposeAllFrames() {
+        JFrame[] jframes = {frmStart, frmLoading, frmNewGame, frmSaveRecovery,
+            frmMainGame, frmMarketDetails, frmActionDetails, frmPlayerDetails, frmLoansDetails};
+        for (JFrame jframe : jframes) {
+            try {
+                jframe.setVisible(false);
+                jframe.dispose();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static void reloadAllFrames() {
+        try {
+            frmStart.getListener();
+        } catch (Exception e) {
+        }
+        try {
+            frmLoading.getListeners();
+        } catch (Exception e) {
+        }
+        try {
+            frmNewGame.getListeners().reloadComponents();
+        } catch (Exception e) {
+        }
+        try {
+            frmSaveRecovery.getListeners().reloadComponents();
+        } catch (Exception e) {
+        }
+        try {
+            frmMainGame.getListeners().reloadComponents();
+        } catch (Exception e) {
+        }
+        try {
+            frmMarketDetails.getListeners().reloadComponents();
+        } catch (Exception e) {
+        }
+        try {
+            frmActionDetails.getListeners().reloadComponents();
+        } catch (Exception e) {
+        }
+        try {
+            frmPlayerDetails.getListeners().reloadComponents();
+        } catch (Exception e) {
+        }
+        try {
+            frmLoansDetails.getListeners().reloadComponents();
+        } catch (Exception e) {
+        }
     }
 }
