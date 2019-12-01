@@ -194,7 +194,7 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pegar Empr&#xe9;stimo"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
@@ -241,7 +241,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pagar Empr&#xe9;stimo"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
@@ -253,7 +253,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Selecionar Empr&#xe9;stimo"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>

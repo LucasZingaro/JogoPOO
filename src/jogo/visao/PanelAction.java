@@ -1,5 +1,6 @@
 package jogo.visao;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -19,6 +20,12 @@ public class PanelAction extends javax.swing.JPanel {
     public PanelAction() {
         initComponents();
 
+        style();
+        addActions();
+    }
+
+    private void style() {
+        this.panelDados.setBackground(new Color(177, 177, 177));
         //Style Editor
         for (Component myComponent : getMyComponents()) {
             if (myComponent instanceof JLabel) {
@@ -26,12 +33,14 @@ public class PanelAction extends javax.swing.JPanel {
                 ((JLabel) myComponent).setVerticalAlignment(javax.swing.SwingConstants.CENTER);
             }
         }
+    }
 
+    private void addActions() {
         //Button Action
         this.getBtnInformacao().addActionListener((ActionEvent e) -> {
             if (!(frmAcao instanceof FrmActionDetails)) {
                 System.out.println("Criando frmPlayerDetails");
-            frmAcao = new FrmActionDetails(acao);
+                frmAcao = new FrmActionDetails(acao);
             }
             frmAcao.setAction(acao);
             frmAcao.getListeners().reloadComponents();
@@ -105,7 +114,6 @@ public class PanelAction extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         panelDados = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
@@ -115,11 +123,13 @@ public class PanelAction extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(153, 153, 153));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(150, 75));
         setMinimumSize(new java.awt.Dimension(150, 75));
         setPreferredSize(new java.awt.Dimension(150, 75));
 
+        panelDados.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        panelDados.setForeground(new java.awt.Color(153, 153, 153));
         panelDados.setLayout(new java.awt.GridLayout(2, 2));
 
         lblNome.setBackground(new java.awt.Color(204, 204, 204));
@@ -148,24 +158,24 @@ public class PanelAction extends javax.swing.JPanel {
         btnInformacao.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnInformacao.setText("Info");
         btnInformacao.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnInformacao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnInformacao.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelDados.add(btnInformacao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(3, 3, 3)
+                .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
         );
     }// </editor-fold>//GEN-END:initComponents
 

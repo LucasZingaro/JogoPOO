@@ -45,6 +45,7 @@ public class FrmLoading extends javax.swing.JFrame {
         progressBarOfGame = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Carregando...");
         setBackground(new java.awt.Color(153, 153, 153));
         setResizable(false);
 

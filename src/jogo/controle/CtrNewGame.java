@@ -64,7 +64,7 @@ public class CtrNewGame {
         //Carrega o jogo
         frmMainGame.setGame(Main.game);
         frmMainGame.getListeners().reloadComponents();
-        System.out.println(Main.game);
+//        System.out.println(Main.game);
 
         //Montrar introdução(se tiver)
         //frmMainGame.setVisible(true); //Já feito pelo Loading

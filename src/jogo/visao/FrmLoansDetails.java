@@ -53,7 +53,8 @@ public class FrmLoansDetails extends javax.swing.JFrame {
     }
 
     public void setBtnPegar(JButton btnPegar) {
-        this.btnPegar = btnPegar;
+        this.btnPegar
+                = btnPegar;
     }
 
     public JButton getBtnSelecionar() {
@@ -141,7 +142,7 @@ public class FrmLoansDetails extends javax.swing.JFrame {
         txtJurosValor.setText("valorJuros");
 
         btnPegar.setText("Pegar Empréstimo");
-        btnPegar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPegar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPegar.setOpaque(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -183,12 +184,12 @@ public class FrmLoansDetails extends javax.swing.JFrame {
 
         btnPagar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnPagar.setText("Pagar Empréstimo");
-        btnPagar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPagar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPagar.setOpaque(false);
 
         btnSelecionar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnSelecionar.setText("Selecionar Empréstimo");
-        btnSelecionar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSelecionar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSelecionar.setOpaque(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

@@ -175,6 +175,7 @@ public class FrmMainGame extends javax.swing.JFrame {
         menuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Game");
 
         panelTelaPrincipal.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -182,7 +183,7 @@ public class FrmMainGame extends javax.swing.JFrame {
 
         btnPassarTurno.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnPassarTurno.setText("Terminar Turno");
-        btnPassarTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPassarTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPassarTurno.setOpaque(false);
 
         jLabel1.setText("Saldo:");
@@ -191,12 +192,12 @@ public class FrmMainGame extends javax.swing.JFrame {
 
         btnVisaoGeral.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnVisaoGeral.setText("Visão Geral do Mercado");
-        btnVisaoGeral.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisaoGeral.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVisaoGeral.setOpaque(false);
 
         btnPatrimonio.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnPatrimonio.setText("Meu Patrimônio");
-        btnPatrimonio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPatrimonio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPatrimonio.setOpaque(false);
 
         jLabel2.setText("Nome:");
@@ -266,7 +267,10 @@ public class FrmMainGame extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        tabelaAcoes.setBackground(new java.awt.Color(153, 153, 153));
+        scrollPaneTabelaAcoes.setForeground(new java.awt.Color(102, 102, 102));
+
+        tabelaAcoes.setBackground(new java.awt.Color(102, 102, 102));
+        tabelaAcoes.setForeground(new java.awt.Color(102, 102, 102));
         tabelaAcoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -306,7 +310,7 @@ public class FrmMainGame extends javax.swing.JFrame {
         frmMenuBar.setBackground(new java.awt.Color(153, 153, 153));
 
         menuJogo.setText("Jogo");
-        menuJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         miSalvar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         miSalvar.setText("Salvar");
@@ -322,7 +326,7 @@ public class FrmMainGame extends javax.swing.JFrame {
         frmMenuBar.add(menuJogo);
 
         menuAjuda.setText("Ajuda");
-        menuAjuda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuAjuda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         frmMenuBar.add(menuAjuda);
 
         setJMenuBar(frmMenuBar);

@@ -105,6 +105,7 @@ public class FrmNewGame extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Novo Jogo");
         setFocusCycleRoot(false);
         setMinimumSize(new java.awt.Dimension(300, 250));
 
@@ -127,7 +128,7 @@ public class FrmNewGame extends javax.swing.JFrame {
 
         btnIniciar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnIniciar.setText("Iniciar");
-        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -148,7 +149,7 @@ public class FrmNewGame extends javax.swing.JFrame {
 
         btnVoltar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnVoltar.setText("Voltar");
-        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;

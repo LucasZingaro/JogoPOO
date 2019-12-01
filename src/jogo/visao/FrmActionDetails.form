@@ -3,10 +3,11 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Detalhes da A&#xe7;&#xe3;o"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -262,7 +263,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Comprar"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor em Forma de M&#xe3;o"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
@@ -279,7 +280,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Vender"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor em Forma de M&#xe3;o"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
@@ -391,7 +392,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Minhas Ordens"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor em Forma de M&#xe3;o"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
