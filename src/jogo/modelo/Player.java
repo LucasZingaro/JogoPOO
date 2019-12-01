@@ -2,6 +2,7 @@ package jogo.modelo;
 
 import java.util.ArrayList;
 import jogo.Config;
+import jogo.Main;
 import jogo.Util;
 
 /**
@@ -159,6 +160,13 @@ public class Player {
                                         2)),
                         0, 3)
                 );
+    }
+
+    void passarTurno() {
+        //player->money
+        this.setMoney(
+                getMoney() - this.calcDespesas(Main.game)
+        );
     }
 
     @Override

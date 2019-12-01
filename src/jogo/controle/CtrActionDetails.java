@@ -47,7 +47,7 @@ public class CtrActionDetails {
                         .getAction().getName()));
 
         frmActionDetails.getLblPrecoUniValor()
-                .setText(String.valueOf(frmActionDetails
+                .setText("R$ "+String.valueOf(frmActionDetails
                         .getAction().getValue()));
 
         frmActionDetails.getLblQuantidadeJogadorValor()
@@ -64,7 +64,7 @@ public class CtrActionDetails {
 
         frmActionDetails.getLblVariacaoValor()
                 .setText(String.valueOf(frmActionDetails
-                        .getAction().getStatus()));
+                        .getAction().getVariation()) + "%");
     }
 
     private void actionBtnOrdens() {

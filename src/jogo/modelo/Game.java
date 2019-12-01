@@ -111,38 +111,16 @@ public class Game {
     }
 
     public void passarTurno() {
-
-        //player->money
-        this.getPlayer().setMoney(
-                getPlayer().getMoney() - this.getPlayer().calcDespesas(this)
-        );
-
-        //Mercado->Ações
-        this.getMarket().getMarketListActions().forEach((action) -> {
-            //Ações->Ordens de Compra
-            action.getPurchaseOrderList().forEach((PurchaseOrder purchaseOrder) -> {
-                purchaseOrder.tryBuy(getMarket());
-                if (purchaseOrder.getEndTurn() == getNumTurn()) {
-                    action.getPurchaseOrderList().remove(purchaseOrder);
-                }
-            });
-
-            //Ações->Ordens de Venda
-            action.getSalesOrderList().forEach((SalesOrder salesOrder) -> {
-                salesOrder.trySell(getMarket());
-                if (salesOrder.getEndTurn() == getNumTurn()) {
-                    action.getSalesOrderList().remove(salesOrder);
-                }
-            });
-
-            //Ações->turno
-            action.passarTurno();
-        });
-
+        //player passar turno
+        this.getPlayer().passarTurno();
+        //mercado passar turno
+        this.getMarket().passarTurno();
+        
         //player->actionlist
         this.refazerPlayerListAction(
                 this.getPlayer().getPlayerListActions(),
                 this.getMarket().getMarketListActions());
+        
 
         //numTurn
         this.setNumTurn(this.getNumTurn() + 1);

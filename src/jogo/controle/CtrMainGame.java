@@ -78,7 +78,7 @@ public class CtrMainGame {
     private void actionBtnPassarTurno() {
         System.out.println("PassarTurno");
         frmMainGame.getGame().passarTurno();
-        this.reloadComponents();
+        Main.reloadAllFrames();
         if (frmMainGame.getGame().getPlayer().getMoney() < 0) {
             JOptionPane.showConfirmDialog(frmMainGame,
                     "Você declara falência financeira"

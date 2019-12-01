@@ -2,6 +2,7 @@ package jogo.modelo;
 
 import jogo.Util;
 import java.util.ArrayList;
+import jogo.Main;
 
 /**
  * Representação do mercado financeiro
@@ -205,7 +206,7 @@ public class Market {
 
     @Override
     public String toString() {
-        return "Market{"+" id=" + id+", inflation=" + inflation
+        return "Market{" + " id=" + id + ", inflation=" + inflation
                 + ",\n    inflationHistory=" + inflationHistory
                 + ",\n    cdi=" + cdi
                 + ",\n    cdiHistory=" + cdiHistory
@@ -250,6 +251,36 @@ public class Market {
             list.add(new Action());
         }
         return list;
+    }
+
+    void passarTurno() {
+        //Mercado->Ações
+        this.getMarketListActions().forEach((action) -> {
+            //Ações->Ordens de Compra
+            action.getPurchaseOrderList().forEach((PurchaseOrder purchaseOrder) -> {
+                purchaseOrder.tryBuy(this);
+                if (purchaseOrder.getEndTurn() == Main.game.getNumTurn()) {
+                    action.getPurchaseOrderList().remove(purchaseOrder);
+                }
+            });
+
+            //Ações->Ordens de Venda
+            action.getSalesOrderList().forEach((SalesOrder salesOrder) -> {
+                salesOrder.trySell(this);
+                if (salesOrder.getEndTurn() == Main.game.getNumTurn()) {
+                    action.getSalesOrderList().remove(salesOrder);
+                }
+            });
+
+            //Ações->turno
+            action.passarTurno();
+        });
+        //status
+        this.setStatus(status);
+        //selic
+        this.setSelic(selic);
+        //cdi
+        this.setCdi(cdi);
     }
 
 }

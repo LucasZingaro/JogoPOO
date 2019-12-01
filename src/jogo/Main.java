@@ -1,7 +1,11 @@
 package jogo;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import jogo.modelo.Action;
 import jogo.modelo.Game;
+import jogo.modelo.PurchaseOrder;
+import jogo.modelo.StatusEnum;
 import jogo.visao.FrmActionDetails;
 import jogo.visao.FrmLoading;
 import jogo.visao.FrmLoansDetails;

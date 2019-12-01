@@ -151,6 +151,10 @@ public class Action {
         );
         this.valueHistory.add(value);
         this.variationHistory.add(variation);
+        
+        //lista de ordens n
+        this.purchaseOrderList = purchaseOrderList;
+        this.salesOrderList = salesOrderList;
     }
 
     public Action(String name, StatusEnum status, double value, double marketQuantity) {
