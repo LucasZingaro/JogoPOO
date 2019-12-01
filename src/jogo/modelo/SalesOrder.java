@@ -7,9 +7,24 @@ package jogo.modelo;
  */
 public class SalesOrder extends Order {
 
-    public SalesOrder(int id, Action Acao, int quantity, int value, int startTurn, int endTurn, boolean isFromPlayer) {
-        super(id, Acao, quantity, value, startTurn, endTurn, isFromPlayer);
+    /**
+     * Contrutor BD
+     */
+    public SalesOrder(int id, Action action, int quantity, double value, int startTurn, int endTurn, boolean isFromPlayer) {
+        super(id, action, quantity, value, startTurn, endTurn, isFromPlayer);
+    }
+
+    public SalesOrder(Action action, int quantity, double value, int startTurn, int endTurn, boolean isFromPlayer) {
+        super(action, quantity, value, startTurn, endTurn, isFromPlayer);
     }
 
     /*Methods...*/
+    @Override
+    public String toString() {
+        return SalesOrder.class.getSimpleName() + super.toString();
+    }
+
+    void trySell(Market market) {
+        System.out.println("Tentando Vender:" + this.toString());
+    }
 }

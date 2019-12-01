@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.controle;
 
+import jogo.Main;
 import jogo.visao.FrmSaveRecovery;
 import jogo.visao.FrmNewGame;
 import jogo.visao.FrmStart;
@@ -17,10 +13,11 @@ import jogo.visao.FrmStart;
  */
 public class CtrStart {
 
-    FrmStart frm;
+    FrmStart frmStart;
 
-    public CtrStart(FrmStart frm) {
-        this.frm = frm;
+    public CtrStart(FrmStart frmStart) {
+        this.frmStart = frmStart;
+        Main.frmStart = frmStart;
         addActionListeners();
     }
 
@@ -28,8 +25,8 @@ public class CtrStart {
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-        frm.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
-        frm.getBtnNovoJogo().addActionListener(e -> actionBtnNovoJogo());
+        frmStart.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
+        frmStart.getBtnNovoJogo().addActionListener(e -> actionBtnNovoJogo());
     }
 
     /**
@@ -38,8 +35,17 @@ public class CtrStart {
      * @see FrmSaveRecovery
      */
     private void actionBtnCarregarJogo() {
-        new FrmSaveRecovery().setVisible(true);
-        frm.dispose();
+        if (!(Main.frmSaveRecovery instanceof FrmSaveRecovery)) {
+            new FrmSaveRecovery().setVisible(true);
+            frmStart.dispose();
+            return;
+        }
+        try {
+            Main.frmSaveRecovery.setVisible(true);
+        } catch (Exception e) {
+            new FrmSaveRecovery().setVisible(true);
+        }
+        frmStart.dispose();
     }
 
     /**
@@ -48,8 +54,17 @@ public class CtrStart {
      * @see FrmNewGame
      */
     private void actionBtnNovoJogo() {
-        new FrmNewGame().setVisible(true);
-        frm.dispose();
+        if (!(Main.frmNewGame instanceof FrmNewGame)) {
+            new FrmNewGame().setVisible(true);
+            frmStart.dispose();
+            return;
+        }
+        try {
+            Main.frmNewGame.setVisible(true);
+        } catch (Exception e) {
+            new FrmNewGame().setVisible(true);
+        }
+        frmStart.dispose();
     }
 
 }

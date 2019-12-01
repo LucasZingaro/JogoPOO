@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.controle;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import jogo.Main;
 import jogo.visao.FrmSaveRecovery;
 import jogo.visao.FrmStart;
 
@@ -19,10 +13,11 @@ import jogo.visao.FrmStart;
  */
 public class CtrSaveRecovery {
 
-    FrmSaveRecovery frm;
+    FrmSaveRecovery frmSaveRecovery;
 
-    public CtrSaveRecovery(FrmSaveRecovery frm) {
-        this.frm = frm;
+    public CtrSaveRecovery(FrmSaveRecovery frmSaveRecovery) {
+        this.frmSaveRecovery = frmSaveRecovery;
+        Main.frmSaveRecovery = frmSaveRecovery;
         addActionListeners();
     }
 
@@ -30,8 +25,8 @@ public class CtrSaveRecovery {
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-        frm.getBtnVoltar().addActionListener(e -> actionBtnVoltar());
-        frm.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
+        frmSaveRecovery.getBtnVoltar().addActionListener(e -> actionBtnVoltar());
+        frmSaveRecovery.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
     }
 
     /**
@@ -40,24 +35,43 @@ public class CtrSaveRecovery {
      * @see FrmStart
      */
     private void actionBtnVoltar() {
-        new FrmStart().setVisible(true);
-        frm.dispose();
+        if (!(Main.frmStart instanceof FrmStart)) {
+            new FrmStart().setVisible(true);
+            frmSaveRecovery.dispose();
+            return;
+        }
+        try {
+            Main.frmStart.setVisible(true);
+        } catch (Exception e) {
+            new FrmStart().setVisible(true);
+        }
+        frmSaveRecovery.dispose();
     }
 
     /**
      * Ação para recuperar jogo salvo
      */
     private void actionBtnCarregarJogo() {
-        if (frm.getTbCarregarJogo().getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(frm,
+        if (frmSaveRecovery.getTbCarregarJogo().getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(frmSaveRecovery,
                     "Nenhum jogo selecionado!!!",
                     "Aviso",
                     JOptionPane.INFORMATION_MESSAGE
             );
             return;
         }
-        JOptionPane.showMessageDialog(frm,
-                "Recuperar jogo da linha selecionada = " + frm.getTbCarregarJogo().getSelectedRow());
+        JOptionPane.showMessageDialog(frmSaveRecovery,
+                "Recuperar jogo da linha selecionada = " + frmSaveRecovery.getTbCarregarJogo().getSelectedRow());
+    }
+
+    public void reloadComponents() {
+        frmSaveRecovery.getTbCarregarJogo();
+        this.reloadTabela();
+    }
+
+    private void reloadTabela() {
+        //recarregar tabela com dados do banco
+        System.out.println("Recarregando tabela com dados do banco");
     }
 
 }

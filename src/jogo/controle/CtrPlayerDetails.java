@@ -1,6 +1,7 @@
 package jogo.controle;
 
 import javax.swing.JOptionPane;
+import jogo.Main;
 import jogo.visao.FrmLoansDetails;
 import jogo.visao.FrmPlayerDetails;
 
@@ -15,6 +16,7 @@ public class CtrPlayerDetails {
 
     public CtrPlayerDetails(FrmPlayerDetails frmPlayerDetails) {
         this.frmPlayerDetails = frmPlayerDetails;
+        Main.frmPlayerDetails = frmPlayerDetails;
         addActionListeners();
     }
 
@@ -66,11 +68,11 @@ public class CtrPlayerDetails {
         }
     }
 
-    void reloadComponents() {
+    public void reloadComponents() {
         frmPlayerDetails.getLblGastosValor()
-                .setText(String.valueOf(10));
+                .setText(String.valueOf(frmPlayerDetails.getPlayer().calcDespesas(Main.game)));
         frmPlayerDetails.getLblJurosValor()
-                .setText(String.valueOf(5));
+                .setText(String.valueOf(Main.game.getMarket().getSelic()));
         frmPlayerDetails.getLblNomeValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().getName()));
         frmPlayerDetails.getLblRendaFixaValor()

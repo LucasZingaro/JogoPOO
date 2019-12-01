@@ -1,5 +1,6 @@
 package jogo.controle;
 
+import jogo.Main;
 import jogo.visao.FrmMarketDetails;
 
 /**
@@ -12,6 +13,7 @@ public class CtrMarketDetails {
 
     public CtrMarketDetails(FrmMarketDetails frmMarketDetails) {
         this.frmMarketDetails = frmMarketDetails;
+        Main.frmMarketDetails = frmMarketDetails;
     }
 
     public void reloadComponents() {

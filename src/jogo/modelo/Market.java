@@ -1,6 +1,8 @@
 package jogo.modelo;
 
+import jogo.Util;
 import java.util.ArrayList;
+import jogo.Main;
 
 /**
  * Representação do mercado financeiro
@@ -11,6 +13,8 @@ public class Market {
 
     /**
      * Identificador do mercado
+     *
+     * @hidden savable
      */
     private int id;
 
@@ -18,11 +22,14 @@ public class Market {
      * Valor da Inflação atual
      *
      * @see "É o último registro do histórico de valores da inflação"
+     * @hidden unsavable
      */
     private float inflation;
 
     /**
      * Histórico de valores da inflação
+     *
+     * @hidden savable
      */
     private ArrayList<Float> inflationHistory;
 
@@ -30,11 +37,14 @@ public class Market {
      * Valor do CDI atual
      *
      * @see "É o último registro do histórico de valores do CDI"
+     * @hidden unsavable
      */
     private float cdi;
 
     /**
      * Histórico de valores do CDI
+     *
+     * @hidden savable
      */
     private ArrayList<Float> cdiHistory;
 
@@ -42,33 +52,84 @@ public class Market {
      * Valor da taxa SELIC Atual
      *
      * @see "É o último registro do histórico de valores da SELIC"
+     * @hidden unsavable
      */
     private float selic;
 
     /**
      * Histórico de valores da SELIC
+     *
+     * @hidden savable
      */
     private ArrayList<Float> selicHistory;
 
     /**
      * Status ou tendência do mercado
+     *
+     * @hidden savable
      */
     private StatusEnum status;
 
     /**
      * Lista de ações do mercado
+     *
+     * @hidden savable
      */
     private ArrayList<Action> marketListActions;
 
-    public Market(float inflation, float cdi, float selic, StatusEnum status, ArrayList<Action> listActions) {
-        this.inflation = inflation;
-        this.cdi = cdi;
-        this.selic = selic;
+    /**
+     * Construtor do BD
+     */
+    public Market(int id, ArrayList<Float> inflationHistory, ArrayList<Float> cdiHistory, ArrayList<Float> selicHistory, StatusEnum status, ArrayList<Action> marketListActions) {
+        this.id = id;
+        this.inflation = inflationHistory.get(inflationHistory.size() - 1);
+        this.inflationHistory = inflationHistory;
+        this.cdi = cdiHistory.get(cdiHistory.size() - 1);
+        this.cdiHistory = cdiHistory;
+        this.selic = selicHistory.get(selicHistory.size() - 1);
+        this.selicHistory = selicHistory;
         this.status = status;
-        this.marketListActions = listActions;
+        this.marketListActions = marketListActions;
+    }
+
+    public Market(float inflation, ArrayList<Float> inflationHistory, float cdi,
+            ArrayList<Float> cdiHistory, float selic, ArrayList<Float> selicHistory,
+            StatusEnum status, ArrayList<Action> marketListActions) {
+
+        this.inflation = inflation;
+        this.inflationHistory = inflationHistory;
+        this.cdi = cdi;
+        this.cdiHistory = cdiHistory;
+        this.selic = selic;
+        this.selicHistory = selicHistory;
+        this.status = status;
+        this.marketListActions = marketListActions;
+    }
+
+    public Market(float inflation, float cdi, float selic, StatusEnum status,
+            ArrayList<Action> listActions) {
+
+        this(inflation, new ArrayList<>(),
+                cdi, new ArrayList<>(),
+                selic, new ArrayList<>(),
+                status, listActions);
     }
 
     public Market() {
+        this.inflation = Market.generateInflation();
+        this.inflationHistory = new ArrayList<>();
+        this.inflationHistory.add(this.inflation);
+
+        this.selic = Market.generateSelic(this.inflation);
+        this.selicHistory = new ArrayList<>();
+        this.selicHistory.add(this.selic);
+
+        this.cdi = Market.calcCdi(selic);
+        this.cdiHistory = new ArrayList<>();
+        this.cdiHistory.add(this.cdi);
+
+        this.status = StatusEnum.NEUTRAL;
+        this.marketListActions = Market.generateMarketListActions(25);
     }
 
     public int getId() {
@@ -141,6 +202,85 @@ public class Market {
 
     public void setMarketListActions(ArrayList<Action> marketListActions) {
         this.marketListActions = marketListActions;
+    }
+
+    @Override
+    public String toString() {
+        return "Market{" + " id=" + id + ", inflation=" + inflation
+                + ",\n    inflationHistory=" + inflationHistory
+                + ",\n    cdi=" + cdi
+                + ",\n    cdiHistory=" + cdiHistory
+                + ",\n    selic=" + selic
+                + ",\n    selicHistory=" + selicHistory
+                + ",\n    status=" + status
+                + ",\n    marketListActions=" + marketListActions
+                + "\n}";
+    }
+
+    public static float generateInflation() {
+        return Float.parseFloat(String.valueOf(Util.generateValue(0.5, 20)));
+
+    }
+
+    public static float generateInflation(float inflation) {
+        return Float.parseFloat(String.valueOf(
+                (generateInflation() * generateInflation() / inflation)
+        ));
+    }
+
+    public static float generateSelic(float inflation) {
+        return Float.parseFloat(String.valueOf(inflation + 1
+                + (Util.multGenerateValue(0.5, 20.0, 256))
+        ));
+    }
+
+    public static float calcSelic(float inflation, float selic) {
+        return Float.parseFloat(String.valueOf(inflation + 1
+                + ((Util.multGenerateValue(0.5, 20.0, 256) + (selic - inflation - 1))
+                / (selic - inflation - 1))
+        ));
+    }
+
+    public static float calcCdi(float selic) {
+        return Float.parseFloat(String.valueOf(selic + Util.generateValue(0.1, 3)));
+    }
+
+    public static ArrayList<Action> generateMarketListActions(int i) {
+        ArrayList<Action> list = new ArrayList<>();
+        for (int j = 0; j < i; j++) {
+            list.add(new Action());
+        }
+        return list;
+    }
+
+    void passarTurno() {
+        //Mercado->Ações
+        this.getMarketListActions().forEach((action) -> {
+            //Ações->Ordens de Compra
+            action.getPurchaseOrderList().forEach((PurchaseOrder purchaseOrder) -> {
+                purchaseOrder.tryBuy(this);
+                if (purchaseOrder.getEndTurn() == Main.game.getNumTurn()) {
+                    action.getPurchaseOrderList().remove(purchaseOrder);
+                }
+            });
+
+            //Ações->Ordens de Venda
+            action.getSalesOrderList().forEach((SalesOrder salesOrder) -> {
+                salesOrder.trySell(this);
+                if (salesOrder.getEndTurn() == Main.game.getNumTurn()) {
+                    action.getSalesOrderList().remove(salesOrder);
+                }
+            });
+
+            //Ações->turno
+            action.passarTurno();
+        });
+        //status
+        this.setStatus(status);
+        //selic
+        this.setSelic(selic);
+        //cdi
+        this.setCdi(cdi);
     }
 
 }

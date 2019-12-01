@@ -26,9 +26,9 @@ public class FrmActionDetails extends javax.swing.JFrame {
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/WinIcon.png")).getImage());
     }
 
-    FrmActionDetails(Action acao) {
+    public FrmActionDetails(Action acao) {
         initComponents();
-        this.setAction(acao);
+        this.action = acao;
         listeners = new CtrActionDetails(this);
     }
 
