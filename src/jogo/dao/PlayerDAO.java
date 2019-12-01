@@ -58,13 +58,13 @@ public class PlayerDAO implements IDAO<Player> {
 
     @Override
     public void alterar(Player obj) throws SQLException {
-        String sql = "update Player set (idMatch, name, Money, Income)"
-                + "values (?, ?, ?, ?)";
+        String sql = "update Player set idMatch = ?, name = ?, Money = ?, Income = ? WHERE idMatch = ?";
         stm = con.prepareStatement(sql);
         stm.setInt(1, obj.getId());
         stm.setString(2, obj.getName());
         stm.setDouble(3, obj.getMoney());
         stm.setDouble(4, obj.getFixedIncome().getValue());
+        stm.setInt(5, obj.getId());
 
         stm.executeUpdate();
 
@@ -88,8 +88,10 @@ public class PlayerDAO implements IDAO<Player> {
         rs = stm.executeQuery();
 
         rs.next();
-
-        Player player = new Player(rs.getInt(1), rs.getString(2), rs.getDouble(3), null, new FixedIncome(rs.getInt(1),rs.getDouble(4)));
+        
+        LoanDAO loan = new LoanDAO();
+        
+        Player player = new Player(rs.getInt(1), rs.getString(2), rs.getDouble(3),loan.ListarLoan(id), new FixedIncome(rs.getInt(1),rs.getDouble(4)));
         return player;
         
     }

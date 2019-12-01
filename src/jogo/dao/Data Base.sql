@@ -55,10 +55,12 @@ CREATE TABLE Game(
 
 
 CREATE TABLE Loan(
+	id int NOT NULL AUTO_INCREMENT,
 	idMatch INT NOT NULL,
     Value FLOAT NULL,
     Interest FLOAT NULL,
-    StartTurn Int NULL
+    StartTurn Int NULL,
+    PRIMARY KEY (id)
 );
 
 

@@ -93,8 +93,8 @@ public class Market {
     }
 
     public Market(float inflation, ArrayList<Float> inflationHistory, float cdi,
-            ArrayList<Float> cdiHistory, float selic, ArrayList<Float> selicHistory,
-            StatusEnum status, ArrayList<Action> marketListActions) {
+                ArrayList<Float> cdiHistory, float selic, ArrayList<Float> selicHistory,
+                StatusEnum status, ArrayList<Action> marketListActions) {
 
         this.inflation = inflation;
         this.inflationHistory = inflationHistory;

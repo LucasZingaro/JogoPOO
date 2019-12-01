@@ -19,7 +19,7 @@ import jogo.modelo.StatusEnum;
  *
  * @author MukaFelix
  */
-public class ActionDAO{
+public class ActionDAO {
 
     private Connection con = null;
     private ConnectionFactory dao;
@@ -45,7 +45,7 @@ public class ActionDAO{
             System.err.println("Erro");
         }
     }
-    
+
     public void inserir(Action obj, int idMatch) throws SQLException {
         String sql = "Insert into Action (idMatch, Name, MarketQuantity, PlayerQuantity)"
                 + "values (?, ?, ?, ?)";
@@ -60,7 +60,7 @@ public class ActionDAO{
         InserirValueHistory(obj);
         InserirVariationHistory(obj);
         InserirPurchaseOrderList(obj);
-
+        InserirSalesOrderList(obj);
     }
 
     public void alterar(Action obj) throws SQLException {
@@ -98,7 +98,7 @@ public class ActionDAO{
         while (rs.next()) {
             actions.add(new Action(rs.getInt(2), rs.getString(3), StatusEnum.parseStatusEnum(rs.getString(4)),
                     ListValueHistory(rs.getInt(2)), ListVariationHistory(rs.getInt(2)), rs.getDouble(5),
-                    rs.getDouble(6), ListPurchaseOrderList(rs.getInt(2)), ListSalesOrderList(rs.getInt(2))));
+                    rs.getDouble(6), ListPurchaseOrder(rs.getInt(2)), ListSalesOrder(rs.getInt(2))));
         }
         return actions;
     }
@@ -159,13 +159,6 @@ public class ActionDAO{
         return history;
     }
 
-    
-    
-    
-    
-    
-    
-    
     //PurchaseOrderList
     private void InserirPurchaseOrderList(Action action) throws SQLException {
         for (int i = 0; i < action.getPurchaseOrderList().size(); i++) {
@@ -173,24 +166,24 @@ public class ActionDAO{
         }
 
     }
-    
+
     private void InserirPurchaseOrder(PurchaseOrder obj) throws SQLException {
         String sql = "Insert into PurchaseOrderList (idAction, Quantity, Value, StartTurn, EndTurn, IsFromPlayer)"
                 + "values (?, ?, ?, ?, ?, ?)";
         stm = con.prepareStatement(sql);
-            stm.setInt(1, obj.getAction().getId());
-            stm.setInt(2, obj.getQuantity());
-            stm.setDouble(3,obj.getValue());
-            stm.setInt(4, obj.getStartTurn());
-            stm.setInt(5, obj.getEndTurn());
-            stm.setBoolean(6, obj.isIsFromPlayer());
-            stm.executeUpdate();
+        stm.setInt(1, obj.getAction().getId());
+        stm.setInt(2, obj.getQuantity());
+        stm.setDouble(3, obj.getValue());
+        stm.setInt(4, obj.getStartTurn());
+        stm.setInt(5, obj.getEndTurn());
+        stm.setBoolean(6, obj.isIsFromPlayer());
+        stm.executeUpdate();
 
     }
 
     public void alterarPurchaseOrderList(ArrayList<PurchaseOrder> listGame, int idAction) throws SQLException {
-        ArrayList<PurchaseOrder> listdb = ListPurchaseOrderList(idAction);
-        for (int i = 0; i < listdb.size(); i++) {
+        ArrayList<PurchaseOrder> listdb = ListPurchaseOrder(idAction);
+        /*for (int i = 0; i < listdb.size(); i++) {
             int contador = 0;
             for (int j = 0; j < listGame.size(); j++) {
                 if (listdb.get(i).getId() == listGame.get(j).getId()) {
@@ -204,35 +197,49 @@ public class ActionDAO{
             if(contador == listGame.size()){
                 
             }
+        }*/
+
+        for (int i = 0; i < listdb.size(); i++) {
+            if (!listGame.contains(listdb.get(i))) {
+                deletarPurchaseOrder(listdb.get(i));
+            }
+            for (int j = 0; j < listGame.size(); j++) {
+                if (listGame.get(j).getId() == 0) {
+                    InserirPurchaseOrder(listGame.get(j));
+                } else {
+                    alterarPurchaseOrder(listGame.get(j), idAction);
+                }
+            }
         }
     }
     
-    private void alterarPurchaseOrder(PurchaseOrder obj, int idAction)throws SQLException{
-        String sql = "update PurchaseOrderList set (idAction, Quantity, Value, StartTurn, EndTurn, IsFromPlayer)"
-                + "values (?, ?, ?, ?, ?, ?)";
+    
+
+    private void alterarPurchaseOrder(PurchaseOrder obj, int idAction) throws SQLException {
+        String sql = "update PurchaseOrderList set idAction = ?, Quantity = ?, Value = ?, StartTurn = ?, EndTurn = ?, IsFromPlayer = ? Where id = ?";
 
         stm = con.prepareStatement(sql);
-        stm.setInt(1, obj.getId());
+        stm.setInt(1, idAction);
         stm.setDouble(2, obj.getQuantity());
         stm.setDouble(3, obj.getValue());
         stm.setInt(4, obj.getStartTurn());
         stm.setInt(5, obj.getEndTurn());
         stm.setBoolean(6, obj.isIsFromPlayer());
+        stm.setInt(7, obj.getId());
 
         stm.executeUpdate();
 
     }
-    
 
-    private void deletarPurchaseOrder(PurchaseOrder obj) throws SQLException{
-        String sql = "DELETE FROM PurchaseOrderList where codigo=?";
+    private void deletarPurchaseOrder(PurchaseOrder obj) throws SQLException {
+        String sql = "DELETE FROM PurchaseOrderList where id=?";
         stm = con.prepareStatement(sql);
         stm.setInt(1, obj.getId());
 
         stm.executeUpdate();
     }
 
-    private ArrayList<PurchaseOrder> ListPurchaseOrderList(int idAction) throws SQLException {
+    private ArrayList<PurchaseOrder> ListPurchaseOrder(int idAction) throws SQLException {
         ArrayList<PurchaseOrder> List = new ArrayList<PurchaseOrder>();
 
         String sql = "SELECT * FROM PurchaseOrderList WHERE idAction = ?";
@@ -246,31 +253,72 @@ public class ActionDAO{
         }
         return List;
     }
-    
-    
-    
-    
-    
-    
 
     //SalesOrderList
     private void InserirSalesOrderList(Action action) throws SQLException {
-        String sql = "Insert into SalesOrderList (idAction, Quantity, Value, StartTurn, EndTurn, IsFromPlayer)"
-                + "values (?, ?, ?, ?, ?, ?)";
-        stm = con.prepareStatement(sql);
         for (int i = 0; i < action.getSalesOrderList().size(); i++) {
-            stm.setInt(1, action.getId());
-            stm.setInt(2, action.getSalesOrderList().get(i).getQuantity());
-            stm.setDouble(3, action.getSalesOrderList().get(i).getValue());
-            stm.setInt(4, action.getSalesOrderList().get(i).getStartTurn());
-            stm.setInt(5, action.getSalesOrderList().get(i).getEndTurn());
-            stm.setBoolean(6, action.getSalesOrderList().get(i).isIsFromPlayer());
-            stm.executeUpdate();
+            InserirSalesOrder(action.getSalesOrderList().get(i));
         }
 
     }
 
-    private ArrayList<SalesOrder> ListSalesOrderList(int idAction) throws SQLException {
+    private void InserirSalesOrder(SalesOrder obj) throws SQLException {
+        String sql = "Insert into SalesOrderList (idAction, Quantity, Value, StartTurn, EndTurn, IsFromPlayer)"
+                + "values (?, ?, ?, ?, ?, ?)";
+        stm = con.prepareStatement(sql);
+        stm.setInt(1, obj.getAction().getId());
+        stm.setInt(2, obj.getQuantity());
+        stm.setDouble(3, obj.getValue());
+        stm.setInt(4, obj.getStartTurn());
+        stm.setInt(5, obj.getEndTurn());
+        stm.setBoolean(6, obj.isIsFromPlayer());
+        stm.executeUpdate();
+
+    }
+
+    public void alterarSalesOrderList(ArrayList<SalesOrder> listGame, int idAction) throws SQLException {
+        ArrayList<SalesOrder> listdb = ListSalesOrder(idAction);
+        for (int i = 0; i < listdb.size(); i++) {
+            if (!listGame.contains(listdb.get(i))) {
+                deletarSalesOrder(listdb.get(i));
+            }
+            for (int j = 0; j < listGame.size(); j++) {
+                if (listGame.get(j).getId() == 0) {
+                    InserirSalesOrder(listGame.get(j));
+                } else {
+                    alterarSalesOrder(listGame.get(j), idAction);
+                }
+            }
+        }
+    }
+    
+    
+
+    private void alterarSalesOrder(SalesOrder obj, int idAction) throws SQLException {
+        String sql = "update SalesOrderList set idAction = ?, Quantity = ?, Value = ?, StartTurn = ?, EndTurn = ?, IsFromPlayer = ? Where id = ?";
+
+        stm = con.prepareStatement(sql);
+        stm.setInt(1, idAction);
+        stm.setDouble(2, obj.getQuantity());
+        stm.setDouble(3, obj.getValue());
+        stm.setInt(4, obj.getStartTurn());
+        stm.setInt(5, obj.getEndTurn());
+        stm.setBoolean(6, obj.isIsFromPlayer());
+        stm.setInt(7, obj.getId());
+
+        stm.executeUpdate();
+
+    }
+
+    private void deletarSalesOrder(SalesOrder obj) throws SQLException {
+        String sql = "DELETE FROM SalesOrderList where id=?";
+        stm = con.prepareStatement(sql);
+        stm.setInt(1, obj.getId());
+
+        stm.executeUpdate();
+    }
+
+    private ArrayList<SalesOrder> ListSalesOrder(int idAction) throws SQLException {
         ArrayList<SalesOrder> List = new ArrayList<SalesOrder>();
 
         String sql = "SELECT * FROM SalesOrderList WHERE idAction = ?";
@@ -284,6 +332,5 @@ public class ActionDAO{
         }
         return List;
     }
-
 
 }
