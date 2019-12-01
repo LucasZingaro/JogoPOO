@@ -69,6 +69,7 @@ public class FrmStart extends javax.swing.JFrame {
         btnCarregarJogo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Game");
         setMinimumSize(new java.awt.Dimension(300, 300));
 
         panelStart.setBackground(new java.awt.Color(102, 102, 102));
@@ -80,7 +81,7 @@ public class FrmStart extends javax.swing.JFrame {
         BtnNovoJogo.setForeground(new java.awt.Color(255, 255, 204));
         BtnNovoJogo.setText("Novo Jogo");
         BtnNovoJogo.setContentAreaFilled(false);
-        BtnNovoJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnNovoJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -92,7 +93,7 @@ public class FrmStart extends javax.swing.JFrame {
         btnCarregarJogo.setForeground(new java.awt.Color(255, 255, 204));
         btnCarregarJogo.setText("Carregar Jogo");
         btnCarregarJogo.setContentAreaFilled(false);
-        btnCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;

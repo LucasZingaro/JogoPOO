@@ -169,6 +169,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
         btnOrdens = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Detalhes da Ação");
 
         panelActionAcao.setBackground(new java.awt.Color(153, 153, 153));
         panelActionAcao.setLayout(new java.awt.GridBagLayout());
@@ -308,7 +309,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
         panelActionAcao.add(scrollTbAcoesVenda, gridBagConstraints);
 
         btnComprar.setText("Comprar");
-        btnComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnComprar.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -318,7 +319,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
 
         btnVender.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnVender.setText("Vender");
-        btnVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVender.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVender.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -356,7 +357,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
 
         btnOrdens.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnOrdens.setText("Minhas Ordens");
-        btnOrdens.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOrdens.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnOrdens.setOpaque(false);
 
         javax.swing.GroupLayout panelInfoJogadorLayout = new javax.swing.GroupLayout(panelInfoJogador);
@@ -405,6 +406,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

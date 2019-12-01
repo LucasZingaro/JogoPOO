@@ -88,6 +88,7 @@ public class FrmMarketDetails extends javax.swing.JFrame {
         lblValorStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mercado");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
@@ -174,6 +175,7 @@ public class FrmMarketDetails extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

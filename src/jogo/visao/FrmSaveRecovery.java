@@ -69,6 +69,7 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
         btnCarregarJogo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Carregar Jogo");
         setMinimumSize(new java.awt.Dimension(300, 300));
 
         panelCarregar.setBackground(new java.awt.Color(153, 153, 153));
@@ -76,7 +77,7 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
 
         btnVoltar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnVoltar.setText("Voltar");
-        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVoltar.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
@@ -104,7 +105,7 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
                 "Nome do Jogador", "Saldo", "Turno", "Salvo em..."
             }
         ));
-        tbCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tbCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tbCarregarJogo.setOpaque(false);
         scrollTbCarregarJogo.setViewportView(tbCarregarJogo);
 
@@ -122,7 +123,7 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
 
         btnCarregarJogo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnCarregarJogo.setText("Carregar Jogo");
-        btnCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCarregarJogo.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
