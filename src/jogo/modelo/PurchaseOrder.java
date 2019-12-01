@@ -24,4 +24,8 @@ public class PurchaseOrder extends Order {
         return PurchaseOrder.class.getSimpleName() + super.toString();
     }
 
+    void tryBuy(Market market) {
+        System.out.println("Tentando Comprar:" + this.toString());
+    }
+
 }

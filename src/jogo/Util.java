@@ -63,4 +63,14 @@ public class Util {
         }
         return s;
     }
+
+    public static String tryCutString(String s, int start, int end) {
+        for (int i = end; i >= 0; i--) {
+            try {
+                return s.substring(start, end);
+            } catch (Exception e) {
+            }
+        }
+        return s;
+    }
 }

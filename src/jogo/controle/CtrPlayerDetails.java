@@ -1,6 +1,7 @@
 package jogo.controle;
 
 import javax.swing.JOptionPane;
+import jogo.Main;
 import jogo.visao.FrmLoansDetails;
 import jogo.visao.FrmPlayerDetails;
 
@@ -9,10 +10,10 @@ import jogo.visao.FrmPlayerDetails;
  * @author Lucas
  */
 public class CtrPlayerDetails {
-
+    
     FrmPlayerDetails frmPlayerDetails;
     FrmLoansDetails frmLoansDetails;
-
+    
     public CtrPlayerDetails(FrmPlayerDetails frmPlayerDetails) {
         this.frmPlayerDetails = frmPlayerDetails;
         addActionListeners();
@@ -29,12 +30,12 @@ public class CtrPlayerDetails {
         frmPlayerDetails.getBtnRetirarValorRF()
                 .addActionListener(e -> actionBtnRetirarValorRF());
     }
-
+    
     private void actionBtnAdicionarValorRF() {
         switch (JOptionPane.showConfirmDialog(frmPlayerDetails,
                 "Adicionando:" + frmPlayerDetails.getTxtValorAdicionadoRF().getText(),
                 "Investimento Renda Fixa", JOptionPane.OK_CANCEL_OPTION)) {
-
+            
             case JOptionPane.OK_OPTION:
                 frmPlayerDetails.getTxtValorAdicionadoRF().setText("");
                 break;
@@ -42,7 +43,7 @@ public class CtrPlayerDetails {
                 break;
         }
     }
-
+    
     private void actionBtnEmprestimos() {
         if (!(frmLoansDetails instanceof FrmLoansDetails)) {
             System.out.println("Criando frmMarketDetails");
@@ -52,12 +53,12 @@ public class CtrPlayerDetails {
         frmLoansDetails.setVisible(true);
         frmLoansDetails.requestFocus();
     }
-
+    
     private void actionBtnRetirarValorRF() {
         switch (JOptionPane.showConfirmDialog(frmPlayerDetails,
                 "Removendo:" + frmPlayerDetails.getTxtValorRemovidoRF().getText(),
                 "Recuperação Renda Fixa", JOptionPane.OK_CANCEL_OPTION)) {
-
+            
             case JOptionPane.OK_OPTION:
                 frmPlayerDetails.getTxtValorAdicionadoRF().setText("");
                 break;
@@ -65,12 +66,12 @@ public class CtrPlayerDetails {
                 break;
         }
     }
-
+    
     void reloadComponents() {
         frmPlayerDetails.getLblGastosValor()
-                .setText(String.valueOf(10));
+                .setText(String.valueOf(frmPlayerDetails.getPlayer().calcDespesas(Main.game)));
         frmPlayerDetails.getLblJurosValor()
-                .setText(String.valueOf(5));
+                .setText(String.valueOf(Main.game.getMarket().getSelic()));
         frmPlayerDetails.getLblNomeValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().getName()));
         frmPlayerDetails.getLblRendaFixaValor()
@@ -78,5 +79,5 @@ public class CtrPlayerDetails {
         frmPlayerDetails.getLblSaldoValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().getMoney()));
     }
-
+    
 }

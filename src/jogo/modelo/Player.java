@@ -2,6 +2,7 @@ package jogo.modelo;
 
 import java.util.ArrayList;
 import jogo.Config;
+import jogo.Util;
 
 /**
  * Representa um jogador
@@ -143,6 +144,21 @@ public class Player {
 
     public void setPlayerListActions(ArrayList<Action> playerListActions) {
         this.playerListActions = playerListActions;
+    }
+
+    public double calcDespesas(Game aThis) {
+        return 500
+                + Double.parseDouble(Util.tryCutString(
+                        String.valueOf((1000 * aThis.getMarket().getInflation())),
+                        0, 3)
+                )
+                + Double.parseDouble(Util.tryCutString(
+                        String.valueOf(
+                                Util.round(
+                                        (aThis.getMarket().getInflation() * aThis.getNumTurn() * 100),
+                                        2)),
+                        0, 3)
+                );
     }
 
     @Override

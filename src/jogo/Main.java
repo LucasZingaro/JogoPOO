@@ -10,6 +10,7 @@ import jogo.visao.FrmStart;
 public class Main {
 
     public static FrmStart frmStart;
+    public static FrmLoading frmLoading;
     public static Game game = null;
 
     /**
@@ -17,7 +18,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        FrmStart start = new FrmStart();
-        new FrmLoading().getListeners().runLoadingJFrame(start);
+        frmStart = new FrmStart();
+        frmLoading = new FrmLoading();
+        frmLoading.getListeners().runLoadingJFrame(frmStart);
     }
 }

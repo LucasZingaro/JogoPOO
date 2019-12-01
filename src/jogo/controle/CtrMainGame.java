@@ -8,10 +8,12 @@ package jogo.controle;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import jogo.Main;
+import jogo.modelo.Action;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellComponent;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellEditor;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellRender;
 import jogo.modelo.tabelaAcoes.TabelaAcoesTableModel;
+import jogo.visao.FrmLoading;
 import jogo.visao.FrmMainGame;
 import jogo.visao.FrmMarketDetails;
 import jogo.visao.FrmPlayerDetails;
@@ -65,6 +67,19 @@ public class CtrMainGame {
 
     private void actionBtnPassarTurno() {
         System.out.println("PassarTurno");
+        frmMainGame.getGame().passarTurno();
+        this.reloadComponents();
+        if (frmMainGame.getGame().getPlayer().getMoney() < 0) {
+            JOptionPane.showConfirmDialog(frmMainGame,
+                    "Você declara falência financeira"
+                    + "\n\nVocê faliu em: " + frmMainGame.getGame().getNumTurn() + " turnos"
+                    + "\n Saldo: R$ " + frmMainGame.getGame().getPlayer().getMoney()
+                    + "\n\nEmpréstimos: \n" + frmMainGame.getGame().getPlayer().getLoanList()
+                    + "\n\n\nAções:\n" + frmMainGame.getGame().getPlayer().getPlayerListActions(),
+                    "Game Over",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.OK_OPTION);
+        }
     }
 
     private void actionBtnPatrimonio() {
@@ -96,7 +111,8 @@ public class CtrMainGame {
         switch (res) {
             case JOptionPane.YES_OPTION:
                 disposeFrames();
-                new FrmStart().setVisible(true);
+                Main.frmStart = new FrmStart();
+                new FrmLoading().getListeners().runLoadingJFrame(Main.frmStart);
                 break;
             default:
                 break;
@@ -127,8 +143,11 @@ public class CtrMainGame {
 
     private void disposeFrames() {
         try {
+            frmMarketDetails.setVisible(false);
             frmMarketDetails.dispose();
+            frmPlayerDetails.setVisible(false);
             frmPlayerDetails.dispose();
+            frmMainGame.setVisible(false);
             frmMainGame.dispose();
         } catch (Exception e) {
         }
@@ -141,6 +160,10 @@ public class CtrMainGame {
                 .setText(String.valueOf(this.frmMainGame.getGame().getPlayer().getMoney()));
         frmMainGame.getLblTurnoValor()
                 .setText(String.valueOf(this.frmMainGame.getGame().getNumTurn()));
+
+        //tabela de ações
+        tabelaAcoesTableModel.fireTableDataChanged();
+        tabelaAcoesTableModel.reloadSelectionJTable(frmMainGame.getTabelaAcoes());
     }
 
 }

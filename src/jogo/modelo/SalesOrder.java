@@ -21,6 +21,10 @@ public class SalesOrder extends Order {
     /*Methods...*/
     @Override
     public String toString() {
-        return SalesOrder.class.getSimpleName()+super.toString();
+        return SalesOrder.class.getSimpleName() + super.toString();
+    }
+
+    void trySell(Market market) {
+        System.out.println("Tentando Vender:" + this.toString());
     }
 }
