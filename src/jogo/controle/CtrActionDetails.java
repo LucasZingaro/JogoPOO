@@ -2,7 +2,10 @@ package jogo.controle;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import jogo.Config;
 import jogo.Main;
 import jogo.Util;
@@ -20,8 +23,9 @@ public class CtrActionDetails {
 
     FrmActionDetails frmActionDetails;
 
-    public CtrActionDetails(FrmActionDetails frm) {
-        this.frmActionDetails = frm;
+    public CtrActionDetails(FrmActionDetails frmActionDetails) {
+        this.frmActionDetails = frmActionDetails;
+        Main.frmActionDetails = frmActionDetails;
         addActionListeners();
     }
 
@@ -73,8 +77,8 @@ public class CtrActionDetails {
                     playerPurchaseOrderList.add(purchaseOrder);
                 }
             });
-
-            JOptionPane.showMessageDialog(frmActionDetails, playerPurchaseOrderList,
+            JScrollPane jp = new JScrollPane(new JTextArea(playerPurchaseOrderList.toString()));
+            JOptionPane.showMessageDialog(frmActionDetails, jp,
                     "Ordens de Compra", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(frmActionDetails,

@@ -21,6 +21,7 @@ public class CtrNewGame {
 
     public CtrNewGame(FrmNewGame frmNewGame) {
         this.frmNewGame = frmNewGame;
+        Main.frmNewGame = frmNewGame;
         addActionListeners();
     }
 

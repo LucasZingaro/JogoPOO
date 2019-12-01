@@ -6,6 +6,7 @@
 package jogo.controle;
 
 import javax.swing.JOptionPane;
+import jogo.Main;
 import jogo.visao.FrmLoansDetails;
 
 /**
@@ -18,6 +19,7 @@ public class CtrLoansDetails {
     
     public CtrLoansDetails(FrmLoansDetails frmLoansDetails) {
         this.frmLoansDetails = frmLoansDetails;
+        Main.frmLoansDetails = frmLoansDetails;
         addActionListeners();
     }
 

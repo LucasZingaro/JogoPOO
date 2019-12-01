@@ -1,5 +1,6 @@
 package jogo.controle;
 
+import jogo.Main;
 import jogo.visao.FrmSaveRecovery;
 import jogo.visao.FrmNewGame;
 import jogo.visao.FrmStart;
@@ -16,6 +17,7 @@ public class CtrStart {
 
     public CtrStart(FrmStart frmStart) {
         this.frmStart = frmStart;
+        Main.frmStart = frmStart;
         addActionListeners();
     }
 
@@ -33,7 +35,16 @@ public class CtrStart {
      * @see FrmSaveRecovery
      */
     private void actionBtnCarregarJogo() {
-        new FrmSaveRecovery().setVisible(true);
+        if (!(Main.frmSaveRecovery instanceof FrmSaveRecovery)) {
+            new FrmSaveRecovery().setVisible(true);
+            frmStart.dispose();
+            return;
+        }
+        try {
+            Main.frmSaveRecovery.setVisible(true);
+        } catch (Exception e) {
+            new FrmSaveRecovery().setVisible(true);
+        }
         frmStart.dispose();
     }
 
@@ -43,7 +54,16 @@ public class CtrStart {
      * @see FrmNewGame
      */
     private void actionBtnNovoJogo() {
-        new FrmNewGame().setVisible(true);
+        if (!(Main.frmNewGame instanceof FrmNewGame)) {
+            new FrmNewGame().setVisible(true);
+            frmStart.dispose();
+            return;
+        }
+        try {
+            Main.frmNewGame.setVisible(true);
+        } catch (Exception e) {
+            new FrmNewGame().setVisible(true);
+        }
         frmStart.dispose();
     }
 

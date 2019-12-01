@@ -15,7 +15,7 @@ import jogo.controle.CtrNewGame;
  */
 public class FrmNewGame extends javax.swing.JFrame {
 
-    private CtrNewGame listeners;
+    private final CtrNewGame listeners;
 
     /**
      * Creates new form Login

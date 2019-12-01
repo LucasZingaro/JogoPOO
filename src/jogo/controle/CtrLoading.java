@@ -22,16 +22,17 @@ public class CtrLoading {
     }
 
     public void runLoadingJFrame(JFrame jframe, long period, long delay) {
+        frmLoading.getProgressBarOfGame().setValue(0);
         frmLoading.setVisible(true);
         jframe.setVisible(false);
         new Thread(() -> {
             new Timer().scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    int value = getFrmLoading().getProgressBarOfGame().getValue();
+                    int value = frmLoading.getProgressBarOfGame().getValue();
                     frmLoading.getProgressBarOfGame().setValue(++value);
-                    if (getFrmLoading().getProgressBarOfGame().getValue() >= 100) {
-                        frmLoading.dispose();
+                    if (frmLoading.getProgressBarOfGame().getValue() >= 100) {
+                        frmLoading.setVisible(false);
                         this.cancel();
                         jframe.setVisible(true);
                         jframe.requestFocus();

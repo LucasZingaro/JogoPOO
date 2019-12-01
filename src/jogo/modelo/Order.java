@@ -138,16 +138,15 @@ public abstract class Order {
 
     @Override
     public String toString() {
-        return "{" 
-                + " \n    id=" + id 
-                + ",\n    Action=" + Action 
-                + ",\n    quantity=" + quantity 
-                + ",\n    value=" + value 
-                + ",\n    startTurn=" + startTurn 
-                + ",\n    endTurn=" + endTurn 
-                + ",\n    isFromPlayer=" + isFromPlayer 
-                + "}";
+        return "{"
+                + " \n    id=" + id
+                + ",\n    Action=" + Action.getName()
+                + ",\n    quantity=" + quantity
+                + ",\n    value=" + value
+                + ",\n    startTurn=" + startTurn
+                + ",\n    endTurn=" + endTurn
+                + ",\n    isFromPlayer=" + isFromPlayer
+                + "}\n";
     }
 
-    
 }

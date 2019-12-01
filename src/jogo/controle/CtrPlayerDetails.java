@@ -16,6 +16,7 @@ public class CtrPlayerDetails {
     
     public CtrPlayerDetails(FrmPlayerDetails frmPlayerDetails) {
         this.frmPlayerDetails = frmPlayerDetails;
+        Main.frmPlayerDetails = frmPlayerDetails;
         addActionListeners();
     }
 
