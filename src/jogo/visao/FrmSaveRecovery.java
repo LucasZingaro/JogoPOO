@@ -20,6 +20,7 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
     public FrmSaveRecovery() {
         initComponents();
         listeners = new CtrSaveRecovery(this);
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/WinIcon.png")).getImage());
     }
 
     public CtrSaveRecovery getListeners() {
@@ -70,14 +71,19 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(300, 300));
 
+        panelCarregar.setBackground(new java.awt.Color(153, 153, 153));
         panelCarregar.setLayout(new java.awt.GridBagLayout());
 
+        btnVoltar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnVoltar.setText("Voltar");
+        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVoltar.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelCarregar.add(btnVoltar, gridBagConstraints);
 
-        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 204));
         lblTitulo.setText("Jogos Salvos");
         lblTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -86,14 +92,20 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         panelCarregar.add(lblTitulo, gridBagConstraints);
 
+        scrollTbCarregarJogo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        tbCarregarJogo.setBackground(new java.awt.Color(153, 153, 153));
+        tbCarregarJogo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         tbCarregarJogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
             new String [] {
-                "Nome do Jogador", "Saldo", "Turno", "Salvo em"
+                "Nome do Jogador", "Saldo", "Turno", "Salvo em..."
             }
         ));
+        tbCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tbCarregarJogo.setOpaque(false);
         scrollTbCarregarJogo.setViewportView(tbCarregarJogo);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -108,7 +120,10 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelCarregar.add(scrollTbCarregarJogo, gridBagConstraints);
 
+        btnCarregarJogo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnCarregarJogo.setText("Carregar Jogo");
+        btnCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCarregarJogo.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -119,11 +134,11 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+            .addComponent(panelCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 523, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 376, Short.MAX_VALUE)
+            .addComponent(panelCarregar, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
         );
 
         pack();

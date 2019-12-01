@@ -24,6 +24,7 @@ public class FrmNewGame extends javax.swing.JFrame {
         initComponents();
         // this.lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/logoJogoPOO.png")));
         listeners = new CtrNewGame(this);
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/WinIcon.png")).getImage());
         for (Component myComponent : getComponents()) {
             if (myComponent instanceof JLabel) {
                 ((JLabel) myComponent).setHorizontalAlignment(SwingConstants.CENTER);
@@ -107,6 +108,7 @@ public class FrmNewGame extends javax.swing.JFrame {
         setFocusCycleRoot(false);
         setMinimumSize(new java.awt.Dimension(300, 250));
 
+        panelIniciar.setBackground(new java.awt.Color(153, 153, 153));
         panelIniciar.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -115,6 +117,7 @@ public class FrmNewGame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 6, 5, 1);
         panelIniciar.add(txtNome, gridBagConstraints);
 
+        lblNome.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
         lblNome.setText("Nome");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -122,8 +125,9 @@ public class FrmNewGame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 6, 5, 5);
         panelIniciar.add(lblNome, gridBagConstraints);
 
-        btnIniciar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnIniciar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnIniciar.setText("Iniciar");
+        btnIniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -132,7 +136,7 @@ public class FrmNewGame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 37, 5, 37);
         panelIniciar.add(btnIniciar, gridBagConstraints);
 
-        lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/imgLogin.png"))); // NOI18N
+        lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/user.png"))); // NOI18N
         lblImg.setFocusable(false);
         lblImg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -142,8 +146,9 @@ public class FrmNewGame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(15, 15, 15, 15);
         panelIniciar.add(lblImg, gridBagConstraints);
 
-        btnVoltar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btnVoltar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnVoltar.setText("Voltar");
+        btnVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -156,7 +161,7 @@ public class FrmNewGame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(panelIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +183,7 @@ public class FrmNewGame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

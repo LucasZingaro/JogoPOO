@@ -23,6 +23,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
     public FrmActionDetails() {
         initComponents();
         listeners = new CtrActionDetails(this);
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/WinIcon.png")).getImage());
     }
 
     public FrmActionDetails(Action acao) {
@@ -169,7 +170,10 @@ public class FrmActionDetails extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        panelActionAcao.setBackground(new java.awt.Color(153, 153, 153));
         panelActionAcao.setLayout(new java.awt.GridBagLayout());
+
+        panelInfoAcao.setBackground(new java.awt.Color(204, 204, 204));
 
         lblVariacaoValor.setText("N%");
 
@@ -198,27 +202,19 @@ public class FrmActionDetails extends javax.swing.JFrame {
             .addGroup(panelInfoAcaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                        .addComponent(lblNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNomeValor))
-                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                        .addComponent(lblPrecoUni)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPrecoUniValor))
-                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                        .addComponent(lblQuantidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblQuantidadeValor))
-                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                        .addComponent(lblStatusAction)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblStatusAcaoValor))
-                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
-                        .addComponent(lblVariacao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblVariacaoValor)))
-                .addContainerGap(185, Short.MAX_VALUE))
+                    .addComponent(lblNome)
+                    .addComponent(lblPrecoUni)
+                    .addComponent(lblQuantidade)
+                    .addComponent(lblStatusAction)
+                    .addComponent(lblVariacao))
+                .addGap(28, 28, 28)
+                .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblVariacaoValor)
+                    .addComponent(lblStatusAcaoValor)
+                    .addComponent(lblQuantidadeValor)
+                    .addComponent(lblPrecoUniValor)
+                    .addComponent(lblNomeValor))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         panelInfoAcaoLayout.setVerticalGroup(
             panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,6 +249,8 @@ public class FrmActionDetails extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(panelInfoAcao, gridBagConstraints);
 
+        tbAcoesCompra.setBackground(new java.awt.Color(204, 204, 204));
+        tbAcoesCompra.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         tbAcoesCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -276,6 +274,8 @@ public class FrmActionDetails extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(scrollTbAcoesCompra, gridBagConstraints);
 
+        tbAcoesVenda.setBackground(new java.awt.Color(204, 204, 204));
+        tbAcoesVenda.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         tbAcoesVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -308,19 +308,25 @@ public class FrmActionDetails extends javax.swing.JFrame {
         panelActionAcao.add(scrollTbAcoesVenda, gridBagConstraints);
 
         btnComprar.setText("Comprar");
+        btnComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnComprar.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(btnComprar, gridBagConstraints);
 
+        btnVender.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnVender.setText("Vender");
+        btnVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVender.setOpaque(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(btnVender, gridBagConstraints);
 
+        lblOrdensCompra.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         lblOrdensCompra.setText("Ordens de Compra");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -329,6 +335,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(lblOrdensCompra, gridBagConstraints);
 
+        lblOrdensVenda.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         lblOrdensVenda.setText("Ordens de Venda");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -337,6 +344,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelActionAcao.add(lblOrdensVenda, gridBagConstraints);
 
+        panelInfoJogador.setBackground(new java.awt.Color(204, 204, 204));
         panelInfoJogador.setMinimumSize(new java.awt.Dimension(100, 100));
         panelInfoJogador.setPreferredSize(new java.awt.Dimension(170, 198));
 
@@ -346,14 +354,17 @@ public class FrmActionDetails extends javax.swing.JFrame {
 
         lblQuantidadeJogadorValor.setText("N");
 
+        btnOrdens.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnOrdens.setText("Minhas Ordens");
+        btnOrdens.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOrdens.setOpaque(false);
 
         javax.swing.GroupLayout panelInfoJogadorLayout = new javax.swing.GroupLayout(panelInfoJogador);
         panelInfoJogador.setLayout(panelInfoJogadorLayout);
         panelInfoJogadorLayout.setHorizontalGroup(
             panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInfoJogadorLayout.createSequentialGroup()
-                .addContainerGap(136, Short.MAX_VALUE)
+                .addContainerGap(121, Short.MAX_VALUE)
                 .addGroup(panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInfoJogadorLayout.createSequentialGroup()
                         .addComponent(lblQuantidadeJogador)
@@ -372,7 +383,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
                 .addGroup(panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblQuantidadeJogadorValor)
                     .addComponent(lblQuantidadeJogador))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(btnOrdens)
                 .addContainerGap())
         );
@@ -407,7 +418,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

@@ -25,6 +25,7 @@ public class FrmLoansDetails extends javax.swing.JFrame {
     public FrmLoansDetails() {
         initComponents();
         listeners = new CtrLoansDetails(this);
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/WinIcon.png")).getImage());
     }
 
     public CtrLoansDetails getListeners() {
@@ -113,6 +114,9 @@ public class FrmLoansDetails extends javax.swing.JFrame {
         setTitle("Empréstimos");
         setResizable(false);
 
+        panelEmprestimo.setBackground(new java.awt.Color(153, 153, 153));
+
+        tbEmprestimos.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         tbEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -126,13 +130,19 @@ public class FrmLoansDetails extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbEmprestimos);
 
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jLabel1.setText("Valor Atual:");
 
         jLabel2.setText("Juros:");
 
+        txtJurosValor.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtJurosValor.setText("valorJuros");
 
         btnPegar.setText("Pegar Empréstimo");
+        btnPegar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPegar.setOpaque(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -169,9 +179,17 @@ public class FrmLoansDetails extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnPagar.setText("Pagar Empréstimo");
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
+        btnPagar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        btnPagar.setText("Pagar Empréstimo");
+        btnPagar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPagar.setOpaque(false);
+
+        btnSelecionar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnSelecionar.setText("Selecionar Empréstimo");
+        btnSelecionar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSelecionar.setOpaque(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -244,7 +262,7 @@ public class FrmLoansDetails extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

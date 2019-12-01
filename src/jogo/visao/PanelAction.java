@@ -113,40 +113,59 @@ public class PanelAction extends javax.swing.JPanel {
         lblPreco = new javax.swing.JLabel();
         btnInformacao = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 153, 153));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMaximumSize(new java.awt.Dimension(150, 75));
         setMinimumSize(new java.awt.Dimension(150, 75));
         setPreferredSize(new java.awt.Dimension(150, 75));
 
         panelDados.setLayout(new java.awt.GridLayout(2, 2));
 
-        lblNome.setText("Nome");
+        lblNome.setBackground(new java.awt.Color(204, 204, 204));
+        lblNome.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        lblNome.setText("     Nome:");
+        lblNome.setAlignmentX(5.0F);
         lblNome.setFocusable(false);
         lblNome.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panelDados.add(lblNome);
 
-        lblVariacao.setText("Variacao %");
+        lblVariacao.setBackground(new java.awt.Color(153, 153, 153));
+        lblVariacao.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        lblVariacao.setText("Variação %");
         lblVariacao.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 1, 0, new java.awt.Color(0, 0, 0)));
         lblVariacao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panelDados.add(lblVariacao);
 
-        lblPreco.setText("Preco");
+        lblPreco.setBackground(new java.awt.Color(153, 153, 153));
+        lblPreco.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        lblPreco.setText("     Preço:");
         lblPreco.setToolTipText("");
         lblPreco.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         panelDados.add(lblPreco);
 
+        btnInformacao.setBackground(new java.awt.Color(204, 204, 204));
+        btnInformacao.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnInformacao.setText("Info");
+        btnInformacao.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnInformacao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelDados.add(btnInformacao);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDados, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

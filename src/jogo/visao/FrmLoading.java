@@ -16,6 +16,7 @@ public class FrmLoading extends javax.swing.JFrame {
     public FrmLoading() {
         initComponents();
         listeners = new CtrLoading(this);
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/WinIcon.png")).getImage());
     }
 
     public CtrLoading getListeners() {
@@ -44,9 +45,13 @@ public class FrmLoading extends javax.swing.JFrame {
         progressBarOfGame = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 153, 153));
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        progressBarOfGame.setBackground(new java.awt.Color(204, 204, 204));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -81,7 +86,7 @@ public class FrmLoading extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
