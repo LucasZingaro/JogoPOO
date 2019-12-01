@@ -9,14 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import jogo.modelo.FixedIncome;
-import jogo.modelo.Player;
+import jogo.modelo.Market;
 
 /**
  *
  * @author MukaFelix
  */
-public class PlayerDAO implements IDAO<Player> {
+public class MarketDAO implements IDAO<Market> {
 
     private Connection con = null;
     private ConnectionFactory dao;
@@ -24,7 +23,7 @@ public class PlayerDAO implements IDAO<Player> {
     private ResultSet rs;
 
     //contrutor para conexão com o DB
-    public PlayerDAO () {
+    public MarketDAO() {
         dao = new ConnectionFactory();
         try {
             con = dao.getConnection();
@@ -42,44 +41,39 @@ public class PlayerDAO implements IDAO<Player> {
             System.err.println("Erro");
         }
     }
-    
-    @Override
-    public void inserir(Player obj) throws SQLException {
-        String sql = "Insert into Player (idMatch, name, Money, Income)"
-                + "values (?, ?, ?, ?)";
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, obj.getId());
-        stm.setString(2, obj.getName());
-        stm.setDouble(3, obj.getMoney());
-        stm.setDouble(4, obj.getFixedIncome().getValue());
-
-        stm.executeUpdate();
-    }
 
     @Override
-    public void alterar(Player obj) throws SQLException {
-        String sql = "update Player set (idMatch, name, Money, Income)"
-                + "values (?, ?, ?, ?)";
+    public void inserir(Market obj) throws SQLException {
+        String sql = "Insert into Market (idMatch, Status)"
+                + "values (?, ?)";
         stm = con.prepareStatement(sql);
         stm.setInt(1, obj.getId());
-        stm.setString(2, obj.getName());
-        stm.setDouble(3, obj.getMoney());
-        stm.setDouble(4, obj.getFixedIncome().getValue());
+        stm.setString(2, obj.getStatus().toString());
 
         stm.executeUpdate();
 
     }
 
     @Override
-    public void excluir(Player obj) throws SQLException {
-        String sql = "DELETE FROM Player where idMatch=?";
+    public void alterar(Market obj) throws SQLException {
+        String sql = "update Market set (idMatch, Status)"
+                + "values (?, ?)";
+        stm = con.prepareStatement(sql);
+        stm.setInt(1, obj.getId());
+        stm.setString(2, obj.getStatus().toString());
+        stm.executeUpdate();
+    }
+
+    @Override
+    public void excluir(Market obj) throws SQLException {
+        String sql = "DELETE FROM Market where idMatch=?";
         stm = con.prepareStatement(sql);
         stm.setInt(1, obj.getId());
 
         stm.executeUpdate();
     }
 
-    public Player LocalizarPlayer(int id) throws SQLException {
+    public Market LocalizarPlayer(int id) throws SQLException {
 
         String sql = "SELECT * from Player where idMatch = ?";
 
@@ -89,8 +83,24 @@ public class PlayerDAO implements IDAO<Player> {
 
         rs.next();
 
-        Player player = new Player(rs.getInt(1), rs.getString(2), rs.getDouble(3), null, new FixedIncome(rs.getInt(1),rs.getDouble(4)));
-        return player;
-        
+        Market market = new Market();
+        return market;
+
     }
+
+    //inflationHistory
+    private void inserirInflationHistory(Market obj) throws SQLException {
+        String sql = "Insert into inflationHistory (idMatch, Inflation)"
+                + "values (?, ?)";
+        stm = con.prepareStatement(sql);
+        stm.setInt(1, obj.getId());
+        
+        for (int i = 0; i < obj.getInflationHistory().size(); i++) {
+            stm.setDouble(2, obj.getInflationHistory().get(i));
+            stm.executeUpdate();
+        }
+    }
+
+    //cdiHistory
+    //selicHistory
 }
