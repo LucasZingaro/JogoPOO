@@ -19,6 +19,7 @@ public class FrmStart extends javax.swing.JFrame {
     public FrmStart() {
         initComponents();
         this.listener = new CtrStart(this);
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/WinIcon.png")).getImage());
     }
 
     public CtrStart getListener() {
@@ -70,18 +71,28 @@ public class FrmStart extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(300, 300));
 
+        panelStart.setBackground(new java.awt.Color(102, 102, 102));
+        panelStart.setForeground(new java.awt.Color(240, 240, 240));
         panelStart.setLayout(new java.awt.GridBagLayout());
 
-        BtnNovoJogo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        BtnNovoJogo.setBackground(new java.awt.Color(255, 255, 255));
+        BtnNovoJogo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        BtnNovoJogo.setForeground(new java.awt.Color(255, 255, 204));
         BtnNovoJogo.setText("Novo Jogo");
+        BtnNovoJogo.setContentAreaFilled(false);
+        BtnNovoJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         panelStart.add(BtnNovoJogo, gridBagConstraints);
 
-        btnCarregarJogo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        btnCarregarJogo.setBackground(new java.awt.Color(255, 255, 255));
+        btnCarregarJogo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        btnCarregarJogo.setForeground(new java.awt.Color(255, 255, 204));
         btnCarregarJogo.setText("Carregar Jogo");
+        btnCarregarJogo.setContentAreaFilled(false);
+        btnCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;

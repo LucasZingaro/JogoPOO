@@ -26,6 +26,7 @@ public class FrmMainGame extends javax.swing.JFrame {
     public FrmMainGame() {
         initComponents();
         listeners = new CtrMainGame(this);
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/jogo/img/WinIcon.png")).getImage());
     }
 
     public CtrMainGame getListeners() {
@@ -175,15 +176,28 @@ public class FrmMainGame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnPassarTurno.setText("Passar de Turno");
+        panelTelaPrincipal.setBackground(new java.awt.Color(153, 153, 153));
+
+        panelDados.setBackground(new java.awt.Color(153, 153, 153));
+
+        btnPassarTurno.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        btnPassarTurno.setText("Terminar Turno");
+        btnPassarTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPassarTurno.setOpaque(false);
 
         jLabel1.setText("Saldo:");
 
         lblSaldoValor.setText("saldoValor");
 
+        btnVisaoGeral.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         btnVisaoGeral.setText("Visão Geral do Mercado");
+        btnVisaoGeral.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisaoGeral.setOpaque(false);
 
-        btnPatrimonio.setText("Meu Patrimonio");
+        btnPatrimonio.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        btnPatrimonio.setText("Meu Patrimônio");
+        btnPatrimonio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPatrimonio.setOpaque(false);
 
         jLabel2.setText("Nome:");
 
@@ -252,6 +266,7 @@ public class FrmMainGame extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        tabelaAcoes.setBackground(new java.awt.Color(153, 153, 153));
         tabelaAcoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -260,8 +275,7 @@ public class FrmMainGame extends javax.swing.JFrame {
                 "Ações", "Ações", "Ações", "Ações"
             }
         ));
-        tabelaAcoes.setColumnSelectionAllowed(false);
-        tabelaAcoes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tabelaAcoes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         scrollPaneTabelaAcoes.setViewportView(tabelaAcoes);
         if (tabelaAcoes.getColumnModel().getColumnCount() > 0) {
             tabelaAcoes.getColumnModel().getColumn(0).setMinWidth(150);
@@ -289,7 +303,10 @@ public class FrmMainGame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        frmMenuBar.setBackground(new java.awt.Color(153, 153, 153));
+
         menuJogo.setText("Jogo");
+        menuJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         miSalvar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         miSalvar.setText("Salvar");
@@ -305,6 +322,7 @@ public class FrmMainGame extends javax.swing.JFrame {
         frmMenuBar.add(menuJogo);
 
         menuAjuda.setText("Ajuda");
+        menuAjuda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         frmMenuBar.add(menuAjuda);
 
         setJMenuBar(frmMenuBar);
@@ -335,7 +353,7 @@ public class FrmMainGame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
