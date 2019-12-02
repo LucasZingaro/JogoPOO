@@ -82,7 +82,6 @@ public class CtrMainGame {
     }
 
     private void actionBtnPassarTurno() {
-        System.out.println("PassarTurno");
         frmMainGame.getGame().passarTurno();
         Main.reloadAllFrames();
         if (frmMainGame.getGame().getPlayer().getMoney() < 0) {
@@ -110,7 +109,6 @@ public class CtrMainGame {
             Main.frmPlayerDetails.setVisible(true);
             Main.frmPlayerDetails.requestFocus();
         } catch (Exception e) {
-            System.out.println("Criando frmPlayerDetails");
             Main.frmPlayerDetails = new FrmPlayerDetails();
             Main.frmPlayerDetails.setPlayer(frmMainGame.getGame().getPlayer());
             Main.frmPlayerDetails.getListeners().reloadComponents();
@@ -126,7 +124,6 @@ public class CtrMainGame {
             Main.frmMarketDetails.setVisible(true);
             Main.frmMarketDetails.requestFocus();
         } catch (Exception e) {
-            System.out.println("Criando frmMarketDetails");
             Main.frmMarketDetails = new FrmMarketDetails();
             Main.frmMarketDetails.setMercado(frmMainGame.getGame().getMarket());
             Main.frmMarketDetails.getListeners().reloadComponents();

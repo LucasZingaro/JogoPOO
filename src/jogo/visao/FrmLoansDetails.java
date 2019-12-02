@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import jogo.modelo.Loan;
 import jogo.modelo.Player;
 
 /**

@@ -3,6 +3,7 @@ package jogo.visao;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import jogo.controle.CtrSaveRecovery;
+import jogo.modelo.Game;
 
 /**
  * Tela de Carregamento dos jogos salvos no Banco de dados.

@@ -118,7 +118,6 @@ public class CtrActionDetails {
     private void actionBtnOrdens() {
         //exibir ordens de compra
         ArrayList<PurchaseOrder> playerPurchaseOrderList = new ArrayList<>();
-        System.out.println(this.frmActionDetails.getAction());
         if (this.frmActionDetails.getAction().getPurchaseOrderList().size() > 0) {
             this.frmActionDetails.getAction().getPurchaseOrderList().forEach((purchaseOrder) -> {
                 if (purchaseOrder.isIsFromPlayer()) {

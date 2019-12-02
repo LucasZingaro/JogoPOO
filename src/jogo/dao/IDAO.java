@@ -13,7 +13,7 @@ public interface IDAO<T> {
      * Inserir objeto no banco de dados.
      *
      * @param obj Objeto a ser inserido.
-     * @param idMatch
+     * @param id
      * @throws java.sql.SQLException
      */
     public void inserir(T obj, int id)throws SQLException;

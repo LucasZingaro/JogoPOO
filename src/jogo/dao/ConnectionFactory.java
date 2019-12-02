@@ -21,7 +21,6 @@ public class ConnectionFactory {
      * configuração.
      *
      * @return Conexão SQL
-     * @throws SQLException
      *
      * @see Config
      */

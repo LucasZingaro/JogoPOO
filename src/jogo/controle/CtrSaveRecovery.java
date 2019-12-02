@@ -115,7 +115,6 @@ public class CtrSaveRecovery {
 
     private void reloadTabela() throws SQLException {
         //recarregar tabela com dados do banco
-        System.out.println("Recarregando tabela com dados do banco");
         //limpa todas as linhas
         for (int i = 0; i < tbCarregarJogoTM.getRowCount(); i++) {
             tbCarregarJogoTM.removeRow(i);

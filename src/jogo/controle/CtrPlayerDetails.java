@@ -99,7 +99,6 @@ public class CtrPlayerDetails {
 
     private void actionBtnEmprestimos() {
         if (!(frmLoansDetails instanceof FrmLoansDetails)) {
-            System.out.println("Criando frmMarketDetails");
             frmLoansDetails = new FrmLoansDetails();
             frmLoansDetails.setPlayer(this.frmPlayerDetails.getPlayer());
         }

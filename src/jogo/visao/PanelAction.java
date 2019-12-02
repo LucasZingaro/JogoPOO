@@ -39,7 +39,6 @@ public class PanelAction extends javax.swing.JPanel {
         //Button Action
         this.getBtnInformacao().addActionListener((ActionEvent e) -> {
             if (!(frmAcao instanceof FrmActionDetails)) {
-                System.out.println("Criando frmPlayerDetails");
                 frmAcao = new FrmActionDetails(acao);
             }
             frmAcao.setAction(acao);
