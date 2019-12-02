@@ -1,6 +1,7 @@
 package jogo.controle;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import jogo.Main;
 import jogo.visao.FrmSaveRecovery;
 import jogo.visao.FrmStart;
@@ -13,11 +14,13 @@ import jogo.visao.FrmStart;
 public class CtrSaveRecovery {
 
     FrmSaveRecovery frmSaveRecovery;
+    DefaultTableModel tbCarregarJogoTM;
 
     public CtrSaveRecovery(FrmSaveRecovery frmSaveRecovery) {
         this.frmSaveRecovery = frmSaveRecovery;
         Main.frmSaveRecovery = frmSaveRecovery;
         addActionListeners();
+        startTbCarregarJogo();
     }
 
     /**
@@ -26,6 +29,12 @@ public class CtrSaveRecovery {
     private void addActionListeners() {
         frmSaveRecovery.getBtnVoltar().addActionListener(e -> actionBtnVoltar());
         frmSaveRecovery.getBtnCarregarJogo().addActionListener(e -> actionBtnCarregarJogo());
+    }
+
+    private void startTbCarregarJogo() {
+        String columnNames[] = {"Nome Jogador", "Saldo", "Turno"};
+        tbCarregarJogoTM = new DefaultTableModel(columnNames, 0);
+        frmSaveRecovery.getTbCarregarJogo().setModel(tbCarregarJogoTM);
     }
 
     /**
