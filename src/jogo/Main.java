@@ -1,9 +1,15 @@
 package jogo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import jogo.dao.ConnectionFactory;
+import jogo.dao.GameDAO;
+import jogo.dao.PlayerDAO;
 import jogo.modelo.Action;
+import jogo.modelo.FixedIncome;
 import jogo.modelo.Game;
+import jogo.modelo.Player;
 import jogo.modelo.PurchaseOrder;
 import jogo.modelo.StatusEnum;
 import jogo.visao.FrmActionDetails;
@@ -36,11 +42,26 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         // TODO code application logic here
-        Main.frmStart = new FrmStart();
+        
+        
+        /*Main.frmStart = new FrmStart();
         Main.frmLoading = new FrmLoading();
-        Main.frmLoading.getListeners().runLoadingJFrame(frmStart);
+        Main.frmLoading.getListeners().runLoadingJFrame(frmStart);*/
+        
+        /*Main.game = new Game(new Player("Murillo"));
+        GameDAO gamedao = new GameDAO();
+        gamedao.inserir(game);*/
+        
+        GameDAO gamedao = new GameDAO();
+        System.out.println(gamedao.localizarGame(3));
+        
+        PlayerDAO player = new PlayerDAO();
+        player.alterar(new Player(3, "João", 10.2, null, new FixedIncome(3 , 12.2)));
+        
+        System.out.println(gamedao.localizarGame(3));
+        
     }
 
     public static void disposeAllFrames() {

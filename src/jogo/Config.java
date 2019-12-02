@@ -13,13 +13,13 @@ public abstract class Config {
     /** Driver do banco de dados*/
     public static String db_DRIVER = "com.mysql.jdbc.Driver";
     /** Link base de acesso ao banco de dados*/
-    public static String db_ROOT = "jdbc:mysql://localhost:3307";
+    public static String db_ROOT = "jdbc:mysql://localhost:3306/jogo_poo";
     /** Nome do banco de dados*/
-    public static String db_NAME = "economygamedb";
+    public static String db_NAME = "jogo_poo";
     /** Nome de usuário do banco de dados*/
     public static String db_USER = "root";
     /** Senha do usuário do banco de dados*/
-    public static String db_PASSWORD = "root";
+    public static String db_PASSWORD = "";
     
     /** Atraso na recuperação de renda fixa (em Turnos)*/
     public static final int FIXED_INCOME_RECOVERY_DELAY = 1;

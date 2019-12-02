@@ -16,7 +16,7 @@ public interface IDAO<T> {
      * @param idMatch
      * @throws java.sql.SQLException
      */
-    public void inserir(T obj)throws SQLException;
+    public void inserir(T obj, int id)throws SQLException;
 
     /**
      * Alterar objeto no banco de dados.

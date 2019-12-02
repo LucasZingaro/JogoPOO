@@ -16,7 +16,7 @@ import jogo.modelo.Loan;
  *
  * @author MukaFelix
  */
-public class LoanDAO implements IDAO<Loan>{
+public class LoanDAO implements IDAO<Loan> {
 
     private Connection con = null;
     private ConnectionFactory dao;
@@ -24,7 +24,7 @@ public class LoanDAO implements IDAO<Loan>{
     private ResultSet rs;
 
     //contrutor para conexão com o DB
-    public LoanDAO(){
+    public LoanDAO() {
         dao = new ConnectionFactory();
         try {
             con = dao.getConnection();
@@ -42,18 +42,33 @@ public class LoanDAO implements IDAO<Loan>{
             System.err.println("Erro");
         }
     }
-    
+
     @Override
-    public void inserir(Loan obj) throws SQLException {
+    public void inserir(Loan obj, int id) throws SQLException {
         String sql = "Insert into Loan (idMatch, Value, Interest, StartTurn)"
                 + "values (?, ?, ?, ?)";
         stm = con.prepareStatement(sql);
-        stm.setInt(1, obj.getId());
+        stm.setInt(1, id);
         stm.setDouble(2, obj.getValue());
         stm.setDouble(3, obj.getInterest());
         stm.setInt(4, obj.getStartTurn());
 
         stm.executeUpdate();
+    }
+
+    public void inserir(ArrayList<Loan> list, int id) throws SQLException {
+        for (Loan obj : list) {
+
+            String sql = "Insert into Loan (idMatch, Value, Interest, StartTurn)"
+                    + "values (?, ?, ?, ?)";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.setDouble(2, obj.getValue());
+            stm.setDouble(3, obj.getInterest());
+            stm.setInt(4, obj.getStartTurn());
+
+            stm.executeUpdate();
+        }
     }
 
     @Override
@@ -77,35 +92,40 @@ public class LoanDAO implements IDAO<Loan>{
 
         stm.executeUpdate();
     }
-    
-    public ArrayList<Loan> ListarLoan(int id) throws SQLException{
-        ArrayList<Loan> loans = new ArrayList<Loan>();
-        
-        String sql = "SELECT * FROM Loan WHERE idMatch = ?";
-        
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs= stm.executeQuery();
-        
-        while(rs.next()){
-            loans.add(new Loan(rs.getInt(1),rs.getDouble(3),rs.getDouble(4),rs.getInt(5)));
+
+    public ArrayList<Loan> ListarLoan(int id) throws SQLException {
+        try {
+            ArrayList<Loan> loans = new ArrayList<Loan>();
+
+            String sql = "SELECT * FROM Loan WHERE idMatch = ?";
+
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                loans.add(new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5)));
+            }
+            return loans;
+        } catch (SQLException e) {
+            return null;
         }
-        return loans;
-
     }
-    
-    public Loan LocalizarLoan(int id) throws SQLException{
-        String sql = "SELECT * from Loan where idMatch = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs = stm.executeQuery();
+    public Loan LocalizarLoan(int id) throws SQLException {
+        try {
+            String sql = "SELECT * from Loan where idMatch = ?";
 
-        rs.next();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
 
-        Loan loan = new Loan(rs.getInt(1),rs.getDouble(3),rs.getDouble(4),rs.getInt(5));
-        return loan;
+            rs.next();
 
+            Loan loan = new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5));
+            return loan;
+        } catch (SQLException e) {
+            return null;
+        }
     }
-    
 }
