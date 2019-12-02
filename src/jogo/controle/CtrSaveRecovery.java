@@ -3,6 +3,7 @@ package jogo.controle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jogo.Main;
+import jogo.modelo.PurchaseOrder;
 import jogo.visao.FrmSaveRecovery;
 import jogo.visao.FrmStart;
 
@@ -35,6 +36,7 @@ public class CtrSaveRecovery {
         String columnNames[] = {"Nome Jogador", "Saldo", "Turno"};
         tbCarregarJogoTM = new DefaultTableModel(columnNames, 0);
         frmSaveRecovery.getTbCarregarJogo().setModel(tbCarregarJogoTM);
+        reloadComponents();
     }
 
     /**
@@ -73,13 +75,25 @@ public class CtrSaveRecovery {
     }
 
     public void reloadComponents() {
-        frmSaveRecovery.getTbCarregarJogo();
-        this.reloadTabela();
+        //reload components, chamado geral
     }
 
     private void reloadTabela() {
         //recarregar tabela com dados do banco
         System.out.println("Recarregando tabela com dados do banco");
+        //limpa todas as linhas
+         for (int i = 0; i < tbCarregarJogoTM.getRowCount(); i++) {
+            tbCarregarJogoTM.removeRow(i);
+        }
+        //popular com 1 item (pode fazer repetição)
+        tbCarregarJogoTM.addRow(new Object[]{
+            "coluna1",
+            "coluna2",
+            "coluna2"
+        });
+
+        tbCarregarJogoTM.fireTableDataChanged();
+        
     }
 
 }
