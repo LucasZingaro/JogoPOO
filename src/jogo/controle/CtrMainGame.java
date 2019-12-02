@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import jogo.Main;
 import jogo.dao.Savegame;
 import jogo.modelo.Game;
+import jogo.modelo.Action;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellComponent;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellEditor;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellRender;
@@ -37,7 +38,7 @@ public class CtrMainGame {
     }
 
     private void startTbModel() {
-        this.tabelaAcoesTableModel = new TabelaAcoesTableModel(5, Main.game.getMarket().getMarketListActions());
+        this.tabelaAcoesTableModel = new TabelaAcoesTableModel(5);
         this.frmMainGame.getTabelaAcoes().setModel(tabelaAcoesTableModel);
         frmMainGame.getTabelaAcoes().setDefaultRenderer(
                 TabelaAcoesCellComponent.class,
@@ -49,6 +50,7 @@ public class CtrMainGame {
         );
         Dimension d = new TabelaAcoesCellComponent().getMaximumSize();
         frmMainGame.getTabelaAcoes().setRowHeight(d.height);
+        reloadTableAcoes();
     }
 
     /**
@@ -220,6 +222,16 @@ public class CtrMainGame {
         //tabela de ações
         tabelaAcoesTableModel.fireTableDataChanged();
         tabelaAcoesTableModel.reloadSelectionJTable(frmMainGame.getTabelaAcoes());
+    }
+
+    public void reloadTableAcoes() {
+        //recarregar tabela com dados
+
+        tabelaAcoesTableModel.limpar();
+        Main.game.getMarket().getMarketListActions().forEach((Action a) -> {
+            tabelaAcoesTableModel.addAcao(a);
+        });
+        tabelaAcoesTableModel.fireTableDataChanged();
     }
 
 }

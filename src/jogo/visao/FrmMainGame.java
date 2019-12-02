@@ -39,6 +39,7 @@ public class FrmMainGame extends javax.swing.JFrame {
 
     public void setGame(Game game) {
         this.game = game;
+        this.listeners.reloadTableAcoes();
     }
 
     public JButton getBtnPassarTurno() {
