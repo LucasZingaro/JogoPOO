@@ -195,31 +195,6 @@ public class Market {
     void passarTurno() {
         //Mercado->Ações
         this.getMarketListActions().forEach((action) -> {
-            //Ações->Ordens de Compra
-            ArrayList<PurchaseOrder> removeListPO = new ArrayList<>();
-            action.getPurchaseOrderList().forEach((PurchaseOrder purchaseOrder) -> {
-                try {
-                    purchaseOrder.tryBuy(this);
-                    if (purchaseOrder.getEndTurn() == Main.game.getNumTurn()) {
-                        removeListPO.add(purchaseOrder);
-                    }
-                } catch (Exception e) {
-                }
-            });
-            action.getPurchaseOrderList().removeAll(removeListPO);
-
-            //Ações->Ordens de Venda
-            ArrayList<SalesOrder> removeListSO = new ArrayList<>();
-            action.getSalesOrderList().forEach((SalesOrder salesOrder) -> {
-                try {
-                    salesOrder.trySell(this);
-                    if (salesOrder.getEndTurn() == Main.game.getNumTurn()) {
-                        removeListSO.add(salesOrder);
-                    }
-                } catch (Exception e) {
-                }
-            });
-            action.getSalesOrderList().removeAll(removeListSO);
 
             //Ações->turno
             action.passarTurno();

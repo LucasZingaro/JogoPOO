@@ -261,17 +261,31 @@ public class Action {
         this.removeOrderListSalesIsNotFromPlayer();
 
         //Lista de orderns só do usuário
+        ArrayList<PurchaseOrder> removeListPO = new ArrayList<>();
         this.getPurchaseOrderList().forEach((PurchaseOrder po) -> {
             if (po.isIsFromPlayer()) {
+                if (po.getEndTurn() == Main.game.getNumTurn()
+                        || po.getQuantity() <= 0) {
+                    removeListPO.add(po);
+                    return;
+                }
                 po.tryBuy(Main.game.getMarket());
             }
         });
+        this.getPurchaseOrderList().removeAll(removeListPO);
+
+        ArrayList<SalesOrder> removeListSO = new ArrayList<>();
         this.getSalesOrderList().forEach((SalesOrder so) -> {
             if (so.isIsFromPlayer()) {
+                if (so.getEndTurn() == Main.game.getNumTurn()
+                        || so.getQuantity() <= 0) {
+                    removeListSO.add(so);
+                    return;
+                }
                 so.trySell(Main.game.getMarket());
             }
         });
-
+        this.getSalesOrderList().removeAll(removeListSO);
         //Refazer ordens do mercado(não player)
         this.getPurchaseOrderList().addAll(gerarListaCompra(Main.game.getNumTurn() + 1, 10));
         this.getSalesOrderList().addAll(gerarListaVenda(Main.game.getNumTurn() + 1, 10));
