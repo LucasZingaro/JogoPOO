@@ -6,9 +6,7 @@ import jogo.Main;
 import jogo.Util;
 
 /**
- * Representa um jogador
- *
- * @author Lucas
+ * Representa um jogador.
  */
 public class Player {
 

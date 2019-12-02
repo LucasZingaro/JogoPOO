@@ -17,8 +17,7 @@ import jogo.visao.FrmPlayerDetails;
 import jogo.visao.FrmStart;
 
 /**
- *
- * @author Lucas
+ * Controle da tela principal do jogo
  */
 public class CtrMainGame {
 

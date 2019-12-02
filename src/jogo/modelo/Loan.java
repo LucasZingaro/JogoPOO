@@ -1,9 +1,7 @@
 package jogo.modelo;
 
 /**
- * Representa um empréstimo do jogador;
- *
- * @author Lucas
+ * Representa um empréstimo do jogador.
  */
 public class Loan {
 
@@ -85,7 +83,7 @@ public class Loan {
 
     @Override
     public String toString() {
-        return     "\n      Loan{"
+        return "\n      Loan{"
                 + " \n          id=" + id
                 + ",\n          value=" + value
                 + ",\n          interest=" + interest

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.dao;
 
 import java.sql.Connection;
@@ -12,10 +7,12 @@ import java.sql.SQLException;
 import jogo.modelo.Game;
 
 /**
+ * DAO Game
  *
- * @author MukaFelix
+ * @see Game
  */
 public class GameDAO {
+
 
     private Connection con = null;
     private ConnectionFactory dao;
@@ -87,7 +84,7 @@ public class GameDAO {
 
         stm.executeUpdate();
     }
-
+    
     public Game localizarGame(int id) throws SQLException {
         try {
             String sql = "SELECT * FROM Game WHERE idMatch = ?";

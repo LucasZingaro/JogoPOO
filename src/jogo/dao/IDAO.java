@@ -18,13 +18,14 @@ public interface IDAO<T> {
      */
     public void inserir(T obj, int id)throws SQLException;
 
+
     /**
      * Alterar objeto no banco de dados.
      *
      * @param obj Objeto a ser aterado.
      * @throws java.sql.SQLException
      */
-    public void alterar(T obj)throws SQLException;
+    public void alterar(T obj) throws SQLException;
 
     /**
      * Excluir objeto do banco de dados.
@@ -32,5 +33,5 @@ public interface IDAO<T> {
      * @param obj Objeto a ser deletado.
      * @throws java.sql.SQLException
      */
-    public void excluir(T obj)throws SQLException;
+    public void excluir(T obj) throws SQLException;
 }

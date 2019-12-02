@@ -37,5 +37,4 @@ public class TabelaAcoesCellEditor extends AbstractCellEditor implements TableCe
         cellComponent.updateData((Action) value, true, table);
         return cellComponent;
     }
-
 }

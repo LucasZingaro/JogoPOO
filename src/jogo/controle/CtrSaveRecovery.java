@@ -9,7 +9,6 @@ import jogo.visao.FrmStart;
  * Classe de controle do FrmSaveRecovery.
  *
  * @see FrmSaveRecovery
- * @author Lucas
  */
 public class CtrSaveRecovery {
 

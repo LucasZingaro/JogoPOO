@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.dao;
 
 import java.sql.Connection;
@@ -13,8 +8,9 @@ import java.util.ArrayList;
 import jogo.modelo.Loan;
 
 /**
+ * DAO Loan
  *
- * @author MukaFelix
+ * @see Loan
  */
 public class LoanDAO implements IDAO<Loan> {
 
@@ -121,6 +117,7 @@ public class LoanDAO implements IDAO<Loan> {
             rs = stm.executeQuery();
 
             rs.next();
+
 
             Loan loan = new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5));
             return loan;

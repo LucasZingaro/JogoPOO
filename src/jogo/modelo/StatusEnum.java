@@ -2,8 +2,6 @@ package jogo.modelo;
 
 /**
  * Status
- * 
- * @author Lucas
  */
 public enum StatusEnum {
     /** Voando */

@@ -1,12 +1,9 @@
 package jogo.modelo;
 
-import java.util.ArrayList;
 import jogo.Config;
 
 /**
  * Representa a renda fixa de um jogador
- *
- * @author Lucas
  */
 public class FixedIncome {
 

@@ -9,7 +9,6 @@ import jogo.visao.FrmStart;
  * Classe de controle do FrmStart.
  *
  * @see FrmStart
- * @author Lucas
  */
 public class CtrStart {
 

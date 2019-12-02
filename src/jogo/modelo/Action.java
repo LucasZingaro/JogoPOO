@@ -1,12 +1,12 @@
 package jogo.modelo;
 
 import java.util.ArrayList;
+import jogo.Main;
 import jogo.Util;
 
 /**
- * Representação de uma ação financeira
+ * Representação de uma ação financeira;
  *
- * @author Lucas
  */
 public class Action {
 
@@ -91,6 +91,7 @@ public class Action {
 
     /**
      * Construtor BD
+     *
      * @param id Identificador
      * @param name Nome
      * @param status Status
@@ -114,13 +115,13 @@ public class Action {
         this.variationHistory = variationHistory;
         this.marketQuantity = marketQuantity;
         this.playerQuantity = playerQuantity;
-        
+
         //Associação de action anteriormente null
         purchaseOrderList.forEach((PurchaseOrder purchaseOrder) -> {
             purchaseOrder.setAction(this);
         });
         this.purchaseOrderList = purchaseOrderList;
-        
+
         //Associação de action anteriormente null
         salesOrderList.forEach((SalesOrder salesOrder) -> {
             salesOrder.setAction(this);
@@ -151,10 +152,10 @@ public class Action {
         );
         this.valueHistory.add(value);
         this.variationHistory.add(variation);
-        
-        //lista de ordens n
-        this.purchaseOrderList = purchaseOrderList;
-        this.salesOrderList = salesOrderList;
+
+        //lista de ordens iniciais(sem quantidade do jogador)
+        this.purchaseOrderList = gerarListaCompra(2, 10);
+        this.salesOrderList = gerarListaVenda(2, 10);
     }
 
     public Action(String name, StatusEnum status, double value, double marketQuantity) {
@@ -289,8 +290,12 @@ public class Action {
 
     public void passarTurno() {
         double valorAntigo = this.value;
-        this.value = Util.round(Action.gerarValor(valorAntigo), 2);
-        this.variation = Util.round(((this.value / valorAntigo) - 1) * 100, 2);
+        this.setValue(Util.round(Action.gerarValor(valorAntigo), 2));
+        this.setVariation(Util.round(((this.value / valorAntigo) - 1) * 100, 2));
+        this.removeOrderListPurchaseIsNotFromPlayer();
+        this.removeOrderListSalesIsNotFromPlayer();
+        this.getPurchaseOrderList().addAll(gerarListaCompra(Main.game.getNumTurn() + 1, 10));
+        this.getSalesOrderList().addAll(gerarListaVenda(Main.game.getNumTurn() + 1, 10));
 
     }
 
@@ -308,6 +313,42 @@ public class Action {
                 + ",\n          purchaseOrderList=" + purchaseOrderList
                 + ",\n          salesOrderList=" + salesOrderList
                 + " \n      }";
+    }
+
+    private ArrayList<PurchaseOrder> gerarListaCompra(int turnofim, int n) {
+        ArrayList<PurchaseOrder> po = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            po.add(new PurchaseOrder(this, turnofim, false));
+        }
+        return po;
+    }
+
+    private ArrayList<SalesOrder> gerarListaVenda(int turnofim, int n) {
+        ArrayList<SalesOrder> so = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            so.add(new SalesOrder(this, turnofim, false));
+        }
+        return so;
+    }
+
+    private void removeOrderListPurchaseIsNotFromPlayer() {
+        ArrayList<PurchaseOrder> removerPO = new ArrayList<>();
+        this.getPurchaseOrderList().forEach((PurchaseOrder po) -> {
+            if (!po.isIsFromPlayer()) {
+                removerPO.add(po);
+            }
+        });
+        this.getPurchaseOrderList().removeAll(removerPO);
+    }
+
+    private void removeOrderListSalesIsNotFromPlayer() {
+        ArrayList<SalesOrder> removerSO = new ArrayList<>();
+        this.getSalesOrderList().forEach((SalesOrder so) -> {
+            if (!so.isIsFromPlayer()) {
+                removerSO.add(so);
+            }
+        });
+        this.getSalesOrderList().removeAll(removerSO);
     }
 
 }

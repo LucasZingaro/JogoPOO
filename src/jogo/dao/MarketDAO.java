@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.dao;
 
 import java.sql.Connection;
@@ -14,8 +9,9 @@ import jogo.modelo.Market;
 import jogo.modelo.StatusEnum;
 
 /**
+ * DAO Market
  *
- * @author MukaFelix
+ * @see Market
  */
 public class MarketDAO implements IDAO<Market> {
 
@@ -92,6 +88,7 @@ public class MarketDAO implements IDAO<Market> {
             rs.next();
 
             ActionDAO action = new ActionDAO();
+
 
             Market market = new Market(rs.getInt(1), inflationHistoryList(id), cdiHistoryList(id), selicHistoryList(id), StatusEnum.parseStatusEnum(rs.getString(2)), action.listaActions());
             return market;

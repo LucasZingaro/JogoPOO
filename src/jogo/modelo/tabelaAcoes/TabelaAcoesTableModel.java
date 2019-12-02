@@ -5,7 +5,6 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import jogo.modelo.Action;
-import jogo.visao.PanelAction;
 
 /**
  * Modelo da tabela de ações

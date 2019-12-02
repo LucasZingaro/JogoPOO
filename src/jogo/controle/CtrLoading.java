@@ -6,8 +6,7 @@ import javax.swing.JFrame;
 import jogo.visao.FrmLoading;
 
 /**
- *
- * @author Lucas
+ * Controle de Carregamento
  */
 public class CtrLoading {
 

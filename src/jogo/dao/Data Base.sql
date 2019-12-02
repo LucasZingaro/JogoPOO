@@ -1,3 +1,4 @@
+
 CREATE DATABASE Jogo_POO;
 
 USE Jogo_POO;

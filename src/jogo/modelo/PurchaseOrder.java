@@ -1,9 +1,7 @@
 package jogo.modelo;
 
 /**
- * Representação da ordem de compra de uma ação
- *
- * @author Lucas
+ * Representação da ordem de compra de uma ação.
  */
 public class PurchaseOrder extends Order {
 
@@ -18,6 +16,13 @@ public class PurchaseOrder extends Order {
         super(action, quantity, value, startTurn, endTurn, isFromPlayer);
     }
 
+    public PurchaseOrder(jogo.modelo.Action Action, int endTurn, boolean isFromPlayer) {
+        super(Action, endTurn, isFromPlayer);
+    }
+    
+    
+    
+
     /*Methods...*/
     @Override
     public String toString() {
@@ -25,7 +30,7 @@ public class PurchaseOrder extends Order {
     }
 
     void tryBuy(Market market) {
-        System.out.println("Tentando Comprar:" + this.toString());
+//        System.out.println("Tentando Comprar:" + this.toString());
     }
 
 }
