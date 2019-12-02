@@ -1,7 +1,11 @@
 package jogo.controle;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import jogo.Main;
+import jogo.dao.GameDAO;
 import jogo.modelo.Game;
 import jogo.modelo.Player;
 import jogo.visao.FrmLoading;
@@ -64,13 +68,20 @@ public class CtrNewGame {
         //Carrega o jogo
         frmMainGame.setGame(Main.game);
         frmMainGame.getListeners().reloadComponents();
-        new Thread(() -> {
-            System.out.println(Main.game);
-        }).start();
 
         //Montrar introdução(se tiver)
         //frmMainGame.setVisible(true); //Já feito pelo Loading
         frmNewGame.dispose();
+
+        //Criar jogo no banco de dados
+        new Thread(() -> {
+            GameDAO gamedao = new GameDAO();
+            try {
+                gamedao.inserir(Main.game);
+            } catch (SQLException ex) {
+                Logger.getLogger(CtrNewGame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
     }
 
     public void reloadComponents() {

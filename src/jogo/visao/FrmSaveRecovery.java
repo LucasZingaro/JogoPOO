@@ -96,18 +96,36 @@ public class FrmSaveRecovery extends javax.swing.JFrame {
         scrollTbCarregarJogo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tbCarregarJogo.setBackground(new java.awt.Color(153, 153, 153));
-        tbCarregarJogo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        tbCarregarJogo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         tbCarregarJogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
             new String [] {
-                "Nome do Jogador", "Saldo", "Turno", "Salvo em..."
+                "Id", "Nome do Jogador", "Saldo", "Turno"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbCarregarJogo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tbCarregarJogo.setOpaque(false);
         scrollTbCarregarJogo.setViewportView(tbCarregarJogo);
+        if (tbCarregarJogo.getColumnModel().getColumnCount() > 0) {
+            tbCarregarJogo.getColumnModel().getColumn(0).setPreferredWidth(10);
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

@@ -78,9 +78,8 @@ public class MarketDAO implements IDAO<Market> {
     }
 
     public Market localizarMarket(int id) throws SQLException {
-        try {
-            String sql = "SELECT * from Market where idMatch = ?";
-
+        //try {
+            String sql = "SELECT * FROM Market WHERE idMatch = ?";
             stm = con.prepareStatement(sql);
             stm.setInt(1, id);
             rs = stm.executeQuery();
@@ -90,11 +89,12 @@ public class MarketDAO implements IDAO<Market> {
             ActionDAO action = new ActionDAO();
 
 
-            Market market = new Market(rs.getInt(1), inflationHistoryList(id), cdiHistoryList(id), selicHistoryList(id), StatusEnum.parseStatusEnum(rs.getString(2)), action.listaActions());
+            Market market = new Market(rs.getInt(1), inflationHistoryList(id), cdiHistoryList(id), selicHistoryList(id), null, action.listaActions(id));
             return market;
-        } catch (SQLException e) {
-            return null;
-        }
+        //} catch (SQLException e) {
+            //System.err.println("Erro: "+e);
+            //return null;
+        //}
     }
 
     //inflationHistory

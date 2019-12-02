@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import jogo.modelo.Game;
 
 /**
@@ -12,7 +13,6 @@ import jogo.modelo.Game;
  * @see Game
  */
 public class GameDAO {
-
 
     private Connection con = null;
     private ConnectionFactory dao;
@@ -53,6 +53,7 @@ public class GameDAO {
         rs = stm.executeQuery();
         rs.last();
         int id = rs.getInt(1);
+        obj.setId(id);
 
         PlayerDAO player = new PlayerDAO();
         player.inserir(obj.getPlayer(), id);
@@ -84,7 +85,7 @@ public class GameDAO {
 
         stm.executeUpdate();
     }
-    
+
     public Game localizarGame(int id) throws SQLException {
         try {
             String sql = "SELECT * FROM Game WHERE idMatch = ?";
@@ -102,5 +103,22 @@ public class GameDAO {
         } catch (SQLException e) {
             return null;
         }
+    }
+
+    public ArrayList<Game> ListaGames() throws SQLException {
+        ArrayList<Game> games = new ArrayList<Game>();
+
+        String sql = "SELECT * FROM Game";
+
+        stm = con.prepareStatement(sql);
+        rs = stm.executeQuery();
+
+        PlayerDAO player = new PlayerDAO();
+        MarketDAO maket = new MarketDAO();
+
+        while (rs.next()) {
+            games.add(new Game(rs.getInt(1), player.LocalizarPlayer(rs.getInt(1)), maket.localizarMarket(rs.getInt(1)), rs.getInt(2)));
+        }
+        return games;
     }
 }

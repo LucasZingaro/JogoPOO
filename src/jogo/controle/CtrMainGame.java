@@ -4,8 +4,13 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import jogo.Main;
+import jogo.dao.Savegame;
+import jogo.modelo.Game;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellComponent;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellEditor;
 import jogo.modelo.tabelaAcoes.TabelaAcoesCellRender;
@@ -160,6 +165,13 @@ public class CtrMainGame {
 
     private void actionMiSalvar() {
         JOptionPane.showMessageDialog(frmMainGame, "Salvando...");
+         new Thread(() -> {
+            try {
+                Savegame.save();
+            } catch (SQLException ex) {
+                Logger.getLogger(CtrMainGame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
     }
 
     private void actionMenuAjuda() {

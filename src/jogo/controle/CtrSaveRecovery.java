@@ -1,9 +1,20 @@
 package jogo.controle;
 
+import java.sql.Array;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jogo.Main;
+import static jogo.Main.frmNewGame;
+import jogo.dao.GameDAO;
+import jogo.modelo.Game;
+import jogo.modelo.Player;
 import jogo.modelo.PurchaseOrder;
+import jogo.visao.FrmLoading;
+import jogo.visao.FrmMainGame;
 import jogo.visao.FrmSaveRecovery;
 import jogo.visao.FrmStart;
 
@@ -33,10 +44,14 @@ public class CtrSaveRecovery {
     }
 
     private void startTbCarregarJogo() {
-        String columnNames[] = {"Nome Jogador", "Saldo", "Turno"};
+        String columnNames[] = {"id", "Nome Jogador", "Saldo", "Turno"};
         tbCarregarJogoTM = new DefaultTableModel(columnNames, 0);
         frmSaveRecovery.getTbCarregarJogo().setModel(tbCarregarJogoTM);
-        reloadComponents();
+        try {
+            reloadTabela();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrSaveRecovery.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,30 +85,59 @@ public class CtrSaveRecovery {
             );
             return;
         }
-        JOptionPane.showMessageDialog(frmSaveRecovery,
-                "Recuperar jogo da linha selecionada = " + frmSaveRecovery.getTbCarregarJogo().getSelectedRow());
+        int id = (int) tbCarregarJogoTM.getValueAt(frmSaveRecovery.getTbCarregarJogo().getSelectedRow(), 0);
+
+        GameDAO gamedao = new GameDAO();
+        try {
+            Game loadGame = gamedao.localizarGame(id);
+            System.out.println(loadGame);
+
+            //Criando o jogo
+            /*Main.game = loadGame;
+            FrmMainGame frmMainGame = new FrmMainGame();
+
+            //display loading
+            new FrmLoading().getListeners().runLoadingJFrame(frmMainGame);
+
+            //Carrega o jogo
+            frmMainGame.setGame(Main.game);
+            frmMainGame.getListeners().reloadComponents();
+
+            //Montrar introdução(se tiver)
+            //frmMainGame.setVisible(true); //Já feito pelo Loading
+            frmNewGame.dispose();*/
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrSaveRecovery.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void reloadComponents() {
         //reload components, chamado geral
     }
 
-    private void reloadTabela() {
+    private void reloadTabela() throws SQLException {
         //recarregar tabela com dados do banco
         System.out.println("Recarregando tabela com dados do banco");
         //limpa todas as linhas
-         for (int i = 0; i < tbCarregarJogoTM.getRowCount(); i++) {
+        for (int i = 0; i < tbCarregarJogoTM.getRowCount(); i++) {
             tbCarregarJogoTM.removeRow(i);
         }
-        //popular com 1 item (pode fazer repetição)
-        tbCarregarJogoTM.addRow(new Object[]{
-            "coluna1",
-            "coluna2",
-            "coluna2"
-        });
+
+        GameDAO gamedao = new GameDAO();
+        ArrayList<Game> gameList = gamedao.ListaGames();
+        for (Game obj : gameList) {
+            //popular com 1 item (pode fazer repetição)
+            tbCarregarJogoTM.addRow(new Object[]{
+                obj.getId(),
+                obj.getPlayer().getName(),
+                obj.getPlayer().getMoney(),
+                obj.getNumTurn()
+            });
+        }
 
         tbCarregarJogoTM.fireTableDataChanged();
-        
+
     }
 
 }
