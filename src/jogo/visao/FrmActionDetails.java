@@ -172,7 +172,10 @@ public class FrmActionDetails extends javax.swing.JFrame {
         setTitle("Detalhes da Ação");
 
         panelActionAcao.setBackground(new java.awt.Color(153, 153, 153));
-        panelActionAcao.setLayout(new java.awt.GridBagLayout());
+        java.awt.GridBagLayout panelActionAcaoLayout = new java.awt.GridBagLayout();
+        panelActionAcaoLayout.columnWidths = new int[] {50, 50};
+        panelActionAcaoLayout.columnWeights = new double[] {50.0, 50.0};
+        panelActionAcao.setLayout(panelActionAcaoLayout);
 
         panelInfoAcao.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -203,19 +206,27 @@ public class FrmActionDetails extends javax.swing.JFrame {
             .addGroup(panelInfoAcaoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNome)
-                    .addComponent(lblPrecoUni)
-                    .addComponent(lblQuantidade)
-                    .addComponent(lblStatusAction)
-                    .addComponent(lblVariacao))
-                .addGap(28, 28, 28)
-                .addGroup(panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblVariacaoValor)
-                    .addComponent(lblStatusAcaoValor)
-                    .addComponent(lblQuantidadeValor)
-                    .addComponent(lblPrecoUniValor)
-                    .addComponent(lblNomeValor))
-                .addContainerGap(160, Short.MAX_VALUE))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
+                        .addComponent(lblNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNomeValor))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
+                        .addComponent(lblPrecoUni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPrecoUniValor))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
+                        .addComponent(lblStatusAction)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblStatusAcaoValor))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
+                        .addComponent(lblVariacao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblVariacaoValor))
+                    .addGroup(panelInfoAcaoLayout.createSequentialGroup()
+                        .addComponent(lblQuantidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblQuantidadeValor)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelInfoAcaoLayout.setVerticalGroup(
             panelInfoAcaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,7 +376,7 @@ public class FrmActionDetails extends javax.swing.JFrame {
         panelInfoJogadorLayout.setHorizontalGroup(
             panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInfoJogadorLayout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelInfoJogadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInfoJogadorLayout.createSequentialGroup()
                         .addComponent(lblQuantidadeJogador)

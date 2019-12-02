@@ -36,11 +36,11 @@ public class CtrLoansDetails {
     }
 
     private void actionBtnPagar() {
-        JOptionPane.showMessageDialog(frmLoansDetails, "Pagar empréstimo");
+        JOptionPane.showMessageDialog(frmLoansDetails, "Nenhum empréstimo válido");
     }
 
     private void actionBtnPegar() {
-        JOptionPane.showMessageDialog(frmLoansDetails, "Pegar empréstimo");
+        JOptionPane.showMessageDialog(frmLoansDetails, "Pegar empréstimo(Indisponível)");
     }
 
     private void actionBtnSelecionar() {
@@ -64,8 +64,10 @@ public class CtrLoansDetails {
     }
 
     private void reloadTbEmprestimos() {
+        for (int i = 0; i < tbEmprestimosTM.getRowCount(); i++) {
+            tbEmprestimosTM.removeRow(i);
+        }
         try {
-            frmLoansDetails.getTbEmprestimos().removeAll();
             frmLoansDetails.getPlayer().getLoanList().forEach((loan) -> {
                 tbEmprestimosTM.addRow(new Object[]{
                     loan.getValue(),
@@ -76,5 +78,6 @@ public class CtrLoansDetails {
         } catch (Exception e) {
         }
 
+        tbEmprestimosTM.fireTableDataChanged();
     }
 }

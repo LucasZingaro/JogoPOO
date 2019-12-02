@@ -142,7 +142,8 @@ public class CtrActionDetails {
                     playerSalesOrderList.add(salesOrder);
                 }
             });
-            JOptionPane.showMessageDialog(frmActionDetails, playerSalesOrderList,
+            JScrollPane js = new JScrollPane(new JTextArea(playerSalesOrderList.toString()));
+            JOptionPane.showMessageDialog(frmActionDetails, js,
                     "Ordens de Venda", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(frmActionDetails,

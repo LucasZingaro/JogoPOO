@@ -26,7 +26,12 @@ public class SalesOrder extends Order {
     /*Methods...*/
     @Override
     public String toString() {
-        return SalesOrder.class.getSimpleName() + super.toString();
+        return "\nOrdem de Venda: {"
+                + "\n Quantidade:" + getQuantity()
+                + "\n valor: R$ " + getValue()
+                + "\n Turno inicial:" + getStartTurn()
+                + "\n Turno final:" + getEndTurn()
+                + "\n}";
     }
 
     void trySell(Market market) {
