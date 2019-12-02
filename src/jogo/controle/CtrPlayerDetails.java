@@ -2,6 +2,7 @@ package jogo.controle;
 
 import javax.swing.JOptionPane;
 import jogo.Main;
+import jogo.Util;
 import jogo.visao.FrmLoansDetails;
 import jogo.visao.FrmPlayerDetails;
 
@@ -32,12 +33,64 @@ public class CtrPlayerDetails {
     }
 
     private void actionBtnAdicionarValorRF() {
+        double valorAdd = 0;
+        try {
+            valorAdd = Double.parseDouble(frmPlayerDetails.getTxtValorAdicionadoRF().getText());
+            valorAdd = Util.round(valorAdd, 2);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(frmLoansDetails, "Valor Inválido!!");
+            frmPlayerDetails.getTxtValorAdicionadoRF().setText("");
+            return;
+        }
+        double oldMoney = frmPlayerDetails.getPlayer().getMoney();
+
+        if (valorAdd > oldMoney) {
+            JOptionPane.showMessageDialog(frmLoansDetails, "Valor maior que o Saldo!!");
+            return;
+        }
         switch (JOptionPane.showConfirmDialog(frmPlayerDetails,
-                "Adicionando:" + frmPlayerDetails.getTxtValorAdicionadoRF().getText(),
+                "Adicionar: R$ " + valorAdd + " ?",
                 "Investimento Renda Fixa", JOptionPane.OK_CANCEL_OPTION)) {
 
             case JOptionPane.OK_OPTION:
+                double valorFI = frmPlayerDetails.getPlayer().getFixedIncome().getValue();
+                frmPlayerDetails.getPlayer().getFixedIncome().setValue(valorFI + valorAdd);
+                frmPlayerDetails.getPlayer().setMoney(oldMoney - valorAdd);
                 frmPlayerDetails.getTxtValorAdicionadoRF().setText("");
+                Main.reloadAllFrames();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void actionBtnRetirarValorRF() {
+        double valorRemover = 0;
+        try {
+            valorRemover = Double.parseDouble(frmPlayerDetails.getTxtValorRemovidoRF().getText());
+            valorRemover = Util.round(valorRemover, 2);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(frmLoansDetails, "Valor Inválido!!");
+            frmPlayerDetails.getTxtValorRemovidoRF().setText("");
+            return;
+        }
+        double valorRF = frmPlayerDetails.getPlayer().getFixedIncome().getValue();
+
+        if (valorRemover > valorRF) {
+            JOptionPane.showMessageDialog(frmLoansDetails, "Valor maior que o Investido!!");
+            return;
+        }
+
+        switch (JOptionPane.showConfirmDialog(frmPlayerDetails,
+                "Remover: R$ " + valorRemover + " ?",
+                "Recuperação Renda Fixa", JOptionPane.OK_CANCEL_OPTION)) {
+
+            case JOptionPane.OK_OPTION:
+                double oldMoney = frmPlayerDetails.getPlayer().getMoney();
+                frmPlayerDetails.getPlayer().getFixedIncome().setValue(valorRF - valorRemover);
+                frmPlayerDetails.getPlayer().setMoney(oldMoney + valorRemover);
+                frmPlayerDetails.getTxtValorRemovidoRF().setText("");
+                Main.reloadAllFrames();
                 break;
             default:
                 break;
@@ -52,19 +105,6 @@ public class CtrPlayerDetails {
         }
         frmLoansDetails.setVisible(true);
         frmLoansDetails.requestFocus();
-    }
-
-    private void actionBtnRetirarValorRF() {
-        switch (JOptionPane.showConfirmDialog(frmPlayerDetails,
-                "Removendo:" + frmPlayerDetails.getTxtValorRemovidoRF().getText(),
-                "Recuperação Renda Fixa", JOptionPane.OK_CANCEL_OPTION)) {
-
-            case JOptionPane.OK_OPTION:
-                frmPlayerDetails.getTxtValorAdicionadoRF().setText("");
-                break;
-            default:
-                break;
-        }
     }
 
     public void reloadComponents() {
