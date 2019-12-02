@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 import jogo.Config;
 import jogo.Main;
 import jogo.Util;
@@ -20,23 +21,63 @@ import jogo.visao.FrmActionDetails;
 public class CtrActionDetails {
 
     FrmActionDetails frmActionDetails;
+    DefaultTableModel tbAcoesCompraTM;
+    DefaultTableModel tbAcoesVEndaTM;
 
     public CtrActionDetails(FrmActionDetails frmActionDetails) {
         this.frmActionDetails = frmActionDetails;
         Main.frmActionDetails = frmActionDetails;
         addActionListeners();
+        startTables();
     }
 
     /**
      * Adiciona os listadores de Ações
      */
     private void addActionListeners() {
-        frmActionDetails.getTbAcoesCompra();
-        frmActionDetails.getTbAcoesVenda();
-
         frmActionDetails.getBtnOrdens().addActionListener(e -> actionBtnOrdens());
         frmActionDetails.getBtnComprar().addActionListener(e -> actionBtnComprar());
         frmActionDetails.getBtnVender().addActionListener(e -> actionBtnVender());
+    }
+
+    private void startTables() {
+        String columnsNames[] = {"Quantidades", "Valor"};
+        tbAcoesCompraTM = new DefaultTableModel(columnsNames, 0);
+        frmActionDetails.getTbAcoesCompra().setModel(tbAcoesCompraTM);
+        reloadTbAcoesCompra();
+        tbAcoesVEndaTM = new DefaultTableModel(columnsNames, 0);
+        frmActionDetails.getTbAcoesVenda().setModel(tbAcoesVEndaTM);
+        reloadTbAcoesVenda();
+    }
+
+    private void reloadTbAcoesCompra() {
+        for (int i = 0; i < tbAcoesCompraTM.getRowCount(); i++) {
+            tbAcoesCompraTM.removeRow(i);
+        }
+        frmActionDetails.getAction().getPurchaseOrderList().forEach((PurchaseOrder po) -> {
+            if (!po.isIsFromPlayer()) {
+                tbAcoesCompraTM.addRow(new Object[]{
+                    po.getQuantity(), po.getValue()}
+                );
+            }
+        });
+
+        tbAcoesCompraTM.fireTableDataChanged();
+    }
+
+    private void reloadTbAcoesVenda() {
+        for (int i = 0; i < tbAcoesVEndaTM.getRowCount(); i++) {
+            tbAcoesVEndaTM.removeRow(i);
+        }
+        frmActionDetails.getAction().getSalesOrderList().forEach((SalesOrder so) -> {
+            if (!so.isIsFromPlayer()) {
+                tbAcoesVEndaTM.addRow(new Object[]{
+                    so.getQuantity(), so.getValue()}
+                );
+            }
+        });
+
+        tbAcoesVEndaTM.fireTableDataChanged();
     }
 
     public void reloadComponents() {
@@ -63,6 +104,15 @@ public class CtrActionDetails {
         frmActionDetails.getLblVariacaoValor()
                 .setText(String.valueOf(frmActionDetails
                         .getAction().getVariation()) + "%");
+        try {
+            reloadTbAcoesCompra();
+        } catch (Exception e) {
+        }
+
+        try {
+            reloadTbAcoesVenda();
+        } catch (Exception e) {
+        }
     }
 
     private void actionBtnOrdens() {
