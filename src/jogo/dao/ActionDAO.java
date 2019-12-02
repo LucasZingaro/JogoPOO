@@ -57,8 +57,6 @@ public class ActionDAO {
         rs = stm.getGeneratedKeys();
         rs.next();
 
-        InserirValueHistory(obj.getValueHistory(), rs.getInt(1));
-        InserirVariationHistory(obj.getVariationHistory(), rs.getInt(1));
         InserirPurchaseOrderList(obj);
         InserirSalesOrderList(obj);
 
@@ -71,15 +69,17 @@ public class ActionDAO {
     }
 
     public void alterar(Action obj) throws SQLException {
-        String sql = "update Action set Name=?, Status = ?,MarketQuantity=?, PlayerQuantity=?"
+        String sql = "update Action set Name = ?, Status = ?, value = ?,variation = ?, MarketQuantity=?, PlayerQuantity=?"
                 + "where id=?";
 
         stm = con.prepareStatement(sql);
         stm.setString(1, obj.getName());
         stm.setString(2, obj.getStatus().toString());
-        stm.setDouble(3, obj.getMarketQuantity());
-        stm.setDouble(4, obj.getPlayerQuantity());
-        stm.setInt(5, obj.getId());
+        stm.setDouble(3, obj.getValue());
+        stm.setDouble(4, obj.getVariation());
+        stm.setDouble(5, obj.getMarketQuantity());
+        stm.setDouble(6, obj.getPlayerQuantity());
+        stm.setInt(7, obj.getId());
 
         stm.executeUpdate();
 
@@ -106,8 +106,8 @@ public class ActionDAO {
 
             while (rs.next()) {
                 actions.add(new Action(rs.getInt(2), rs.getString(3), StatusEnum.parseStatusEnum(rs.getString(4)),
-                        ListValueHistory(rs.getInt(2)), ListVariationHistory(rs.getInt(2)), rs.getDouble(5),
-                        rs.getDouble(6), ListPurchaseOrder(rs.getInt(2)), ListSalesOrder(rs.getInt(2))));
+                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getDouble(8),
+                        ListPurchaseOrder(rs.getInt(2)), ListSalesOrder(rs.getInt(2))));
             }
             return actions;
         } catch (SQLException e) {
@@ -121,92 +121,6 @@ public class ActionDAO {
             alterar(listGame.get(j));
             alterarPurchaseOrderList(listGame.get(j).getPurchaseOrderList(), listGame.get(j).getId());
             alterarSalesOrderList(listGame.get(j).getSalesOrderList(), listGame.get(j).getId());
-            alterarValueHistoryList(listGame.get(j).getValueHistory(), listGame.get(j).getId());
-            alterarVariationHistory(listGame.get(j).getVariationHistory(), listGame.get(j).getId());
-        }
-    }
-
-    //ValueHistory
-    private void InserirValueHistory(ArrayList<Double> list, int id) throws SQLException {
-        String sql = "Insert into ValueHistory (idAction, Value)"
-                + "values (?, ?)";
-        stm = con.prepareStatement(sql);
-        for (int i = 0; i < list.size(); i++) {
-            stm.setInt(1, id);
-            stm.setDouble(2, list.get(i));
-            stm.executeUpdate();
-        }
-
-    }
-
-    private void alterarValueHistoryList(ArrayList<Double> listGame, int id) throws SQLException {
-        ArrayList<Double> listDB = ListValueHistory(id);
-        int listDBsize = listDB.size();
-        ArrayList<Double> insert = new ArrayList<>();
-        for (int i = listDBsize; i < listGame.size(); i++) {
-            insert.add(listGame.get(i));
-        }
-        InserirValueHistory(insert, id);
-    }
-
-    private ArrayList<Double> ListValueHistory(int idAction) throws SQLException {
-        try {
-            ArrayList<Double> history = new ArrayList<Double>();
-
-            String sql = "SELECT * FROM ValueHistory WHERE idAction = ?";
-
-            stm = con.prepareStatement(sql);
-            stm.setInt(1, idAction);
-            rs = stm.executeQuery();
-
-            while (rs.next()) {
-                history.add(rs.getDouble(3));
-            }
-            return history;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-
-    //variationHistory
-    private void InserirVariationHistory(ArrayList<Double> list, int id) throws SQLException {
-        String sql = "Insert into VariationHistory (idAction, Value)"
-                + "values (?, ?)";
-        stm = con.prepareStatement(sql);
-        for (int i = 0; i < list.size(); i++) {
-            stm.setInt(1, id);
-            stm.setDouble(2, list.get(i));
-            stm.executeUpdate();
-        }
-
-    }
-
-    private void alterarVariationHistory(ArrayList<Double> listGame, int id) throws SQLException {
-        ArrayList<Double> listDB = ListVariationHistory(id);
-        int listDBsize = listDB.size();
-        ArrayList<Double> insert = new ArrayList<>();
-        for (int i = listDBsize; i < listGame.size(); i++) {
-            insert.add(listGame.get(i));
-        }
-        InserirVariationHistory(insert, id);
-    }
-
-    private ArrayList<Double> ListVariationHistory(int idAction) throws SQLException {
-        try {
-            ArrayList<Double> history = new ArrayList<Double>();
-
-            String sql = "SELECT * FROM VariationHistory WHERE idAction = ?";
-
-            stm = con.prepareStatement(sql);
-            stm.setInt(1, idAction);
-            rs = stm.executeQuery();
-
-            while (rs.next()) {
-                history.add(rs.getDouble(3));
-            }
-            return history;
-        } catch (SQLException e) {
-            return null;
         }
     }
 

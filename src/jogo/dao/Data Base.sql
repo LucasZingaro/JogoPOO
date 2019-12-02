@@ -105,7 +105,6 @@ CREATE TABLE Player(
     PRIMARY KEY (idMatch)
 );
 
-
 /*CREATE TABLE FixedIncome(
 	idMatch INT NOT NULL,
     value FLOAT NULL

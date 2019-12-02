@@ -92,21 +92,19 @@ public class CtrSaveRecovery {
             Game loadGame = gamedao.localizarGame(id);
             System.out.println(loadGame);
 
-            //Criando o jogo
-            /*Main.game = loadGame;
-            FrmMainGame frmMainGame = new FrmMainGame();
+            //GameCarregando
+            Main.game = new Game(new Player("Carregando..."));
 
+            FrmMainGame frmMainGame = new FrmMainGame();
             //display loading
             new FrmLoading().getListeners().runLoadingJFrame(frmMainGame);
 
-            //Carrega o jogo
+            //buscando o jogo
+            Main.game = loadGame;
             frmMainGame.setGame(Main.game);
             frmMainGame.getListeners().reloadComponents();
+            frmNewGame.dispose();
 
-            //Montrar introdução(se tiver)
-            //frmMainGame.setVisible(true); //Já feito pelo Loading
-            frmNewGame.dispose();*/
-            
         } catch (SQLException ex) {
             Logger.getLogger(CtrSaveRecovery.class.getName()).log(Level.SEVERE, null, ex);
         }
