@@ -219,13 +219,13 @@ public class Market {
     }
 
     public static float generateInflation() {
-        return Float.parseFloat(String.valueOf(Util.generateValue(0.5, 20)));
+        return Float.parseFloat(String.valueOf(Util.generateValue(0.6, 20)));
 
     }
 
     public static float generateInflation(float inflation) {
         String s = String.valueOf(
-                ((generateInflation() * generateInflation()) % (inflation * 2.5) + 0.01)
+                ((generateInflation() * generateInflation()) % (inflation * 2) + 0.01)
         );
         Util.tryCutString(s, 0, 10);
         return Float.parseFloat(s);
@@ -233,7 +233,7 @@ public class Market {
 
     public static float generateSelic(float inflation) {
         String s = String.valueOf(
-                (inflation + 1 + (Util.multGenerateValue(0.5, 20.0, 256)))
+                (inflation + 0.01 + (Util.multGenerateValue(0.5, 5.0, 30)))
         );
         Util.tryCutString(s, 0, 10);
         return Float.parseFloat(s);

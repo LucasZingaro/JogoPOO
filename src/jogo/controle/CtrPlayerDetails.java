@@ -112,7 +112,7 @@ public class CtrPlayerDetails {
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().calcDespesas(Main.game)));
         double selic = Main.game.getMarket().getSelic();
         frmPlayerDetails.getPlayer().getFixedIncome().setInterest(selic);
-        frmPlayerDetails.getLblJurosValor().setText(selic+"%");
+        frmPlayerDetails.getLblJurosValor().setText(Util.round(selic, 2) + "%");
 
         frmPlayerDetails.getLblNomeValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().getName()));
