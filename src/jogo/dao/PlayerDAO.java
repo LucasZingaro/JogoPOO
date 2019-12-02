@@ -19,7 +19,7 @@ public class PlayerDAO implements IDAO<Player> {
     private ResultSet rs;
 
     //contrutor para conexão com o DB
-    public PlayerDAO () {
+    public PlayerDAO() {
         dao = new ConnectionFactory();
         try {
             con = dao.getConnection();
@@ -37,13 +37,13 @@ public class PlayerDAO implements IDAO<Player> {
             System.err.println("Erro");
         }
     }
-    
+
     @Override
-    public void inserir(Player obj) throws SQLException {
+    public void inserir(Player obj, int id) throws SQLException {
         String sql = "Insert into Player (idMatch, name, Money, Income)"
                 + "values (?, ?, ?, ?)";
         stm = con.prepareStatement(sql);
-        stm.setInt(1, obj.getId());
+        stm.setInt(1, id);
         stm.setString(2, obj.getName());
         stm.setDouble(3, obj.getMoney());
         stm.setDouble(4, obj.getFixedIncome().getValue());
@@ -53,13 +53,12 @@ public class PlayerDAO implements IDAO<Player> {
 
     @Override
     public void alterar(Player obj) throws SQLException {
-        String sql = "update Player set idMatch = ?, name = ?, Money = ?, Income = ? WHERE idMatch = ?";
+        String sql = "update Player set name = ?, Money = ?, Income = ? WHERE idMatch = ?";
         stm = con.prepareStatement(sql);
-        stm.setInt(1, obj.getId());
-        stm.setString(2, obj.getName());
-        stm.setDouble(3, obj.getMoney());
-        stm.setDouble(4, obj.getFixedIncome().getValue());
-        stm.setInt(5, obj.getId());
+        stm.setString(1, obj.getName());
+        stm.setDouble(2, obj.getMoney());
+        stm.setDouble(3, obj.getFixedIncome().getValue());
+        stm.setInt(4, obj.getId());
 
         stm.executeUpdate();
 
@@ -75,19 +74,21 @@ public class PlayerDAO implements IDAO<Player> {
     }
 
     public Player LocalizarPlayer(int id) throws SQLException {
+        try {
+            String sql = "SELECT * from Player where idMatch = ?";
 
-        String sql = "SELECT * from Player where idMatch = ?";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs = stm.executeQuery();
+            rs.next();
 
-        rs.next();
-        
-        LoanDAO loan = new LoanDAO();
-        
-        Player player = new Player(rs.getInt(1), rs.getString(2), rs.getDouble(3),loan.ListarLoan(id), new FixedIncome(rs.getInt(1),rs.getDouble(4)));
-        return player;
-        
+            LoanDAO loan = new LoanDAO();
+
+            Player player = new Player(rs.getInt(1), rs.getString(2), rs.getDouble(3), loan.ListarLoan(id), new FixedIncome(rs.getInt(1), rs.getDouble(4)));
+            return player;
+        } catch (SQLException e) {
+            return null;
+        }
     }
 }

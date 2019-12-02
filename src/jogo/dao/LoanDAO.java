@@ -40,16 +40,31 @@ public class LoanDAO implements IDAO<Loan> {
     }
 
     @Override
-    public void inserir(Loan obj) throws SQLException {
+    public void inserir(Loan obj, int id) throws SQLException {
         String sql = "Insert into Loan (idMatch, Value, Interest, StartTurn)"
                 + "values (?, ?, ?, ?)";
         stm = con.prepareStatement(sql);
-        stm.setInt(1, obj.getId());
+        stm.setInt(1, id);
         stm.setDouble(2, obj.getValue());
         stm.setDouble(3, obj.getInterest());
         stm.setInt(4, obj.getStartTurn());
 
         stm.executeUpdate();
+    }
+
+    public void inserir(ArrayList<Loan> list, int id) throws SQLException {
+        for (Loan obj : list) {
+
+            String sql = "Insert into Loan (idMatch, Value, Interest, StartTurn)"
+                    + "values (?, ?, ?, ?)";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.setDouble(2, obj.getValue());
+            stm.setDouble(3, obj.getInterest());
+            stm.setInt(4, obj.getStartTurn());
+
+            stm.executeUpdate();
+        }
     }
 
     @Override
@@ -75,33 +90,39 @@ public class LoanDAO implements IDAO<Loan> {
     }
 
     public ArrayList<Loan> ListarLoan(int id) throws SQLException {
-        ArrayList<Loan> loans = new ArrayList<Loan>();
+        try {
+            ArrayList<Loan> loans = new ArrayList<Loan>();
 
-        String sql = "SELECT * FROM Loan WHERE idMatch = ?";
+            String sql = "SELECT * FROM Loan WHERE idMatch = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            loans.add(new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5)));
+            while (rs.next()) {
+                loans.add(new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5)));
+            }
+            return loans;
+        } catch (SQLException e) {
+            return null;
         }
-        return loans;
-
     }
 
     public Loan LocalizarLoan(int id) throws SQLException {
-        String sql = "SELECT * from Loan where idMatch = ?";
+        try {
+            String sql = "SELECT * from Loan where idMatch = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
 
-        rs.next();
+            rs.next();
 
-        Loan loan = new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5));
-        return loan;
 
+            Loan loan = new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5));
+            return loan;
+        } catch (SQLException e) {
+            return null;
+        }
     }
-
 }

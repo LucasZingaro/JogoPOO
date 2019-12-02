@@ -59,6 +59,27 @@ public class ActionDAO {
         InserirSalesOrderList(obj);
     }
 
+    public void inserir(ArrayList<Action> list, int idMatch) throws SQLException {
+        for (Action obj : list) {
+
+            String sql = "Insert into Action (idMatch, Name, MarketQuantity, PlayerQuantity)"
+                    + "values (?, ?, ?, ?)";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, idMatch);
+            stm.setString(2, obj.getName());
+            stm.setDouble(3, obj.getMarketQuantity());
+            stm.setDouble(4, obj.getPlayerQuantity());
+
+            stm.executeUpdate();
+
+            InserirValueHistory(obj);
+            InserirVariationHistory(obj);
+            InserirPurchaseOrderList(obj);
+            InserirSalesOrderList(obj);
+
+        }
+    }
+
     public void alterar(Action obj) throws SQLException {
         String sql = "update Action set Name=?, Status = ?,MarketQuantity=?, PlayerQuantity=?"
                 + "where id=?";
@@ -84,22 +105,26 @@ public class ActionDAO {
     }
 
     public ArrayList<Action> listaActions() throws SQLException {
-        ArrayList<Action> actions = new ArrayList<Action>();
+        try {
+            ArrayList<Action> actions = new ArrayList<Action>();
 
-        String sql = "SELECT * FROM Action";
+            String sql = "SELECT * FROM Action";
 
-        stm = con.prepareStatement(sql);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            actions.add(new Action(rs.getInt(2), rs.getString(3), StatusEnum.parseStatusEnum(rs.getString(4)),
-                    ListValueHistory(rs.getInt(2)), ListVariationHistory(rs.getInt(2)), rs.getDouble(5),
-                    rs.getDouble(6), ListPurchaseOrder(rs.getInt(2)), ListSalesOrder(rs.getInt(2))));
+            while (rs.next()) {
+                actions.add(new Action(rs.getInt(2), rs.getString(3), StatusEnum.parseStatusEnum(rs.getString(4)),
+                        ListValueHistory(rs.getInt(2)), ListVariationHistory(rs.getInt(2)), rs.getDouble(5),
+                        rs.getDouble(6), ListPurchaseOrder(rs.getInt(2)), ListSalesOrder(rs.getInt(2))));
+            }
+            return actions;
+        } catch (SQLException e) {
+            return null;
         }
-        return actions;
     }
-
     //ValueHistory
+
     private void InserirValueHistory(Action action) throws SQLException {
         String sql = "Insert into ValueHistory (idAction, Value)"
                 + "values (?, ?)";
@@ -113,18 +138,22 @@ public class ActionDAO {
     }
 
     private ArrayList<Double> ListValueHistory(int idAction) throws SQLException {
-        ArrayList<Double> history = new ArrayList<Double>();
+        try {
+            ArrayList<Double> history = new ArrayList<Double>();
 
-        String sql = "SELECT * FROM ValueHistory WHERE idAction = ?";
+            String sql = "SELECT * FROM ValueHistory WHERE idAction = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, idAction);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, idAction);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            history.add(rs.getDouble(3));
+            while (rs.next()) {
+                history.add(rs.getDouble(3));
+            }
+            return history;
+        } catch (SQLException e) {
+            return null;
         }
-        return history;
     }
 
     //variationHistory
@@ -141,18 +170,22 @@ public class ActionDAO {
     }
 
     private ArrayList<Double> ListVariationHistory(int idAction) throws SQLException {
-        ArrayList<Double> history = new ArrayList<Double>();
+        try {
+            ArrayList<Double> history = new ArrayList<Double>();
 
-        String sql = "SELECT * FROM VariationHistory WHERE idAction = ?";
+            String sql = "SELECT * FROM VariationHistory WHERE idAction = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, idAction);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, idAction);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            history.add(rs.getDouble(3));
+            while (rs.next()) {
+                history.add(rs.getDouble(3));
+            }
+            return history;
+        } catch (SQLException e) {
+            return null;
         }
-        return history;
     }
 
     //PurchaseOrderList
@@ -234,18 +267,22 @@ public class ActionDAO {
     }
 
     private ArrayList<PurchaseOrder> ListPurchaseOrder(int idAction) throws SQLException {
-        ArrayList<PurchaseOrder> List = new ArrayList<PurchaseOrder>();
+        try {
+            ArrayList<PurchaseOrder> List = new ArrayList<PurchaseOrder>();
 
-        String sql = "SELECT * FROM PurchaseOrderList WHERE idAction = ?";
+            String sql = "SELECT * FROM PurchaseOrderList WHERE idAction = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, idAction);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, idAction);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            List.add(new PurchaseOrder(rs.getInt(1), null, rs.getInt(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getBoolean(7)));
+            while (rs.next()) {
+                List.add(new PurchaseOrder(rs.getInt(1), null, rs.getInt(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getBoolean(7)));
+            }
+            return List;
+        } catch (SQLException e) {
+            return null;
         }
-        return List;
     }
 
     //SalesOrderList
@@ -311,18 +348,22 @@ public class ActionDAO {
     }
 
     private ArrayList<SalesOrder> ListSalesOrder(int idAction) throws SQLException {
-        ArrayList<SalesOrder> List = new ArrayList<SalesOrder>();
+        try {
+            ArrayList<SalesOrder> List = new ArrayList<SalesOrder>();
 
-        String sql = "SELECT * FROM SalesOrderList WHERE idAction = ?";
+            String sql = "SELECT * FROM SalesOrderList WHERE idAction = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, idAction);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, idAction);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            List.add(new SalesOrder(rs.getInt(1), null, rs.getInt(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getBoolean(7)));
+            while (rs.next()) {
+                List.add(new SalesOrder(rs.getInt(1), null, rs.getInt(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getBoolean(7)));
+            }
+            return List;
+        } catch (SQLException e) {
+            return null;
         }
-        return List;
     }
 
 }

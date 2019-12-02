@@ -8,6 +8,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import jogo.Config;
 
+
 /**
  * Classe para manipulação de conexões com o banco de dados
  *

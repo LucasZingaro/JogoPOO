@@ -41,11 +41,11 @@ public class MarketDAO implements IDAO<Market> {
     }
 
     @Override
-    public void inserir(Market obj) throws SQLException {
+    public void inserir(Market obj, int id) throws SQLException {
         String sql = "Insert into Market (idMatch, Status)"
                 + "values (?, ?)";
         stm = con.prepareStatement(sql);
-        stm.setInt(1, obj.getId());
+        stm.setInt(1, id);
         stm.setString(2, obj.getStatus().toString());
 
         stm.executeUpdate();
@@ -78,20 +78,23 @@ public class MarketDAO implements IDAO<Market> {
     }
 
     public Market localizarMarket(int id) throws SQLException {
+        try {
+            String sql = "SELECT * from Market where idMatch = ?";
 
-        String sql = "SELECT * from Market where idMatch = ?";
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs = stm.executeQuery();
+            rs.next();
 
-        rs.next();
+            ActionDAO action = new ActionDAO();
 
-        ActionDAO action = new ActionDAO();
 
-        Market market = new Market(rs.getInt(1), inflationHistoryList(id), cdiHistoryList(id), selicHistoryList(id), StatusEnum.parseStatusEnum(rs.getString(2)), action.listaActions());
-        return market;
-
+            Market market = new Market(rs.getInt(1), inflationHistoryList(id), cdiHistoryList(id), selicHistoryList(id), StatusEnum.parseStatusEnum(rs.getString(2)), action.listaActions());
+            return market;
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
     //inflationHistory
@@ -116,18 +119,22 @@ public class MarketDAO implements IDAO<Market> {
     }
 
     private ArrayList<Float> inflationHistoryList(int id) throws SQLException {
-        ArrayList<Float> History = new ArrayList<Float>();
+        try {
+            ArrayList<Float> History = new ArrayList<Float>();
 
-        String sql = "SELECT * FROM historyList WHERE idMatch = ?";
+            String sql = "SELECT * FROM historyList WHERE idMatch = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            History.add(rs.getFloat(2));
+            while (rs.next()) {
+                History.add(rs.getFloat(2));
+            }
+            return History;
+        } catch (SQLException e) {
+            return null;
         }
-        return History;
     }
 
     /*private void alterarInflationHistory(Market obj) throws SQLException {
@@ -163,18 +170,22 @@ public class MarketDAO implements IDAO<Market> {
     }
 
     private ArrayList<Float> cdiHistoryList(int id) throws SQLException {
-        ArrayList<Float> History = new ArrayList<Float>();
+        try {
+            ArrayList<Float> History = new ArrayList<Float>();
 
-        String sql = "SELECT * FROM cdiHistory WHERE idMatch = ?";
+            String sql = "SELECT * FROM cdiHistory WHERE idMatch = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            History.add(rs.getFloat(2));
+            while (rs.next()) {
+                History.add(rs.getFloat(2));
+            }
+            return History;
+        } catch (SQLException e) {
+            return null;
         }
-        return History;
     }
 
     //selicHistory
@@ -199,17 +210,21 @@ public class MarketDAO implements IDAO<Market> {
     }
 
     private ArrayList<Float> selicHistoryList(int id) throws SQLException {
-        ArrayList<Float> History = new ArrayList<Float>();
+        try {
+            ArrayList<Float> History = new ArrayList<Float>();
 
-        String sql = "SELECT * FROM selicHistory WHERE idMatch = ?";
+            String sql = "SELECT * FROM selicHistory WHERE idMatch = ?";
 
-        stm = con.prepareStatement(sql);
-        stm.setInt(1, id);
-        rs = stm.executeQuery();
+            stm = con.prepareStatement(sql);
+            stm.setInt(1, id);
+            rs = stm.executeQuery();
 
-        while (rs.next()) {
-            History.add(rs.getFloat(2));
+            while (rs.next()) {
+                History.add(rs.getFloat(2));
+            }
+            return History;
+        } catch (SQLException e) {
+            return null;
         }
-        return History;
     }
 }
