@@ -2,6 +2,7 @@ package jogo;
 
 import java.sql.SQLException;
 import javax.swing.JFrame;
+import jogo.dao.ConnectionFactory;
 import jogo.modelo.Game;
 import jogo.visao.FrmActionDetails;
 import jogo.visao.FrmLoading;
@@ -35,7 +36,7 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
-        
+        System.out.println(ConnectionFactory.tryConnection());
         
         Main.frmStart = new FrmStart();
         Main.frmLoading = new FrmLoading();

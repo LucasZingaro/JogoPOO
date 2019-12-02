@@ -43,20 +43,22 @@ public class ActionDAO {
     }
 
     public void inserir(Action obj, int idMatch) throws SQLException {
-        String sql = "Insert into Action (idMatch, Name, Status, MarketQuantity, PlayerQuantity)"
-                + "values (?, ?, ?, ? ,?)";
+        String sql = "Insert into Action (idMatch, Name, Status, value, variation, MarketQuantity, PlayerQuantity)"
+                + "values (?, ?, ?, ?, ?, ?, ?)";
         stm = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         stm.setInt(1, idMatch);
         stm.setString(2, obj.getName());
         stm.setString(3, obj.getStatus().toString());
-        stm.setDouble(4, obj.getMarketQuantity());
-        stm.setDouble(5, obj.getPlayerQuantity());
+        stm.setDouble(4, obj.getValue());
+        stm.setDouble(5, obj.getVariation());
+        stm.setDouble(6, obj.getMarketQuantity());
+        stm.setDouble(7, obj.getPlayerQuantity());
 
         stm.executeUpdate();
 
         rs = stm.getGeneratedKeys();
         rs.next();
-
+        obj.setId(rs.getInt(1));
         InserirPurchaseOrderList(obj);
         InserirSalesOrderList(obj);
 
@@ -69,8 +71,8 @@ public class ActionDAO {
     }
 
     public void alterar(Action obj) throws SQLException {
-        String sql = "update Action set Name = ?, Status = ?, value = ?,variation = ?, MarketQuantity=?, PlayerQuantity=?"
-                + "where id=?";
+        String sql = "update Action set Name = ?, Status = ?, value = ?,variation = ?, MarketQuantity = ?, PlayerQuantity = ?"
+                + "where idAction=?";
 
         stm = con.prepareStatement(sql);
         stm.setString(1, obj.getName());
@@ -86,7 +88,7 @@ public class ActionDAO {
     }
 
     public void excluir(Action obj) throws SQLException {
-        String sql = "DELETE FROM Action where codigo=?";
+        String sql = "DELETE FROM Action where idAction=?";
         stm = con.prepareStatement(sql);
         stm.setInt(1, obj.getId());
 
@@ -102,37 +104,39 @@ public class ActionDAO {
 
             stm = con.prepareStatement(sql);
             stm.setInt(1, id);
-            rs = stm.executeQuery();
-
-            while (rs.next()) {
-                actions.add(new Action(rs.getInt(2), rs.getString(3), StatusEnum.parseStatusEnum(rs.getString(4)),
-                        rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getDouble(8),
-                        ListPurchaseOrder(rs.getInt(2)), ListSalesOrder(rs.getInt(2))));
+            ResultSet r;
+            r = stm.executeQuery();
+            int idAction;
+            while (r.next()) {
+                idAction = r.getInt(2);
+                actions.add(new Action(idAction, r.getString(3), StatusEnum.parseStatusEnum(r.getString(4)),
+                        r.getDouble(5), r.getDouble(6), r.getDouble(7), r.getDouble(8),
+                        ListPurchaseOrder(idAction), ListSalesOrder(idAction)));
             }
+            //System.out.println(actions);
             return actions;
         } catch (SQLException e) {
+            System.err.println(e.getMessage());
             return null;
         }
     }
 
-    public void save(ArrayList<Action> listGame, int id) throws SQLException {
-        ArrayList<Action> listDB = listaActions(id);
+    public void saveAlter(ArrayList<Action> listGame) throws SQLException {
         for (int j = 0; j < listGame.size(); j++) {
             alterar(listGame.get(j));
-            alterarPurchaseOrderList(listGame.get(j).getPurchaseOrderList(), listGame.get(j).getId());
-            alterarSalesOrderList(listGame.get(j).getSalesOrderList(), listGame.get(j).getId());
         }
+        /*alterarPurchaseOrderList(listGame.get(j).getPurchaseOrderList(), listGame.get(j).getId());
+        alterarSalesOrderList(listGame.get(j).getSalesOrderList(), listGame.get(j).getId());*/
     }
-
+    
     //PurchaseOrderList
     private void InserirPurchaseOrderList(Action action) throws SQLException {
         for (int i = 0; i < action.getPurchaseOrderList().size(); i++) {
-            InserirPurchaseOrder(action.getPurchaseOrderList().get(i));
+            InserirPurchaseOrder(action.getPurchaseOrderList().get(i), action.getId());
         }
-
     }
 
-    private void InserirPurchaseOrder(PurchaseOrder obj) throws SQLException {
+    private void InserirPurchaseOrder(PurchaseOrder obj, int id) throws SQLException {
         String sql = "Insert into PurchaseOrderList (idAction, Quantity, Value, StartTurn, EndTurn, IsFromPlayer)"
                 + "values (?, ?, ?, ?, ?, ?)";
         stm = con.prepareStatement(sql);
@@ -154,7 +158,7 @@ public class ActionDAO {
             }
             for (int j = 0; j < listGame.size(); j++) {
                 if (listGame.get(j).getId() == 0) {
-                    InserirPurchaseOrder(listGame.get(j));
+                    InserirPurchaseOrder(listGame.get(j), idAction);
                 } else {
                     alterarPurchaseOrder(listGame.get(j), idAction);
                 }
@@ -208,12 +212,12 @@ public class ActionDAO {
     //SalesOrderList
     private void InserirSalesOrderList(Action action) throws SQLException {
         for (int i = 0; i < action.getSalesOrderList().size(); i++) {
-            InserirSalesOrder(action.getSalesOrderList().get(i));
+            InserirSalesOrder(action.getSalesOrderList().get(i), action.getId());
         }
 
     }
 
-    private void InserirSalesOrder(SalesOrder obj) throws SQLException {
+    private void InserirSalesOrder(SalesOrder obj, int id) throws SQLException {
         String sql = "Insert into SalesOrderList (idAction, Quantity, Value, StartTurn, EndTurn, IsFromPlayer)"
                 + "values (?, ?, ?, ?, ?, ?)";
         stm = con.prepareStatement(sql);
@@ -235,7 +239,7 @@ public class ActionDAO {
             }
             for (int j = 0; j < listGame.size(); j++) {
                 if (listGame.get(j).getId() == 0) {
-                    InserirSalesOrder(listGame.get(j));
+                    InserirSalesOrder(listGame.get(j), idAction);
                 } else {
                     alterarSalesOrder(listGame.get(j), idAction);
                 }

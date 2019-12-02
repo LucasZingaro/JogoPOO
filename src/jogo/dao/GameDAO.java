@@ -25,7 +25,7 @@ public class GameDAO {
         try {
             con = dao.getConnection();
         } catch (SQLException e) {
-            System.err.println("Erro de Conexão");
+            System.err.println("Erro de Conexão"+ e.getMessage());
         }
     }
 
@@ -63,9 +63,6 @@ public class GameDAO {
 
         ActionDAO action = new ActionDAO();
         action.inserir(obj.getMarket().getMarketListActions(), id);
-
-        LoanDAO loan = new LoanDAO();
-        loan.inserir(obj.getPlayer().getLoanList(), id);
 
     }
 

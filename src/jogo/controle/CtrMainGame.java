@@ -226,8 +226,8 @@ public class CtrMainGame {
 
     public void reloadTableAcoes() {
         //recarregar tabela com dados
-
         tabelaAcoesTableModel.limpar();
+        
         Main.game.getMarket().getMarketListActions().forEach((Action a) -> {
             tabelaAcoesTableModel.addAcao(a);
         });

@@ -43,7 +43,7 @@ public class MarketDAO implements IDAO<Market> {
     @Override
     public void inserir(Market obj, int id) throws SQLException {
         String sql = "Insert into Market (idMatch, inflation, cdi, selic, Status)"
-                + "values (?, ?)";
+                + "values (?, ?, ?, ?, ?)";
         stm = con.prepareStatement(sql);
         stm.setInt(1, id);
         stm.setFloat(2, obj.getInflation());
@@ -78,7 +78,7 @@ public class MarketDAO implements IDAO<Market> {
     }
 
     public Market localizarMarket(int id) throws SQLException {
-        //try {
+        try {
             String sql = "SELECT * from Market where idMatch = ?";
 
             stm = con.prepareStatement(sql);
@@ -88,15 +88,12 @@ public class MarketDAO implements IDAO<Market> {
             rs.next();
 
             ActionDAO action = new ActionDAO();
-
-
             Market market = new Market(rs.getInt(1), rs.getFloat(2),rs.getFloat(3),rs.getFloat(4),StatusEnum.parseStatusEnum(rs.getString(5)), action.listaActions(id));
-            System.out.println(market);
             return market;
-        /*} catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e);
             return null;
-        }*/
+        }
     }
 }
 

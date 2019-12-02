@@ -90,7 +90,6 @@ public class CtrSaveRecovery {
         GameDAO gamedao = new GameDAO();
         try {
             Game loadGame = gamedao.localizarGame(id);
-            System.out.println(loadGame);
 
             //GameCarregando
             Main.game = new Game(new Player("Carregando..."));
@@ -103,7 +102,7 @@ public class CtrSaveRecovery {
             Main.game = loadGame;
             frmMainGame.setGame(Main.game);
             frmMainGame.getListeners().reloadComponents();
-            frmNewGame.dispose();
+            //frmNewGame.dispose();
 
         } catch (SQLException ex) {
             Logger.getLogger(CtrSaveRecovery.class.getName()).log(Level.SEVERE, null, ex);
