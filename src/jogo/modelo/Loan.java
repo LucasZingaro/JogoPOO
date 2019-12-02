@@ -1,5 +1,7 @@
 package jogo.modelo;
 
+import jogo.Util;
+
 /**
  * Representa um empréstimo do jogador.
  */
@@ -62,7 +64,7 @@ public class Loan {
     }
 
     public void setValue(double value) {
-        this.value = value;
+        this.value = Util.round(value, 2);
     }
 
     public double getInterest() {

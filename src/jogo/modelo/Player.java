@@ -165,6 +165,22 @@ public class Player {
         this.setMoney(
                 getMoney() - this.calcDespesas(Main.game)
         );
+
+        //player->fixedIncome
+        double valueFI = this.getFixedIncome().getValue();
+
+        double interestFI = this.getFixedIncome().getInterest();
+        System.out.println("interestF=" + interestFI);
+        valueFI += (valueFI * (interestFI / 100));
+        this.getFixedIncome().setValue(valueFI);
+        System.out.println(valueFI);
+
+        //player->loans
+        this.getLoanList().forEach((Loan l) -> {
+            double valueL = l.getValue();
+            valueL += valueL * l.getInterest() / 100;
+            l.setValue(valueL);
+        });
     }
 
     @Override

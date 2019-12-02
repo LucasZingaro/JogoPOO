@@ -94,11 +94,11 @@ public class Market {
             ArrayList<Float> cdiHistory, float selic, ArrayList<Float> selicHistory,
             StatusEnum status, ArrayList<Action> marketListActions) {
 
-        this.inflation = inflation;
+        this.inflation = Util.round(inflation, 2);
         this.inflationHistory = inflationHistory;
-        this.cdi = cdi;
+        this.cdi = Util.round(cdi, 2);
         this.cdiHistory = cdiHistory;
-        this.selic = selic;
+        this.selic = Util.round(selic, 2);
         this.selicHistory = selicHistory;
         this.status = status;
         this.marketListActions = marketListActions;
@@ -114,15 +114,15 @@ public class Market {
     }
 
     public Market() {
-        this.inflation = Float.parseFloat("" + Util.round(Market.generateInflation(), 2));
+        this.inflation = Util.round(Market.generateInflation(), 2);
         this.inflationHistory = new ArrayList<>();
         this.inflationHistory.add(this.inflation);
 
-        this.selic = Float.parseFloat("" + Util.round(Market.generateSelic(this.inflation), 2));
+        this.selic = Util.round(Market.generateSelic(this.inflation), 2);
         this.selicHistory = new ArrayList<>();
         this.selicHistory.add(this.selic);
 
-        this.cdi = Float.parseFloat("" + Util.round(Market.calcCdi(selic), 2));
+        this.cdi = Util.round(Market.calcCdi(selic), 2);
         this.cdiHistory = new ArrayList<>();
         this.cdiHistory.add(this.cdi);
 
@@ -143,7 +143,7 @@ public class Market {
     }
 
     public void setInflation(float inflation) {
-        this.inflation = Float.parseFloat("" + Util.round(inflation, 2));
+        this.inflation = Util.round(inflation, 2);
         inflationHistory.add(this.getInflation());
     }
 
@@ -160,7 +160,7 @@ public class Market {
     }
 
     public void setCdi(float cdi) {
-        this.cdi = Float.parseFloat("" + Util.round(cdi, 2));
+        this.cdi = Util.round(cdi, 2);
         cdiHistory.add(this.getCdi());
     }
 
@@ -177,7 +177,7 @@ public class Market {
     }
 
     public void setSelic(float selic) {
-        this.selic = Float.parseFloat("" + Util.round(selic, 2));
+        this.selic = Util.round(selic, 2);
         selicHistory.add(this.getSelic());
     }
 
@@ -224,21 +224,27 @@ public class Market {
     }
 
     public static float generateInflation(float inflation) {
-        return Float.parseFloat(String.valueOf(
+        String s = String.valueOf(
                 ((generateInflation() * generateInflation()) % (inflation * 2.5) + 0.01)
-        ));
+        );
+        Util.tryCutString(s, 0, 10);
+        return Float.parseFloat(s);
     }
 
     public static float generateSelic(float inflation) {
-        return Float.parseFloat(String.valueOf(
+        String s = String.valueOf(
                 (inflation + 1 + (Util.multGenerateValue(0.5, 20.0, 256)))
-        ));
+        );
+        Util.tryCutString(s, 0, 10);
+        return Float.parseFloat(s);
     }
 
     public static float calcSelic(float inflation, float selic) {
-        return Float.parseFloat(String.valueOf(inflation + 1
+        String s = String.valueOf(inflation + 1
                 + ((Util.multGenerateValue(0.5, 20.0, 256)
-                + (selic - inflation - 1)) / (selic - inflation - 1))));
+                + (selic - inflation - 1)) / (selic - inflation - 1)));
+        Util.tryCutString(s, 0, 10);
+        return Float.parseFloat(s);
     }
 
     public static float calcCdi(float selic) {

@@ -111,6 +111,7 @@ public class Game {
     public void passarTurno() {
         //player passar turno
         this.getPlayer().passarTurno();
+        
         //mercado passar turno
         this.getMarket().passarTurno();
 

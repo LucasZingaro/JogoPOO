@@ -110,12 +110,15 @@ public class CtrPlayerDetails {
     public void reloadComponents() {
         frmPlayerDetails.getLblGastosValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().calcDespesas(Main.game)));
-        frmPlayerDetails.getLblJurosValor()
-                .setText(String.valueOf(Main.game.getMarket().getSelic()));
+        double selic = Main.game.getMarket().getSelic();
+        frmPlayerDetails.getPlayer().getFixedIncome().setInterest(selic);
+        frmPlayerDetails.getLblJurosValor().setText(selic+"%");
+
         frmPlayerDetails.getLblNomeValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().getName()));
         frmPlayerDetails.getLblRendaFixaValor()
-                .setText(String.valueOf(frmPlayerDetails.getPlayer().getFixedIncome().getValue()));
+                .setText(String.valueOf(frmPlayerDetails.getPlayer()
+                        .getFixedIncome().getValue()));
         frmPlayerDetails.getLblSaldoValor()
                 .setText(String.valueOf(frmPlayerDetails.getPlayer().getMoney()));
     }

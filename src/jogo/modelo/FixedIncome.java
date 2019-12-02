@@ -1,6 +1,7 @@
 package jogo.modelo;
 
 import jogo.Config;
+import jogo.Util;
 
 /**
  * Representa a renda fixa de um jogador
@@ -74,7 +75,7 @@ public class FixedIncome {
     }
 
     public void setValue(double value) {
-        this.value = value;
+        this.value = Util.round(value, 2);
     }
 
     public double getInterest() {

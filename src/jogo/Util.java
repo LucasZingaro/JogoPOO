@@ -48,6 +48,27 @@ public class Util {
         return bd.doubleValue();
     }
 
+    public static double roundFtoD(float value, int places) {
+        return Double.parseDouble(String.valueOf(round(value, places)));
+    }
+
+    public static float round(float value, int places) {
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        try {
+            bd = bd.setScale(places, RoundingMode.HALF_UP);
+        } catch (Exception e) {
+        }
+        return bd.floatValue();
+    }
+
+    public static float roundDtoF(double value, int places) {
+        return Float.parseFloat(String.valueOf(round(value, places)));
+    }
+
     public static char getRandomChar(int bound) {
         return ((char) (new Random().nextInt(26) + 'a'));
     }
