@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.dao;
 
 import java.sql.Connection;
@@ -13,10 +8,11 @@ import java.util.ArrayList;
 import jogo.modelo.Loan;
 
 /**
+ * DAO Loan
  *
- * @author MukaFelix
+ * @see Loan
  */
-public class LoanDAO implements IDAO<Loan>{
+public class LoanDAO implements IDAO<Loan> {
 
     private Connection con = null;
     private ConnectionFactory dao;
@@ -24,7 +20,7 @@ public class LoanDAO implements IDAO<Loan>{
     private ResultSet rs;
 
     //contrutor para conexão com o DB
-    public LoanDAO(){
+    public LoanDAO() {
         dao = new ConnectionFactory();
         try {
             con = dao.getConnection();
@@ -42,7 +38,7 @@ public class LoanDAO implements IDAO<Loan>{
             System.err.println("Erro");
         }
     }
-    
+
     @Override
     public void inserir(Loan obj) throws SQLException {
         String sql = "Insert into Loan (idMatch, Value, Interest, StartTurn)"
@@ -77,24 +73,24 @@ public class LoanDAO implements IDAO<Loan>{
 
         stm.executeUpdate();
     }
-    
-    public ArrayList<Loan> ListarLoan(int id) throws SQLException{
+
+    public ArrayList<Loan> ListarLoan(int id) throws SQLException {
         ArrayList<Loan> loans = new ArrayList<Loan>();
-        
+
         String sql = "SELECT * FROM Loan WHERE idMatch = ?";
-        
+
         stm = con.prepareStatement(sql);
         stm.setInt(1, id);
-        rs= stm.executeQuery();
-        
-        while(rs.next()){
-            loans.add(new Loan(rs.getInt(1),rs.getDouble(3),rs.getDouble(4),rs.getInt(5)));
+        rs = stm.executeQuery();
+
+        while (rs.next()) {
+            loans.add(new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5)));
         }
         return loans;
 
     }
-    
-    public Loan LocalizarLoan(int id) throws SQLException{
+
+    public Loan LocalizarLoan(int id) throws SQLException {
         String sql = "SELECT * from Loan where idMatch = ?";
 
         stm = con.prepareStatement(sql);
@@ -103,9 +99,9 @@ public class LoanDAO implements IDAO<Loan>{
 
         rs.next();
 
-        Loan loan = new Loan(rs.getInt(1),rs.getDouble(3),rs.getDouble(4),rs.getInt(5));
+        Loan loan = new Loan(rs.getInt(1), rs.getDouble(3), rs.getDouble(4), rs.getInt(5));
         return loan;
 
     }
-    
+
 }

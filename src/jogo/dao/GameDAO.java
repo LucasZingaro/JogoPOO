@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.dao;
 
 import java.sql.Connection;
@@ -12,10 +7,11 @@ import java.sql.SQLException;
 import jogo.modelo.Game;
 
 /**
+ * DAO Game
  *
- * @author MukaFelix
+ * @see Game
  */
-public class GameDAO implements IDAO<Game>{
+public class GameDAO implements IDAO<Game> {
 
     private Connection con = null;
     private ConnectionFactory dao;
@@ -23,7 +19,7 @@ public class GameDAO implements IDAO<Game>{
     private ResultSet rs;
 
     //contrutor para conexão com o DB
-    public GameDAO(){
+    public GameDAO() {
         dao = new ConnectionFactory();
         try {
             con = dao.getConnection();
@@ -41,7 +37,7 @@ public class GameDAO implements IDAO<Game>{
             System.err.println("Erro");
         }
     }
-    
+
     @Override
     public void inserir(Game obj) throws SQLException {
         String sql = "Insert into Game (NumTurn)"
@@ -58,7 +54,7 @@ public class GameDAO implements IDAO<Game>{
         stm = con.prepareStatement(sql);
         stm.setInt(1, obj.getNumTurn());
         stm.setInt(2, obj.getId());
-        
+
         stm.executeUpdate();
     }
 
@@ -70,5 +66,5 @@ public class GameDAO implements IDAO<Game>{
 
         stm.executeUpdate();
     }
-    
+
 }

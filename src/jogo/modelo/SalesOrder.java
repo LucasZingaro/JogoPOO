@@ -1,9 +1,7 @@
 package jogo.modelo;
 
 /**
- * Representação da ordem de venda de uma ação
- *
- * @author Lucas
+ * Representação da ordem de venda de uma ação.
  */
 public class SalesOrder extends Order {
 
@@ -13,9 +11,13 @@ public class SalesOrder extends Order {
     public SalesOrder(int id, Action action, int quantity, double value, int startTurn, int endTurn, boolean isFromPlayer) {
         super(id, action, quantity, value, startTurn, endTurn, isFromPlayer);
     }
-
+    
     public SalesOrder(Action action, int quantity, double value, int startTurn, int endTurn, boolean isFromPlayer) {
         super(action, quantity, value, startTurn, endTurn, isFromPlayer);
+    }
+    
+    SalesOrder(jogo.modelo.Action action, int endTurn, boolean isFromPayer) {
+        super(action, endTurn, isFromPayer);
     }
 
     /*Methods...*/
@@ -23,8 +25,8 @@ public class SalesOrder extends Order {
     public String toString() {
         return SalesOrder.class.getSimpleName() + super.toString();
     }
-
+    
     void trySell(Market market) {
-        System.out.println("Tentando Vender:" + this.toString());
+//        System.out.println("Tentando Vender:" + this.toString());
     }
 }

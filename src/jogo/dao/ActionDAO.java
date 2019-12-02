@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogo.dao;
 
 import java.sql.Connection;
@@ -16,8 +11,9 @@ import jogo.modelo.SalesOrder;
 import jogo.modelo.StatusEnum;
 
 /**
+ * DAO Action
  *
- * @author MukaFelix
+ * @see Action
  */
 public class ActionDAO {
 
@@ -212,8 +208,6 @@ public class ActionDAO {
             }
         }
     }
-    
-    
 
     private void alterarPurchaseOrder(PurchaseOrder obj, int idAction) throws SQLException {
         String sql = "update PurchaseOrderList set idAction = ?, Quantity = ?, Value = ?, StartTurn = ?, EndTurn = ?, IsFromPlayer = ? Where id = ?";
@@ -291,8 +285,6 @@ public class ActionDAO {
             }
         }
     }
-    
-    
 
     private void alterarSalesOrder(SalesOrder obj, int idAction) throws SQLException {
         String sql = "update SalesOrderList set idAction = ?, Quantity = ?, Value = ?, StartTurn = ?, EndTurn = ?, IsFromPlayer = ? Where id = ?";

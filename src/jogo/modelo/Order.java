@@ -1,9 +1,9 @@
 package jogo.modelo;
 
+import jogo.Util;
+
 /**
- * Representação de Ordens para operações da ação financeira
- *
- * @author Lucas
+ * Representação de Ordens para operações da ação financeira.
  */
 public abstract class Order {
 
@@ -76,6 +76,15 @@ public abstract class Order {
         this.quantity = quantity;
         this.value = value;
         this.startTurn = startTurn;
+        this.endTurn = endTurn;
+        this.isFromPlayer = isFromPlayer;
+    }
+
+    public Order(Action Action, int endTurn, boolean isFromPlayer) {
+        this.Action = Action;
+        this.quantity = (int) Util.generateValue(100, 10000);
+        this.value = Util.round(Util.generateValue(Action.getValue() * 0.9, Action.getValue() * 0.1), 2);
+        this.startTurn = 0;
         this.endTurn = endTurn;
         this.isFromPlayer = isFromPlayer;
     }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 /**
  * Representa a partida do jogo
- *
- * @author Lucas
  */
 public class Game {
 
@@ -115,12 +113,11 @@ public class Game {
         this.getPlayer().passarTurno();
         //mercado passar turno
         this.getMarket().passarTurno();
-        
+
         //player->actionlist
         this.refazerPlayerListAction(
                 this.getPlayer().getPlayerListActions(),
                 this.getMarket().getMarketListActions());
-        
 
         //numTurn
         this.setNumTurn(this.getNumTurn() + 1);

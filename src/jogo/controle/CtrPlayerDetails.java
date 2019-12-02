@@ -6,8 +6,7 @@ import jogo.visao.FrmLoansDetails;
 import jogo.visao.FrmPlayerDetails;
 
 /**
- *
- * @author Lucas
+ * Controle da tela de detalhes do jogador
  */
 public class CtrPlayerDetails {
 

@@ -31,5 +31,4 @@ public class TabelaAcoesCellRender implements TableCellRenderer {
         cellComponent.updateData((Action) value, false, table);
         return cellComponent;
     }
-
 }

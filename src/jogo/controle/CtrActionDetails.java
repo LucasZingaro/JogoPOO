@@ -2,7 +2,6 @@ package jogo.controle;
 
 import java.awt.Component;
 import java.util.ArrayList;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -17,7 +16,6 @@ import jogo.visao.FrmActionDetails;
  * Classe de controle do FrmActionDetails.
  *
  * @see FrmActionDetails
- * @author Lucas
  */
 public class CtrActionDetails {
 
@@ -47,7 +45,7 @@ public class CtrActionDetails {
                         .getAction().getName()));
 
         frmActionDetails.getLblPrecoUniValor()
-                .setText("R$ "+String.valueOf(frmActionDetails
+                .setText("R$ " + String.valueOf(frmActionDetails
                         .getAction().getValue()));
 
         frmActionDetails.getLblQuantidadeJogadorValor()

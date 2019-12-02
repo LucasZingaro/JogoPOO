@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import jogo.Main;
 
 /**
- * Representação do mercado financeiro
- *
- * @author Lucas
+ * Representação do mercado financeiro.
  */
 public class Market {
 
@@ -93,8 +91,8 @@ public class Market {
     }
 
     public Market(float inflation, ArrayList<Float> inflationHistory, float cdi,
-                ArrayList<Float> cdiHistory, float selic, ArrayList<Float> selicHistory,
-                StatusEnum status, ArrayList<Action> marketListActions) {
+            ArrayList<Float> cdiHistory, float selic, ArrayList<Float> selicHistory,
+            StatusEnum status, ArrayList<Action> marketListActions) {
 
         this.inflation = inflation;
         this.inflationHistory = inflationHistory;
@@ -227,7 +225,7 @@ public class Market {
 
     public static float generateInflation(float inflation) {
         return Float.parseFloat(String.valueOf(
-                ((generateInflation() * generateInflation()) % (inflation * 2.5)+0.01)
+                ((generateInflation() * generateInflation()) % (inflation * 2.5) + 0.01)
         ));
     }
 
@@ -259,20 +257,30 @@ public class Market {
         //Mercado->Ações
         this.getMarketListActions().forEach((action) -> {
             //Ações->Ordens de Compra
+            ArrayList<PurchaseOrder> removeListPO = new ArrayList<>();
             action.getPurchaseOrderList().forEach((PurchaseOrder purchaseOrder) -> {
-                purchaseOrder.tryBuy(this);
-                if (purchaseOrder.getEndTurn() == Main.game.getNumTurn()) {
-                    action.getPurchaseOrderList().remove(purchaseOrder);
+                try {
+                    purchaseOrder.tryBuy(this);
+                    if (purchaseOrder.getEndTurn() == Main.game.getNumTurn()) {
+                        removeListPO.add(purchaseOrder);
+                    }
+                } catch (Exception e) {
                 }
             });
+            action.getPurchaseOrderList().removeAll(removeListPO);
 
             //Ações->Ordens de Venda
+            ArrayList<SalesOrder> removeListSO = new ArrayList<>();
             action.getSalesOrderList().forEach((SalesOrder salesOrder) -> {
-                salesOrder.trySell(this);
-                if (salesOrder.getEndTurn() == Main.game.getNumTurn()) {
-                    action.getSalesOrderList().remove(salesOrder);
+                try {
+                    salesOrder.trySell(this);
+                    if (salesOrder.getEndTurn() == Main.game.getNumTurn()) {
+                        removeListSO.add(salesOrder);
+                    }
+                } catch (Exception e) {
                 }
             });
+            action.getSalesOrderList().removeAll(removeListSO);
 
             //Ações->turno
             action.passarTurno();

@@ -4,8 +4,7 @@ import jogo.Main;
 import jogo.visao.FrmMarketDetails;
 
 /**
- *
- * @author Lucas
+ *Controle da tela de dados do Mercado
  */
 public class CtrMarketDetails {
 

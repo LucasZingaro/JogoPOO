@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import java.util.Random;
 
 /**
- * Classe de utilidades gerais
+ * Classe de utilidades gerais.
  *
  * @author Lucas
  */
