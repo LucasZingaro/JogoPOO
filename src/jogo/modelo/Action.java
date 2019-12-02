@@ -40,26 +40,11 @@ public class Action {
     private double value;
 
     /**
-     * Histórico de valores da ação
-     *
-     * @hidden savable
-     */
-    private ArrayList<Double> valueHistory;
-
-    /**
      * Variação do valor atual da Ação em comparação com o valor anterior.
      *
-     * @see "É o último registro do histórico de variação"
-     * @hidden unsavable
-     */
-    private double variation;
-
-    /**
-     * Histórico de valores da variação
-     *
      * @hidden savable
      */
-    private ArrayList<Double> variationHistory;
+    private double variation;
 
     /**
      * Quantidade de ações no marcado
@@ -95,24 +80,22 @@ public class Action {
      * @param id Identificador
      * @param name Nome
      * @param status Status
-     * @param valueHistory Históricos de valores
-     * @param variationHistory Históricos de variação
+     * @param value valore
+     * @param variation variação
      * @param marketQuantity Quantidade de ações no mercado
      * @param playerQuantity Quantidade de ações do jogador
      * @param purchaseOrderList Lista de ordens de compra (Action==null)
      * @param salesOrderList Lista de ordens de venda (Action==null)
      */
-    public Action(int id, String name, StatusEnum status, ArrayList<Double> valueHistory,
-            ArrayList<Double> variationHistory, double marketQuantity, double playerQuantity,
+    public Action(int id, String name, StatusEnum status, double value,
+            double variation, double marketQuantity, double playerQuantity,
             ArrayList<PurchaseOrder> purchaseOrderList, ArrayList<SalesOrder> salesOrderList) {
 
         this.id = id;
         this.name = name;
         this.status = status;
-        this.value = valueHistory.get(valueHistory.size() - 1);
-        this.valueHistory = valueHistory;
-        this.variation = variationHistory.get(this.valueHistory.size() - 1);
-        this.variationHistory = variationHistory;
+        this.value = value;
+        this.variation = variation;
         this.marketQuantity = marketQuantity;
         this.playerQuantity = playerQuantity;
 
@@ -133,9 +116,7 @@ public class Action {
         this.name = name;
         this.status = status;
         this.value = value;
-        this.valueHistory = valueHistory;
         this.variation = variation;
-        this.variationHistory = variationHistory;
         this.marketQuantity = marketQuantity;
         this.playerQuantity = playerQuantity;
         this.purchaseOrderList = purchaseOrderList;
@@ -150,8 +131,6 @@ public class Action {
                 new ArrayList<>(),
                 new ArrayList<>()
         );
-        this.valueHistory.add(value);
-        this.variationHistory.add(variation);
 
         //lista de ordens iniciais(sem quantidade do jogador)
         this.purchaseOrderList = gerarListaCompra(2, 10);
@@ -209,28 +188,12 @@ public class Action {
         this.value = value;
     }
 
-    public ArrayList<Double> getValueHistory() {
-        return valueHistory;
-    }
-
-    public void setValueHistory(ArrayList<Double> valueHistory) {
-        this.valueHistory = valueHistory;
-    }
-
     public double getVariation() {
         return variation;
     }
 
     public void setVariation(double variation) {
         this.variation = variation;
-    }
-
-    public ArrayList<Double> getVariationHistory() {
-        return variationHistory;
-    }
-
-    public void setVariationHistory(ArrayList<Double> variationHistory) {
-        this.variationHistory = variationHistory;
     }
 
     public double getMarketQuantity() {
@@ -292,12 +255,30 @@ public class Action {
         double valorAntigo = this.value;
         this.setValue(Util.round(Action.gerarValor(valorAntigo), 2));
         this.setVariation(Util.round(((this.value / valorAntigo) - 1) * 100, 2));
+
+        //Limpar ordens do mercado(não player)
         this.removeOrderListPurchaseIsNotFromPlayer();
         this.removeOrderListSalesIsNotFromPlayer();
+
+        //Lista de orderns só do usuário
+        this.getPurchaseOrderList().forEach((PurchaseOrder po) -> {
+            if (po.isIsFromPlayer()) {
+                po.tryBuy(Main.game.getMarket());
+            }
+        });
+        this.getSalesOrderList().forEach((SalesOrder so) -> {
+            if (so.isIsFromPlayer()) {
+                so.trySell(Main.game.getMarket());
+            }
+        });
+
+        //Refazer ordens do mercado(não player)
         this.getPurchaseOrderList().addAll(gerarListaCompra(Main.game.getNumTurn() + 1, 10));
         this.getSalesOrderList().addAll(gerarListaVenda(Main.game.getNumTurn() + 1, 10));
 
     }
+
+    ;
 
     public String toString() {
         return "\n      Action{"
@@ -305,9 +286,7 @@ public class Action {
                 + ",\n          name=" + name
                 + ",\n          status=" + status
                 + ",\n          value=" + value
-                + ",\n          valueHistory=" + valueHistory
                 + ",\n          variation=" + variation
-                + ",\n          variationHistory=" + variationHistory
                 + ",\n          marketQuantity=" + marketQuantity
                 + ",\n          playerQuantity=" + playerQuantity
                 + ",\n          purchaseOrderList=" + purchaseOrderList

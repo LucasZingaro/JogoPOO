@@ -25,41 +25,18 @@ public class Market {
     private float inflation;
 
     /**
-     * Histórico de valores da inflação
-     *
-     * @hidden savable
-     */
-    private ArrayList<Float> inflationHistory;
-
-    /**
      * Valor do CDI atual
      *
-     * @see "É o último registro do histórico de valores do CDI"
-     * @hidden unsavable
+     * @hidden savable
      */
     private float cdi;
 
     /**
-     * Histórico de valores do CDI
-     *
-     * @hidden savable
-     */
-    private ArrayList<Float> cdiHistory;
-
-    /**
      * Valor da taxa SELIC Atual
      *
-     * @see "É o último registro do histórico de valores da SELIC"
-     * @hidden unsavable
-     */
-    private float selic;
-
-    /**
-     * Histórico de valores da SELIC
-     *
      * @hidden savable
      */
-    private ArrayList<Float> selicHistory;
+    private float selic;
 
     /**
      * Status ou tendência do mercado
@@ -77,54 +54,40 @@ public class Market {
 
     /**
      * Construtor do BD
+     *
+     * @param id
+     * @param inflation
+     * @param cdi
+     * @param selic
+     * @param status
+     * @param marketListActions
      */
-    public Market(int id, ArrayList<Float> inflationHistory, ArrayList<Float> cdiHistory, ArrayList<Float> selicHistory, StatusEnum status, ArrayList<Action> marketListActions) {
+    public Market(int id, float inflation, float cdi, float selic,
+            StatusEnum status, ArrayList<Action> marketListActions) {
         this.id = id;
-        this.inflation = inflationHistory.get(inflationHistory.size() - 1);
-        this.inflationHistory = inflationHistory;
-        this.cdi = cdiHistory.get(cdiHistory.size() - 1);
-        this.cdiHistory = cdiHistory;
-        this.selic = selicHistory.get(selicHistory.size() - 1);
-        this.selicHistory = selicHistory;
+        this.inflation = inflation;
+        this.cdi = cdi;
+        this.selic = selic;
         this.status = status;
         this.marketListActions = marketListActions;
     }
 
-    public Market(float inflation, ArrayList<Float> inflationHistory, float cdi,
-            ArrayList<Float> cdiHistory, float selic, ArrayList<Float> selicHistory,
+    public Market(float inflation, float cdi, float selic,
             StatusEnum status, ArrayList<Action> marketListActions) {
 
         this.inflation = Util.round(inflation, 2);
-        this.inflationHistory = inflationHistory;
         this.cdi = Util.round(cdi, 2);
-        this.cdiHistory = cdiHistory;
         this.selic = Util.round(selic, 2);
-        this.selicHistory = selicHistory;
         this.status = status;
         this.marketListActions = marketListActions;
-    }
-
-    public Market(float inflation, float cdi, float selic, StatusEnum status,
-            ArrayList<Action> listActions) {
-
-        this(inflation, new ArrayList<>(),
-                cdi, new ArrayList<>(),
-                selic, new ArrayList<>(),
-                status, listActions);
     }
 
     public Market() {
         this.inflation = Util.round(Market.generateInflation(), 2);
-        this.inflationHistory = new ArrayList<>();
-        this.inflationHistory.add(this.inflation);
 
         this.selic = Util.round(Market.generateSelic(this.inflation), 2);
-        this.selicHistory = new ArrayList<>();
-        this.selicHistory.add(this.selic);
 
         this.cdi = Util.round(Market.calcCdi(selic), 2);
-        this.cdiHistory = new ArrayList<>();
-        this.cdiHistory.add(this.cdi);
 
         this.status = StatusEnum.NEUTRAL;
         this.marketListActions = Market.generateMarketListActions(50);
@@ -144,15 +107,6 @@ public class Market {
 
     public void setInflation(float inflation) {
         this.inflation = Util.round(inflation, 2);
-        inflationHistory.add(this.getInflation());
-    }
-
-    public ArrayList<Float> getInflationHistory() {
-        return inflationHistory;
-    }
-
-    public void setInflationHistory(ArrayList<Float> inflationHistory) {
-        this.inflationHistory = inflationHistory;
     }
 
     public float getCdi() {
@@ -161,15 +115,6 @@ public class Market {
 
     public void setCdi(float cdi) {
         this.cdi = Util.round(cdi, 2);
-        cdiHistory.add(this.getCdi());
-    }
-
-    public ArrayList<Float> getCdiHistory() {
-        return cdiHistory;
-    }
-
-    public void setCdiHistory(ArrayList<Float> cdiHistory) {
-        this.cdiHistory = cdiHistory;
     }
 
     public float getSelic() {
@@ -178,15 +123,6 @@ public class Market {
 
     public void setSelic(float selic) {
         this.selic = Util.round(selic, 2);
-        selicHistory.add(this.getSelic());
-    }
-
-    public ArrayList<Float> getSelicHistory() {
-        return selicHistory;
-    }
-
-    public void setSelicHistory(ArrayList<Float> selicHistory) {
-        this.selicHistory = selicHistory;
     }
 
     public StatusEnum getStatus() {
@@ -208,11 +144,8 @@ public class Market {
     @Override
     public String toString() {
         return "Market{" + " id=" + id + ", inflation=" + inflation
-                + ",\n    inflationHistory=" + inflationHistory
                 + ",\n    cdi=" + cdi
-                + ",\n    cdiHistory=" + cdiHistory
                 + ",\n    selic=" + selic
-                + ",\n    selicHistory=" + selicHistory
                 + ",\n    status=" + status
                 + ",\n    marketListActions=" + marketListActions
                 + "\n}";
